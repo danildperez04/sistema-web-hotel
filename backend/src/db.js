@@ -3,5 +3,4 @@ const { db: {dialect, user, password, host, port, database} } = require('./confi
 
 const sequelize = new Sequelize(`${dialect}://${user}:${password}@${host}:${port}/${database}`);
 
-
 module.exports = sequelize;
