@@ -1,14 +1,14 @@
-const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../db');
+// const { DataTypes, Model } = require('sequelize');
+// const sequelize = require('../db');
 
-class Service extends Model{}
+// class Service extends Model{}
 
-Service.init({
+// Service.init({
   
-},
-{
-  sequelize, 
-  modelName: 'Service'
-});
+// },
+// {
+//   sequelize, 
+//   modelName: 'service'
+// });
 
-module.exports = { Service };
+// module.exports = { Service };

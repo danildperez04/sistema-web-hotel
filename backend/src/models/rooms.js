@@ -20,7 +20,7 @@ Room.init({
 },
 {
   sequelize,
-  modelName: 'Room'
+  modelName: 'room'
 });
 
 // Room.belongsToMany();

@@ -16,18 +16,18 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
   role: {
     type: DataTypes.ENUM(['ADMINISTRADOR', 'RECEPCIONISTA']),
     allowNull: false
   },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false
-  }
 }, 
 {
   sequelize, 
-  modelName: 'User'
+  modelName: 'user'
 });
 
 module.exports = { User };
