@@ -7,35 +7,56 @@ function startApp(){
     submit.addEventListener('click', (e)=>{
         e.preventDefault();
 
-        validateFields();
+        if(validateFields()){
+            const userData = {
+                name: document.querySelector('#name').value,
+                lastName: document.querySelector('#lastName').value,
+                email: document.querySelector('#email').value,
+                pass: document.querySelector('#pass').value
+            };
+
+
+           fetch('localhost:3000/api/users', {
+            method: "POST",
+            body: JSON.stringify(userData),
+            headers: {
+                'Content-Type': 'application/json' 
+              }
+           })
+           .then(response => response.json())
+           .then(data => console.log(data));
+
+        }
 
     });
 }
 
 function validateFields(){
     const message = 'Este campo es obligatorio';
-    if(document.querySelector('#name').value === ''){
-        showError(message, 'name');
+
+    const array = document.querySelectorAll("input");
+
+    for (const {value, id} of array) {
+        if(!value){
+         showError(message, id);
+         return false;
+        }
     }
-    else if(document.querySelector('#lastName').value === ''){
-        showError(message, 'lastName');
-    }
-    else if(document.querySelector('#email').value === ''){
-        showError(message, 'email');
-    }
-    else if(document.querySelector('#pass').value === ''){
-        showError(message, 'pass');
-    }
-    else if(document.querySelector('#confirm').value === ''){
-        showError(message, 'confirm');
-    }
-    else if(pass !== confirm){
-        showError('Las contraseñas no coinciden', 'confirm')
-    }
+
+    const pass = document.querySelector('#pass').value;
+    const confirm = document.querySelector('#confirm').value;
+    
+    if(pass !== confirm){
+        showError('Las contraseñas no coinciden', 'confirm');
+        return false;
+    } 
+
+return true;
+
 }
 
 
-function showError(text, filed){
+function showError(text, field){
     if(document.querySelector('.error') !== null){
        document.querySelector('.error').remove();
     }
@@ -45,6 +66,6 @@ function showError(text, filed){
         info.textContent = text;
         error.appendChild(info);
         error.classList.add('error')
-        const add = document.querySelector('.'+filed);
+        const add = document.querySelector('.'+field);
         add.appendChild(error);
 }
