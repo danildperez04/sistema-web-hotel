@@ -9,20 +9,13 @@ Room.init({
     allowNull: false
   },
   price:{
-    type: DataTypes.NUMBER,
+    type: DataTypes.DECIMAL,
     allowNull: false
   },
-  state: {
-    type: DataTypes.ENUM(['DISPONIBLE', 'OCUPADA', 'NO DISPONIBLE']),
-    allowNull: false
-  },
-  // services atribute ---- m:n relationship
 },
 {
   sequelize,
   modelName: 'room'
 });
-
-// Room.belongsToMany();
 
 module.exports =  { Room };

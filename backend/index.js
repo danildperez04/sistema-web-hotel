@@ -1,6 +1,8 @@
 const http = require('http');
 require('dotenv').config({});
+
 require('./src/models/role');
+require('./src/models/reservation');
 
 const app = require('./src/app');
 
