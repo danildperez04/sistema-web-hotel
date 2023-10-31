@@ -13,7 +13,15 @@ const getOne = async (req, res)=>{
 };
 
 const create = async (req, res)=>{  
-  res.send('Create User');
+  const {firstName,lastName, username, password} = req.body;
+
+  const user = userService.create({
+    firstName,
+    lastName, 
+    username, password
+  });
+
+  res.send(user);
 };
 
 const update = async (req, res)=>{  

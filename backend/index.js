@@ -1,5 +1,6 @@
 const http = require('http');
 require('dotenv').config({});
+require('./src/models/role');
 
 const app = require('./src/app');
 

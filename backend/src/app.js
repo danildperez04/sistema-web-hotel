@@ -12,8 +12,6 @@ app.use(morgan('dev'));
 
 app.use('/api', api);
 
-console.log(__dirname);
-
 app.use(notFound);
 
 module.exports = app;

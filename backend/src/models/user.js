@@ -1,6 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db');
-const { Role } = require('./role');
 
 class User extends Model{}
 
@@ -26,7 +25,5 @@ User.init({
   sequelize, 
   modelName: 'user'
 });
-
-User.Role = User.belongsTo(Role);
 
 module.exports = { User };
