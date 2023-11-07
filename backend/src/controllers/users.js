@@ -18,7 +18,8 @@ const create = async (req, res)=>{
   const user = await userService.create({
     firstName,
     lastName, 
-    username, password
+    username, 
+    password
   });
 
   res.send(user);

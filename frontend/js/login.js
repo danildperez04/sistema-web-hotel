@@ -9,23 +9,23 @@ function startApp(){
 
         if(validateFields()){
             const userData = {
-                name: document.querySelector('#name').value,
+                firstName: document.querySelector('#name').value,
                 lastName: document.querySelector('#lastName').value,
-                email: document.querySelector('#email').value,
-                pass: document.querySelector('#pass').value
+                username: document.querySelector('#email').value,
+                password: document.querySelector('#pass').value
             };
 
 
-           fetch('localhost:3000/api/users', {
-            method: "POST",
-            body: JSON.stringify(userData),
-            headers: {
-                'Content-Type': 'application/json' 
-              }
-           })
-           .then(response => response.json())
-           .then(data => console.log(data));
-
+            fetch('http://localhost:3000/api/users/', {
+                method: 'POST',
+                body: JSON.stringify(userData),
+                headers: {
+                    'Content-Type': 'application/json' 
+                }
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(e => console.error(e.message));
         }
 
     });
@@ -38,8 +38,8 @@ function validateFields(){
 
     for (const {value, id} of array) {
         if(!value){
-         showError(message, id);
-         return false;
+            showError(message, id);
+            return false;
         }
     }
 
