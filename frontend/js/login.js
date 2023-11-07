@@ -3,18 +3,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 function startApp(){
-    const submit = document.querySelector('.sub');
-    submit.addEventListener('click', (e)=>{
+    const form = document.querySelector('.form');
+    form.addEventListener('submit', (e)=>{
         e.preventDefault();
 
         if(validateFields()){
-            const userData = {
-                firstName: document.querySelector('#name').value,
-                lastName: document.querySelector('#lastName').value,
-                username: document.querySelector('#email').value,
-                password: document.querySelector('#pass').value
-            };
-
+            const userData = Object.fromEntries(new FormData(e.target));
 
             fetch('http://localhost:3000/api/users/', {
                 method: 'POST',
@@ -32,16 +26,6 @@ function startApp(){
 }
 
 function validateFields(){
-    const message = 'Este campo es obligatorio';
-
-    const array = document.querySelectorAll("input");
-
-    for (const {value, id} of array) {
-        if(!value){
-            showError(message, id);
-            return false;
-        }
-    }
 
     const pass = document.querySelector('#pass').value;
     const confirm = document.querySelector('#confirm').value;
