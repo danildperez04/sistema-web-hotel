@@ -1,7 +1,9 @@
+const { getAll, create, getOne, update, remove } = require('../controllers/clientControllers');
+
 const router = require('express').Router();
 
-router.route('/').get().post();
+router.route('/').get(getAll).post(create);
 
-router.route('/:id').get().put().delete();
+router.route('/:id').get(getOne).put(update).delete(remove);
 
 module.exports = router;
