@@ -5,48 +5,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="../../styles/app.css">
 </head>
-<!--
-  dni,
-  fullName
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  phoneNumber: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  address: {
-    type : DataTypes.STRING,
-    allowNull: false,
-  },
-  birthDate: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
--->
 
 <body>
-  <h1>Clientes</h1>
-  <form class="client-form">
-    <label for="input-client-dni">Cédula: </label>
-    <input id="input-client-dni" name="dni" type="text" placeholder="Ingrese su cédula..." required>
-    <label for="input-client-name">Name: </label>
-    <input id="input-client-name" name="fullname" type="text" placeholder="Ingrese su nombre..." required>
-    <label for="input-client-email">Email: </label>
-    <input id="input-client-email" name="email" type="email" placeholder="Ingrese su email..." required>
-    <label for="input-client-phonenumber">Numero de telefono: </label>
-    <input id="input-client-phonenumber" name="phoneNumber" type="tel" placeholder="Ingrese su numero de telefono..."
-      required>
-    <label for="input-client-birthdate">Fecha de nacimiento: </label>
-    <input id="input-client-birthdate" name="birthDate" type="date" required>
+  <section class="section-client">
+    <h1>Clientes</h1>
+    <form class="client-form">
+      <div class="field">
+        <label for="input-client-dni">Cédula: </label>
+        <input id="input-client-dni" name="dni" type="text" placeholder="Ingrese su cédula..." required>  
+      </div>
+      
+      <div class="field">
+        <label for="input-client-name">Name: </label>
+        <input id="input-client-name" name="fullname" type="text" placeholder="Ingrese su nombre..." required>
+      </div>
 
-    <label for="input-client-adress">Dirección: </label>
-    <input id="input-client-adress" name="adress" type="text" required>
+      <div class="field">
+        <label for="input-client-email">Email: </label>
+        <input id="input-client-email" name="email" type="email" placeholder="Ingrese su email..." required>  
+      </div>
 
-    <input type="submit" name="" id="">
-  </form>
+      <div class="field">
+        <label for="input-client-phonenumber">Numero de telefono: </label>
+        <input id="input-client-phonenumber" name="phoneNumber" type="tel" placeholder="Ingrese su numero de telefono..."
+          required>  
+      </div>
+
+      <div class="field">
+        <label for="input-client-birthdate">Fecha de nacimiento: </label>
+        <input id="input-client-birthdate" name="birthDate" type="date" required>  
+      </div>
+
+      <div class="field">
+        <label for="input-client-adress">Dirección: </label>
+        <input id="input-client-adress" name="adress" type="text" required>  
+      </div>
+
+      <div>
+        <input type="submit" name="" id="" class="submit">
+      </div>
+     
+    </form>
+  </section>
+
+  <script src="../js/client.js"></script>
 </body>
 
 </html>
