@@ -14,7 +14,7 @@ const getOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const {dni ,fullName ,email ,phoneNumber ,address, birthDate } = req.body;
+  const { dni, fullName, email, phoneNumber, address, birthDate, municipalityId } = req.body;
 
   const client = await clientService.create({
     dni,
@@ -23,6 +23,7 @@ const create = async (req, res) => {
     phoneNumber,
     address,
     birthDate,
+    municipalityId
   });
 
   res.send(client);
