@@ -1,4 +1,4 @@
-const { getAll, create, getOne, update, remove } = require('../controllers/clientControllers');
+const { getAll, create, getOne, update, remove } = require('../controllers/clients');
 
 const router = require('express').Router();
 
