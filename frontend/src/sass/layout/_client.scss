@@ -1,4 +1,4 @@
-.section-client{
+.section-client {
     border: 1px solid $blue;
     padding: 1rem;
     border-radius: 1rem;
@@ -10,29 +10,28 @@
     text-align: center;
     margin: 5rem auto 3rem auto;
     height: 40rem;
-    
 
-    .client-form{
-    
-     display: grid;
-     display: flex;
-     flex-direction: column;
-     gap: 2rem;
-     align-items: center;
-     
-     div{   
+
+    .client-form {
+
+        display: grid;
         display: flex;
         flex-direction: column;
-        width: 90%;
+        gap: 2rem;
+        align-items: center;
 
-        input{
+        div {
+            display: flex;
+            flex-direction: column;
             width: 90%;
-            height: 1.7rem;
-            border-radius: 5px;
-            border: 1px solid lighten($blue, 10)
+
+            input {
+                width: 90%;
+                height: 1.7rem;
+                border-radius: 5px;
+                border: 1px solid lighten($blue, 10)
+            }
         }
-     }
 
     }
 }
-
