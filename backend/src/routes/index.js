@@ -6,4 +6,4 @@ const clientsRouter = require('./clients.js');
 router.use('/users', usersRouter);
 router.use('/clients', clientsRouter);
 
-module.exports = router;
+module.exports = router; 

@@ -42,6 +42,7 @@
     background-color: lighten($blue, 10);
     color: $white;
     font-weight: bold;
+    font-family: $main_font;
 
     &:hover {
         cursor: pointer;

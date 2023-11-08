@@ -1,7 +1,9 @@
 //base
 @import './base/variables';
 @import './base/normalize';
+@import './base/globals';
 
 
 //layout
 @import './layout/login';
+@import './layout/client';

@@ -19,7 +19,7 @@ Client.init({
     allowNull: false,
   },
   phoneNumber: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   address: {
@@ -27,7 +27,7 @@ Client.init({
     allowNull: false,
   },
   birthDate: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     allowNull: false,
   },
 },
@@ -39,3 +39,4 @@ Client.init({
 Municipality.hasMany(Client);
 Client.belongsTo(Municipality);
 
+module.exports = { Client };

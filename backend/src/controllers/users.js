@@ -13,7 +13,7 @@ const getOne = async (req, res)=>{
 };
 
 const create = async (req, res)=>{  
-  const {firstName,lastName,email , username, password} = req.body;
+  const {firstName, lastName, email, username, password} = req.body;
 
   const user = await userService.create({
     firstName,

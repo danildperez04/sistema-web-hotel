@@ -308,6 +308,10 @@ template {
   display: none;
 }
 
+label, input {
+  font-family: "Montserrat", sans-serif;
+}
+
 .section {
   border: 1px solid #33C3F0;
   padding: 1rem;
@@ -343,6 +347,7 @@ template {
   background-color: #63d1f3;
   color: #ffffff;
   font-weight: bold;
+  font-family: "Montserrat", sans-serif;
 }
 .sub:hover {
   cursor: pointer;
@@ -368,6 +373,37 @@ template {
 .error p {
   color: rgb(246, 23, 23);
   font-size: 0.9rem;
+}
+
+.section-client {
+  border: 1px solid #33C3F0;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
+  -webkit-box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
+  -moz-box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
+  width: 25rem;
+  text-align: center;
+  margin: 5rem auto 3rem auto;
+  height: 40rem;
+}
+.section-client .client-form {
+  display: grid;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+.section-client .client-form div {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+.section-client .client-form div input {
+  width: 90%;
+  height: 1.7rem;
+  border-radius: 5px;
+  border: 1px solid #63d1f3;
 }
 
 /*# sourceMappingURL=app.css.map */
