@@ -23,13 +23,41 @@ const create = async(req, res) =>{
 }; 
 
 const update = async(req, res) =>{
-  const {id} = req.params;
-  res.send(`Update Service {${id}}`);
+  const { id } = req.params;
+  const { name, price, details } = req.body;
+  const foundService = await servicesService.getOne(id);
+
+  if (!foundService){
+    res.status(404).send({
+      message: 'Servide not found'
+    });
+  }
+
+  const serviceToUpdate = {
+    name,
+    price,
+    details,
+  };
+
+  const updateService = await servicesService.update(serviceToUpdate, id);
+
+  res.send(updateService);
 };
 
 const remove = async (req, res)=>{  
   const {id} = req.params;
-  res.send(`Remove Service {${id}}`);
+
+  const foundService = await servicesService.getOne(id);
+
+  if (!foundService){
+    res.status(404).send({
+      message: 'Servide not found'
+    });
+  }
+
+  await servicesService.remove(id);
+
+  res.sendStatus(204);
 };
 
 module.export = {
