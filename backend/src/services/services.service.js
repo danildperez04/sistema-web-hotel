@@ -1,12 +1,12 @@
-const { Service : ServiceModel } = require('../models/services');
+const { Service : serviceModel } = require('../models/services');
 
 class Service{
   getAll(){
-    return ServiceModel.findAll();
+    return serviceModel.findAll();
   }
 
   async create(serviceData){
-    return await ServiceModel.create(serviceData);
+    return await serviceModel.create(serviceData);
   }
 }
 
