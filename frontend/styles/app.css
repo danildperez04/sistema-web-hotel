@@ -406,4 +406,66 @@ label, input {
   border: 1px solid #63d1f3;
 }
 
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+.header {
+  background-color: #33C3F0;
+  height: 3rem;
+}
+
+main {
+  text-align: center;
+}
+
+.client-list {
+  margin: 3rem;
+}
+.client-list .header-table {
+  background-color: #33C3F0;
+}
+.client-list .header-table tr th {
+  color: #ffffff;
+  font-weight: 700;
+  margin-top: 1rem;
+  width: auto;
+  min-width: 10rem;
+}
+.client-list tbody td {
+  text-align: center;
+}
+.client-list tbody tr {
+  background-color: rgb(200, 194, 194);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 0.4rem;
+  justify-content: space-around;
+}
+.actions a {
+  background-color: #b90707;
+  color: #ffffff;
+  width: 6rem;
+  cursor: pointer;
+  margin: 0 0.2rem;
+  height: 1.3rem;
+  text-align: center;
+}
+.actions a:hover {
+  background-color: #f84848;
+}
+.actions .btn-update {
+  background-color: rgb(82, 161, 82);
+}
+.actions .btn-update:hover {
+  background-color: #70b670;
+}
+
+.row {
+  height: 2rem;
+}
+
 /*# sourceMappingURL=app.css.map */
