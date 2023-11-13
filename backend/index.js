@@ -16,7 +16,7 @@ server.listen(port, host, async ()=>{
     await db.authenticate();
     console.log('Connected to [DB]');
     
-    await db.sync({force: true});
+    await db.sync({});
 
     console.log(`Server listening on port ${port}`);
   }catch (error){
