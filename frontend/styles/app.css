@@ -382,7 +382,7 @@ label, input {
   box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
   -webkit-box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
   -moz-box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
-  width: 48rem;
+  width: 46rem;
   text-align: center;
   margin: 5rem auto 3rem auto;
   height: 45rem;
@@ -410,6 +410,7 @@ label, input {
 .field label {
   display: flex;
   margin-bottom: 1rem;
+  font-weight: bold;
 }
 
 #input-client-address {
@@ -425,10 +426,11 @@ label, input {
   background-color: #33C3F0;
   color: #ffffff;
   border: none;
-  width: 10rem;
+  width: 16rem;
   height: 2rem;
   border-radius: 5px;
   font-weight: bold;
+  margin-left: -29rem;
 }
 .submit:hover {
   background-color: #63d1f3;
