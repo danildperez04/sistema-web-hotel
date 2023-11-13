@@ -1,3 +1,13 @@
 GET http://localhost:3000/api/clients
 
-####
+POST http://localhost:3000/api/clients HTTP/1.1
+Content-Type: application/json
+
+{
+  "dni":"491-230903-1000T",
+  "fullName": "Saul Lagos",
+  "email": "lagosmsaul@gmail.com",
+  "phoneNumber": "+505 89082564",
+  "address": "UNI-RUACS",
+  "birthDate": "2023-09-23"
+}
