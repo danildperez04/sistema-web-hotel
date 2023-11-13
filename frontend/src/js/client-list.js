@@ -29,6 +29,7 @@ function showClients(data){
         btnUpdate.textContent = 'Actualizar';
         btnUpdate.classList.add('btn-update');
         btnDelete.textContent = 'Eliminar';
+        
         actions.appendChild(btnUpdate);
         actions.appendChild(btnDelete);
         row.appendChild(actions);
