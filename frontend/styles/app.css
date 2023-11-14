@@ -382,10 +382,11 @@ label, input {
   box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
   -webkit-box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
   -moz-box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
-  width: 25rem;
+  width: 46rem;
   text-align: center;
   margin: 5rem auto 3rem auto;
-  height: 40rem;
+  height: 45rem;
+  padding-bottom: 1rem;
 }
 .section-client .client-form {
   display: grid;
@@ -404,6 +405,36 @@ label, input {
   height: 1.7rem;
   border-radius: 5px;
   border: 1px solid #63d1f3;
+}
+
+.field label {
+  display: flex;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+#input-client-address {
+  height: 7rem;
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid #63d1f3;
+  width: 90%;
+}
+
+.submit {
+  margin: 2rem;
+  background-color: #33C3F0;
+  color: #ffffff;
+  border: none;
+  width: 16rem;
+  height: 2rem;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-left: -29rem;
+}
+.submit:hover {
+  background-color: #63d1f3;
+  cursor: pointer;
 }
 
 * {
