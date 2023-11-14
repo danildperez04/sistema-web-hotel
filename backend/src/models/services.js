@@ -1,7 +1,7 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db');
 
-class Service extends Model{}
+class Service extends Model { }
 
 Service.init({
   name: {
@@ -16,9 +16,8 @@ Service.init({
     type: DataTypes.STRING,
     allowNull: false
   }
-},
-{
-  sequelize, 
+}, {
+  sequelize,
   modelName: 'service'
 });
 

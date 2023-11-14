@@ -1,7 +1,7 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db');
 
-class User extends Model{}
+class User extends Model { }
 
 User.init({
   firstName: {
@@ -16,7 +16,7 @@ User.init({
     type: DataTypes.STRING,
     allowNull: true
   },
-  username:{
+  username: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -24,9 +24,8 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
-}, 
-{
-  sequelize, 
+}, {
+  sequelize,
   modelName: 'user'
 });
 

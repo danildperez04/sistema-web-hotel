@@ -1,8 +1,12 @@
 const { Service: serviceModel } = require('../models/services');
 
 class Service {
-  getAll() {
+  async getAll() {
     return serviceModel.findAll();
+  }
+
+  async getOne(id) {
+    return serviceModel.findOne({ where: { id } });
   }
 
   async create(serviceData) {
