@@ -34,8 +34,10 @@ function showClients(data) {
     row.appendChild(actions);
     table.appendChild(row);
 
-    localStorage.setItem('id', client['id']);
-    btnUpdate.href = `./update-client.html`;
+    btnUpdate.addEventListener('click', ()=>{
+      localStorage.setItem('id', client['id']);
+      window.location.replace('update-client.html', 'client-list.html')
+    });
     btnDelete.addEventListener('click', ()=>{
       deleteClient(client['id']);
     });

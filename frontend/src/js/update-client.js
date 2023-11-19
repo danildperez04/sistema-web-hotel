@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', ()=>{
 
     const id = localStorage.getItem('id');
-    
+
     fetch(`http://localhost:3000/api/clients/${id}`)
     .then(response => response.json())
     .then(data => {
@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const clientData = Object.fromEntries(new FormData(e.target));
+            localStorage.clear();
 
             fetch(`http://localhost:3000/api/clients/${id}`, {
                 method: 'PUT',
@@ -37,7 +38,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
            });
     });
 
-    localStorage.clear();
 });
 
 function fullFields(obj){
