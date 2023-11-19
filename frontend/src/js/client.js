@@ -16,8 +16,16 @@ function startApp() {
       }
     })
       .then(response => {
-        if (response.ok)
-          console.log('Se creo el cliente');
+        if (response.ok){
+          const dialog = document.createElement('div');
+          dialog.classList.add('info');
+          const message = document.createElement('p');
+          message.textContent = 'Se ha agregado el nuevo cliente correctamente';
+          dialog.appendChild(message);
+          //pending
+          document.body.appendChild(dialog);
+        }
+
       });
   });
 }

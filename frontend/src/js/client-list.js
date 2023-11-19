@@ -16,7 +16,7 @@ function showClients(data) {
     const row = document.createElement('tr');
     row.classList.add('row');
     Object.keys(client).forEach(key => {
-      if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt') {
+      if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'municipalityId') {
         const cell = document.createElement('td');
         cell.textContent = client[key];
         row.appendChild(cell);
@@ -33,6 +33,26 @@ function showClients(data) {
     actions.appendChild(btnDelete);
     row.appendChild(actions);
     table.appendChild(row);
+
+    btnUpdate.href = `./update-client.html?id=${client['id']}`;
+    btnDelete.addEventListener('click', () => {
+      fetch(`http://localhost:3000/api/clients/${client['id']}`, {
+        method: 'DELETE'
+      })
+        .then(response => {
+          if (response.ok) {
+            const dialog = document.createElement('div');
+            dialog.classList.add('info');
+            const message = document.createElement('p');
+            message.textContent = 'Se ha eliminado el cliente correctamente';
+            dialog.appendChild(message);
+            //pending
+            document.querySelector('.msg').appendChild(dialog);
+          }
+
+        })
+    });
+
   });
 
 }
