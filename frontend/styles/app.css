@@ -312,6 +312,15 @@ label, input {
   font-family: "Montserrat", sans-serif;
 }
 
+.info {
+  width: 70%;
+  height: rem;
+  background-color: rgb(145, 214, 145);
+}
+.info p {
+  color: rgb(3, 70, 3);
+}
+
 .section {
   border: 1px solid #33C3F0;
   padding: 1rem;
