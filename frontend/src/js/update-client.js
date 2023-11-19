@@ -12,6 +12,29 @@ document.addEventListener('DOMContentLoaded', ()=>{
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const clientData = Object.fromEntries(new FormData(e.target));
+
+            fetch(`http://localhost:3000/api/clients/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(clientData),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+            })
+            .then(response =>{
+                if(response.ok){
+                    const dialog = document.createElement('div');
+                    dialog.classList.add('info');
+                    const message = document.createElement('p');
+                    message.textContent = 'Se ha actualizado el cliente correctamente';
+                    dialog.appendChild(message);
+                    //pending
+                    document.body.appendChild(dialog);
+
+                    setTimeout(() => {
+                        window.location.replace('client-list.html', 'update-client.html');
+                    }, 1000);
+                }
+            });
             
            });
     });
