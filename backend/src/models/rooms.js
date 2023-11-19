@@ -1,21 +1,24 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db');
 
-class Room extends Model {}
+class Room extends Model { }
 
 Room.init({
   code: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  price:{
+  price: {
     type: DataTypes.DECIMAL,
     allowNull: false
   },
-},
-{
+  description: {
+    type: DataTypes.STRING,
+    allowNull: false
+  }
+}, {
   sequelize,
   modelName: 'room'
 });
 
-module.exports =  { Room };
+module.exports = { Room };
