@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', ()=>{
-    const queryString = window.location.search;
 
-    const urlParams = new URLSearchParams(queryString);
-    const id = urlParams.get('id');
+    const id = localStorage.getItem('id');
     
     fetch(`http://localhost:3000/api/clients/${id}`)
     .then(response => response.json())
@@ -38,6 +36,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
             
            });
     });
+
+    localStorage.clear();
 });
 
 function fullFields(obj){

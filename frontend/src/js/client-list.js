@@ -34,25 +34,37 @@ function showClients(data) {
     row.appendChild(actions);
     table.appendChild(row);
 
-    btnUpdate.href = `./update-client.html?id=${client['id']}`;
-    btnDelete.addEventListener('click', () => {
-      fetch(`http://localhost:3000/api/clients/${client['id']}`, {
-        method: 'DELETE'
-      })
-        .then(response => {
-          if (response.ok) {
-            const dialog = document.createElement('div');
-            dialog.classList.add('info');
-            const message = document.createElement('p');
-            message.textContent = 'Se ha eliminado el cliente correctamente';
-            dialog.appendChild(message);
-            //pending
-            document.querySelector('.msg').appendChild(dialog);
-          }
-
-        })
+    localStorage.setItem('id', client['id']);
+    btnUpdate.href = `./update-client.html`;
+    btnDelete.addEventListener('click', ()=>{
+      deleteClient(client['id']);
     });
 
   });
 
 }
+
+
+function deleteClient(id) {
+  fetch(`http://localhost:3000/api/clients/${id}`, {
+    method: 'DELETE'
+  })
+    .then(response => {
+
+      if (response.ok) {
+        const dialog = document.createElement('div');
+        dialog.classList.add('info');
+        const message = document.createElement('p');
+        message.textContent = 'Se ha eliminado el cliente correctamente';
+        dialog.appendChild(message);
+        //pending
+        document.querySelector('.msg').appendChild(dialog);
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+
+    });
+
+}
+
