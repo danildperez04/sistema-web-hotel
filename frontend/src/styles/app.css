@@ -452,7 +452,10 @@ label, input {
 
 .header {
   background-color: #33C3F0;
-  height: 3rem;
+  height: 4rem;
+  box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
 }
 
 main {
@@ -510,8 +513,84 @@ main {
 
 .left-bar {
   background-color: #17396d;
-  width: 10rem;
-  height: 10rem;
+  position: absolute;
+  width: 13rem;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: all 500ms ease;
+}
+
+.menu-content {
+  width: 100%;
+  max-width: 25rem;
+  position: relative;
+  transition: all 500ms ease;
+}
+.menu-content nav {
+  transform: translateY(15%);
+}
+.menu-content nav a {
+  display: block;
+  text-decoration: none;
+  padding: 1.5rem;
+  color: #ffffff;
+  border-left: 5px solid transparent;
+  transition: all 400ms ease;
+  text-align: center;
+}
+.menu-content nav a:hover {
+  border-left: 5px solid #a2dcd7;
+  background: #0e2343;
+}
+
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.header nav {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+.header nav a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.header nav a:hover {
+  cursor: pointer;
+}
+
+.search {
+  display: flex;
+  gap: 1rem;
+  margin-left: 2rem;
+  align-items: center;
+}
+.search label {
+  color: #ffffff;
+  font-weight: bold;
+}
+.search button {
+  position: relative;
+  margin-left: -1rem;
+  width: 2rem;
+  background-color: #17396d;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 1.8rem;
+}
+.search button:hover {
+  background-color: #2253a0;
+}
+
+#input-search {
+  border-radius: 3px;
+  border: none;
+  width: 18rem;
+  font-size: 0.9rem;
+  height: 1.8rem;
 }
 
 /*# sourceMappingURL=app.css.map */

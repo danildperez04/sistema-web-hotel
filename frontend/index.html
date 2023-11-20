@@ -6,11 +6,45 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite App</title>
+  <link rel="stylesheet" href="./src/styles/app.css">
 </head>
 
 <body>
-  <a href="./src/pages/client.html">Clientes</a>
-  <a href="./src/pages/service.html">Servicios</a>
+
+  <section class="left-bar">
+
+    <div class="menu-content">
+
+      <nav>
+        <a href="./src/pages/client.html">Clientes</a>
+        <a href="./src/pages/service.html">Servicios</a>
+        <a href="./src/pages/client-list.html">Lista de Clientes</a>
+        <a href="#">Habitaciones</a>
+        <a href="#">Reservas</a>
+      </nav>
+
+    </div>
+ 
+  </section>
+
+<header class="header">
+
+  <div class="search">
+    <label for="input-search">Buscar</label>
+    <input type="text" id="input-search" placeholder="¿Qué estas buscando?">
+    <button><img src="./src/img/search.png" alt=""></button>
+  </div>
+
+  <nav>
+    <a href="">Cuentas</a>
+    <a href="">Control</a>
+    <a href="">Gestion</a>
+    <a href="">Informacion</a>
+  </nav>
+</header>
+    
+
+
 </body>
 
 </html>

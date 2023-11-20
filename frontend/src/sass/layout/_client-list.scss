@@ -4,7 +4,10 @@
 
 .header {
   background-color: $blue;
-  height: 3rem;
+  height: 4rem;
+  box-shadow: 3px 4px 14px -9px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 3px 4px 14px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 4px 14px -9px rgba(0,0,0,0.75);
 }
 
 main {
@@ -44,7 +47,7 @@ main {
   justify-content: space-around;
 
   a {
-    background-color: darken($red, 15);
+    background-color: darken($redError, 15);
     color: $white;
     width: 6rem;
     cursor: pointer;
@@ -53,7 +56,7 @@ main {
     text-align: center;
 
     &:hover {
-      background-color: lighten($red, 10);
+      background-color: lighten($redError, 10);
     }
   }
 
