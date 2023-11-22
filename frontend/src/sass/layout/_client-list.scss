@@ -89,7 +89,8 @@ main {
     margin-bottom: 2rem;
     display: block;
     max-width: 35rem;
-    height: 6.6rem;
+    min-height: 6.6rem;
+    height: auto;
     padding: 1rem 1rem;
     background-color: $white;
     margin: 0 auto;

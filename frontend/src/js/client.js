@@ -16,15 +16,39 @@ function startApp() {
       }
     })
       .then(response => {
-        if (response.ok){
-          const dialog = document.createElement('div');
-          dialog.classList.add('info');
-          const message = document.createElement('p');
-          message.textContent = 'Se ha agregado el nuevo cliente correctamente';
-          dialog.appendChild(message);
-          //pending
-          document.body.appendChild(dialog);
+
+        if (response.ok) {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+          const modal = document.createElement('div');
+          modal.classList.add('modal');
+          modal.innerHTML = `
+                             <div class="modal-content">
+                             <img src="../img/check.png">
+                              <p>Se creó el nuevo cliente correctamente</p>
+                              <div>
+                                  <button class="close-modal">Aceptar</button>
+                            </div>
+                            </div>
+                            `;
+
+          setTimeout(() => {
+            const modalContent = document.querySelector('.modal-content');
+            modalContent.classList.add('animation');
+
+            document.querySelector('.close-modal').addEventListener('click', () => {
+              modal.remove();
+              window.location.replace('client-list.html', 'update-client.html');
+            });
+
+          }, 0);
+
+          document.querySelector('body').appendChild(modal);
         }
+
+      })
+      .catch(err => {
+        console.error(err);
 
       });
   });

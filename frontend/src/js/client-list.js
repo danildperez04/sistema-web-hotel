@@ -85,11 +85,10 @@ function deleteClient(id) {
 
       if (response.ok) {
         const dialog = document.createElement('div');
-        dialog.classList.add('info');
+        dialog.classList.add('message');
         const message = document.createElement('p');
         message.textContent = 'Se ha eliminado el cliente correctamente';
         dialog.appendChild(message);
-        //pending
         document.querySelector('.msg').appendChild(dialog);
         setTimeout(() => {
           location.reload();

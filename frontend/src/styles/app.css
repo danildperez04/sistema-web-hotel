@@ -321,6 +321,21 @@ label, input {
   color: rgb(3, 70, 3);
 }
 
+.message {
+  background-color: #70b670;
+  height: 2rem;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.message p {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: bold;
+}
+
 .section {
   border: 1px solid #33C3F0;
   padding: 1rem;
@@ -394,7 +409,7 @@ label, input {
   width: 46rem;
   text-align: center;
   margin: 5rem auto 3rem auto;
-  height: 45rem;
+  height: 46rem;
   padding-bottom: 1rem;
 }
 .section-client .client-form {
@@ -526,7 +541,8 @@ main {
   margin-bottom: 2rem;
   display: block;
   max-width: 35rem;
-  height: 6.6rem;
+  min-height: 6.6rem;
+  height: auto;
   padding: 1rem 1rem;
   background-color: #ffffff;
   margin: 0 auto;

@@ -1,0 +1,15 @@
+.message{
+    background-color: lighten($green, 10);
+    height: 2rem;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p{
+        font-size: 1.2rem;
+        color: $white;
+        font-weight: bold;
+    }
+}
