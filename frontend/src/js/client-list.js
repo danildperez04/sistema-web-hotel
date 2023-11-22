@@ -34,12 +34,42 @@ function showClients(data) {
     row.appendChild(actions);
     table.appendChild(row);
 
-    btnUpdate.addEventListener('click', ()=>{
+    btnUpdate.addEventListener('click', () => {
+      localStorage.clear();
       localStorage.setItem('id', client['id']);
       window.location.replace('update-client.html', 'client-list.html')
     });
-    btnDelete.addEventListener('click', ()=>{
-      deleteClient(client['id']);
+    btnDelete.addEventListener('click', () => {
+      const modal = document.createElement('div');
+      modal.classList.add('modal');
+      modal.innerHTML = `
+        <div class="modal-content">
+          <p>¿Estas seguro que quieres eliminar este cliente? Esta acción no se puede deshacer</p>
+
+        <div>
+          <button class="btnDelete">Eliminar</button>
+          <button class="close-modal">Cancelar</button>
+        </div>
+        </div>
+        `;
+
+      setTimeout(() => {
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.classList.add('animation');
+
+        document.querySelector('.close-modal').addEventListener('click', () => {
+          modal.remove();
+        });
+
+        document.querySelector('.btnDelete').addEventListener('click', ()=>{
+          modal.remove();
+          deleteClient(client['id']);
+        });
+
+      }, 0);
+
+      document.querySelector('body').appendChild(modal);
+
     });
 
   });

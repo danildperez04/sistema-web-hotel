@@ -511,6 +511,64 @@ main {
   height: 2rem;
 }
 
+.modal {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+.modal .modal-content {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  display: block;
+  max-width: 35rem;
+  height: 6.6rem;
+  padding: 1rem 1rem;
+  background-color: #ffffff;
+  margin: 0 auto;
+  transform: translateY(-30rem);
+  transition-property: transform;
+  transition-duration: 600ms;
+  opacity: 0;
+  border-radius: 8px;
+}
+.modal .modal-content div {
+  display: flex;
+  justify-content: space-evenly;
+}
+.modal .modal-content .btnDelete {
+  background-color: rgb(246, 23, 23);
+  color: #ffffff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  width: 8rem;
+}
+.modal .modal-content .btnDelete:hover {
+  background-color: #f96161;
+}
+.modal .modal-content .close-modal {
+  background-color: #4c4c6c;
+  color: #ffffff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  width: 8rem;
+}
+.modal .modal-content .close-modal:hover {
+  background-color: #6d6d98;
+}
+.modal .modal-content.animation {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+}
+
 .left-bar {
   background-color: #17396d;
   position: absolute;
