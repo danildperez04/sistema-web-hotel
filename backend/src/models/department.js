@@ -1,17 +1,16 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db');
 
-class Departament extends Model{}
+class Department extends Model { }
 
-Departament.init({
+Department.init({
   name: {
     type: DataTypes.STRING,
     allowNull: false,
   }
-},
-{
+}, {
   sequelize,
-  modelName: 'departament'
+  modelName: 'department'
 });
 
-module.exports = {Departament};
+module.exports = { Department };

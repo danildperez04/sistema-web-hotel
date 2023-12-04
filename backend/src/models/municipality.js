@@ -1,21 +1,20 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../db');
-const { Departament } = require('./departament');
+const { Department } = require('./department');
 
-class Municipality extends Model{}
+class Municipality extends Model { }
 
 Municipality.init({
-  name:{
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-},
-{
+}, {
   sequelize,
   modelName: 'municipality'
 });
 
-Departament.hasMany(Municipality);
-Municipality.belongsTo(Departament);
+Department.hasMany(Municipality);
+Municipality.belongsTo(Department);
 
-module.exports = {Municipality};
+module.exports = { Municipality };
