@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../services/users.service');
 const userService = new User();
 
@@ -24,22 +25,24 @@ const getOne = async (req, res) => {
 const create = async (req, res) => {
   const { firstName, lastName, email, username, password } = req.body;
 
+  const passwordHash = await bcrypt.hash(password, 10);
+
   const user = await userService.create({
     firstName,
     lastName,
     email,
     username,
-    password
+    password: passwordHash
   });
 
   res.send(user);
 };
 
-const update = async (req, res) => {
+const update = async () => {
 
 };
 
-const remove = async (req, res) => {
+const remove = async () => {
 
 };
 

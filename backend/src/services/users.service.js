@@ -5,8 +5,12 @@ class User {
     return userModel.findAll();
   }
 
-  async getOne(id) {
+  async getOneById(id) {
     return await userModel.findOne({ where: { id } });
+  }
+
+  async getOneBy(param) {
+    return await userModel.findOne({ where: param });
   }
 
   async create(userData) {
