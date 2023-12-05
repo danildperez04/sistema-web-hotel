@@ -667,4 +667,45 @@ main {
   height: 1.8rem;
 }
 
+.section-sign {
+  margin: 0 auto;
+  width: 20rem;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #ffffff;
+}
+.section-sign .form {
+  gap: 2rem;
+  width: 100%;
+  align-items: center;
+}
+.section-sign .form input {
+  width: 90%;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid #a2dcd7;
+}
+.section-sign p {
+  margin-top: 2rem;
+  margin-bottom: -0.1rem;
+  font-weight: bold;
+}
+.section-sign .create-account {
+  border: 1px solid #33C3F0;
+  color: #33C3F0;
+  text-decoration: none;
+  height: 2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+body {
+  background-color: #F6F6F6;
+}
+
 /*# sourceMappingURL=app.css.map */
