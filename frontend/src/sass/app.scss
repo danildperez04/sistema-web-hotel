@@ -3,6 +3,7 @@
 @import './base/normalize';
 @import './base/globals';
 @import './base/messages';
+@import './base/modal';
 
 
 //layout
@@ -11,3 +12,4 @@
 @import './layout/client-list';
 @import './layout/main';
 @import './layout/sign-in';
+@import './layout/rooms';

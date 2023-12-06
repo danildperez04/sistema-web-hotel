@@ -1,0 +1,40 @@
+.table-rooms{
+    margin: 3rem auto;
+
+
+    .header-table {
+        background-color: $darkBlue;
+    
+        tr th {
+          color: $white;
+          font-weight: 700;
+          margin-top: 1rem;
+          width: auto;
+          min-width: 10rem;
+        }
+      }
+
+      tbody {
+        td {
+          text-align: center;
+        }
+    
+        tr {
+          background-color: rgb(200, 194, 194);
+        }
+      }
+}
+
+.btn-create{
+    background-color: $green;
+    color: $white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    min-height: 2rem;
+
+    &:hover{
+        background-color: darken($green, 10);
+    }
+}

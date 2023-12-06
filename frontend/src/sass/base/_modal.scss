@@ -1,0 +1,22 @@
+.modal-create-room{
+    
+    .form{
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        input{
+            height: 2rem;
+        }
+
+        textarea{
+            height: 6rem;
+            resize: none;
+        }
+    }
+
+    .btn-x{
+        margin-right: -33rem;
+        cursor: pointer;
+    }
+}
+
