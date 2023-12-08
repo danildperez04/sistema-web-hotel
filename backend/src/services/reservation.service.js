@@ -10,6 +10,10 @@ class Reservation {
 
     return reservations;
   }
+
+  async create(reservationData) {
+    return await reservationModel.create(reservationData);
+  }
 }
 
 module.exports = Reservation;

@@ -2,9 +2,9 @@ const Service = require('../services/services.service');
 const servicesService = new Service();
 
 const getAll = async (req, res) => {
-  const service = await servicesService.getAll();
+  const services = await servicesService.getAll();
 
-  res.send(service);
+  res.send(services);
 };
 
 const getOne = async (req, res) => {
