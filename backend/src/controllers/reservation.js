@@ -2,35 +2,35 @@
 const Reservation = require('../services/reservation.service');
 const reservationServices = new Reservation();
 
-const getAll = async(req, res) => {
-  const reservation = await reservationServices.getAll();
+const getAll = async (req, res) => {
+  const reservations = await reservationServices.getAll();
 
-  res.send(reservation);
+  res.send(reservations);
 };
 
-const getOne = async ( req, res ) => {
+const getOne = async (req, res) => {
   const { id } = req.params;
 
-  const foundReservation  = await reservationServices.getOne(id);
-  
-  if(!foundReservation){
+  const foundReservation = await reservationServices.getOne(id);
+
+  if (!foundReservation) {
     return req.status(404).send({
-      message : 'Reservationt not found'
+      message: 'Reservationt not found'
     });
-  } 
+  }
 
   res.send(foundReservation);
 
 };
 
-const create = async ( req, res) => {
-  const { userId, clientId, startDate, endDate, cancelled} = req.body;
+const create = async (req, res) => {
+  const { userId, clientId, startDate, endDate, cancelled } = req.body;
 
   const reservation = await reservationServices.create({
-    userId, 
-    clientId, 
-    startDate, 
-    endDate, 
+    userId,
+    clientId,
+    startDate,
+    endDate,
     cancelled,
   });
 
@@ -39,7 +39,7 @@ const create = async ( req, res) => {
 };
 
 const update = () => {
-  
+
 };
 
 const remove = () => {

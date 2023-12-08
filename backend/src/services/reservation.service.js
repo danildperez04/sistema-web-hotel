@@ -1,12 +1,10 @@
 const { Reservation: reservationModel } = require('../models/reservation');
-const { Reservation_Room } = require('../models/reservation_room');
-const { Reservation_Service } = require('../models/reservation_service');
+const { Room } = require('../models/rooms');
+const { Service } = require('../models/services');
 
 class Reservation {
   async getAll() {
-    const reservations = await reservationModel.findAll({
-      include: [Reservation_Room, Reservation_Service]
-    });
+    const reservations = await reservationModel.findAll({ include: { all: true } });
 
     return reservations;
   }
