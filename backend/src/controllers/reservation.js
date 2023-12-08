@@ -1,19 +1,45 @@
 //TODO: Reservation Controller
+const Reservation = require('../services/reservation.service');
+const reservationServices = new Reservation();
 
-const getAll = () => {
+const getAll = async(req, res) => {
+  const reservation = await reservationServices.getAll();
+
+  res.send(reservation);
+};
+
+const getOne = async ( req, res ) => {
+  const { id } = req.params;
+
+  const foundReservation  = await reservationServices.getOne(id);
+  
+  if(!foundReservation){
+    return req.status(404).send({
+      message : 'Reservationt not found'
+    });
+  } 
+
+  res.send(foundReservation);
 
 };
 
-const getOne = () => {
+const create = async ( req, res) => {
+  const { userId, clientId, startDate, endDate, cancelled} = req.body;
 
-};
+  const reservation = await reservationServices.create({
+    userId, 
+    clientId, 
+    startDate, 
+    endDate, 
+    cancelled,
+  });
 
-const create = () => {
+  res.send(reservation);
 
 };
 
 const update = () => {
-
+  
 };
 
 const remove = () => {
