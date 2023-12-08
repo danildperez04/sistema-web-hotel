@@ -10,7 +10,28 @@ class Reservation {
   }
 
   async create(reservationData) {
-    return await reservationModel.create(reservationData);
+    const reservation = await reservationModel.create(reservationData);
+    const services = await Service.findAll();
+    const rooms = await Room.findAll();
+
+    services.forEach(async (service) => {
+      await reservation.addService(service, {
+        through:
+        {
+          servicePrice: service.price
+        }
+      });
+    });
+
+    rooms.forEach(async (room) => {
+      await reservation.addRoom(room, {
+        through: {
+          roomPrice: room.price
+        }
+      });
+    });
+
+    return reservation;
   }
 }
 
