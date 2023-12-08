@@ -23,7 +23,7 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   const {code, price, description} = req.body;
-  const room = new roomServices.create({
+  const room = await roomServices.create({
     code,
     price,
     description,
