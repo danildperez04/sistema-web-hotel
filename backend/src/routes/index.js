@@ -5,6 +5,7 @@ const clientsRouter = require('./clients.js');
 const servicesRouter = require('./services.js');
 const roomsRouter = require('./room.js');
 const reservationsRouter = require('./reservation.js');
+const Client = require('../services/client.service.js');
 
 //TODO: Auth route
 router.post('/auth');
@@ -13,5 +14,11 @@ router.use('/clients', clientsRouter);
 router.use('/services', servicesRouter);
 router.use('/rooms', roomsRouter);
 router.use('/reservations', reservationsRouter);
+
+router.get('/departments', async (req, res) => {
+  const clientService = new Client();
+
+  res.send(await clientService.getDepartments());
+});
 
 module.exports = router; 

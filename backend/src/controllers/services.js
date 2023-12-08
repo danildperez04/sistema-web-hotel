@@ -30,7 +30,7 @@ const update = async (req, res) => {
 
   if (!foundService) {
     res.status(404).send({
-      message: 'Servide not found'
+      message: 'Service not found'
     });
   }
 
@@ -52,7 +52,7 @@ const remove = async (req, res) => {
 
   if (!foundService) {
     res.status(404).send({
-      message: 'Servide not found'
+      message: 'Service not found'
     });
   }
 
@@ -61,7 +61,7 @@ const remove = async (req, res) => {
   res.sendStatus(204);
 };
 
-module.export = {
+module.exports = {
   getAll,
   getOne,
   create,

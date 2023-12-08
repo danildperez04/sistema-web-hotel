@@ -26,4 +26,4 @@ class Service {
   }
 }
 
-module.export = Service;
+module.exports = Service;

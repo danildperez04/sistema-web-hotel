@@ -1,12 +1,13 @@
 const { Client: clientModel } = require('../models/client');
-
+const { Department: departmentModel } = require('../models/department');
+const { Municipality } = require('../models/municipality');
 class Client {
   async getAll() {
     return await clientModel.findAll();
   }
 
   async getOne(id) {
-    const client = await clientModel.findOne({where: {id}});
+    const client = await clientModel.findOne({ where: { id } });
     return client?.dataValues;
   }
 
@@ -24,6 +25,14 @@ class Client {
     return await clientModel.destroy({
       where: { id }
     });
+  }
+
+  async getDepartments() {
+    const departments = await departmentModel.findAll({
+      include: { model: Municipality, as: 'municipalities' }
+    });
+
+    return departments;
   }
 }
 
