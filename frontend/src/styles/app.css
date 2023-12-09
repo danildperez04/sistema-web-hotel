@@ -684,6 +684,12 @@ main {
   height: 1.8rem;
 }
 
+.form label {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 400;
+}
+
 .section-sign {
   margin: 0 auto;
   width: 20rem;

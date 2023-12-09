@@ -90,3 +90,11 @@
     font-size: .9rem;
     height: 1.8rem;
 }
+
+.form{
+    label{
+        display: flex;
+        justify-content: flex-start;
+        font-weight: 400;
+    }
+}
