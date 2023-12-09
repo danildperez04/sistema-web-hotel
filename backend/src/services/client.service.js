@@ -3,11 +3,11 @@ const { Department: departmentModel } = require('../models/department');
 const { Municipality } = require('../models/municipality');
 class Client {
   async getAll() {
-    return await clientModel.findAll();
+    return await clientModel.findAll({ include: { all: true } });
   }
 
   async getOne(id) {
-    const client = await clientModel.findOne({ where: { id } });
+    const client = await clientModel.findOne({ include: { all: true }, where: { id } });
     return client?.dataValues;
   }
 
