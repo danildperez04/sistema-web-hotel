@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const userService = new (require('./users.service'))();
+
 class Auth {
   async login({ username, password }) {
     const user = await userService.getOneById({ username });

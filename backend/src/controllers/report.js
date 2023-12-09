@@ -1,4 +1,5 @@
-const getReport = () => {
+const getReport = (req, res) => {
+  const { date, limit } = req.query;
 
 };
 
