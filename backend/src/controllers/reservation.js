@@ -15,7 +15,7 @@ const getOne = async (req, res) => {
 
   if (!foundReservation) {
     return req.status(404).send({
-      message: 'Reservationt not found'
+      message: 'Reservation not found'
     });
   }
 
@@ -38,7 +38,29 @@ const create = async (req, res) => {
 
 };
 
-const update = () => {
+const update = async ( req, res ) => {
+  const { id } = req.params;
+  const { userId, clientId, startDate, endDate, cancelled, services, rooms } = req.body;
+  const foundReservation = await reservationServices.getOne(id);
+
+  if (!foundReservation) {
+    return req.status(404).send({
+      message: 'Reservation not found'
+    });
+  }
+
+  const reservationToUpdate = {
+    userId, 
+    clientId, 
+    startDate, 
+    endDate, 
+    cancelled,
+    
+  };
+
+
+  const reservationUpdated = await reservationServices.update(reservationToUpdate, {services, rooms} , id );
+  res.send(reservationUpdated);
 
 };
 

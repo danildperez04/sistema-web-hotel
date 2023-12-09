@@ -45,8 +45,13 @@ class Reservation {
     return reservation;
   }
 
-  async update() {
+  async update( reservationData, { services, rooms }, id ) {
+    const reservation = await reservationModel.update(reservationData, { where: { id } } );
+    reservation.services = services;
+    reservation.rooms = rooms;
+    
 
+    return await reservation.save();
   }
 }
 
