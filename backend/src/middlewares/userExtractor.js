@@ -13,11 +13,15 @@ const userExtractor = async (req, res, next) => {
 
   const decodedToken = jwt.verify(token, process.env.SECRET);
 
-  if (!decodedToken.id) {
+  if (!decodedToken?.id) {
     return res.status(401).json({ error: 'token missing or invalid' });
   }
 
-  req.user = await userService.getOneById(id);
+  req.user = await userService.getOneById(decodedToken.id);
+
+  next();
 };
 
-mod;
+module.exports = {
+  userExtractor
+};
