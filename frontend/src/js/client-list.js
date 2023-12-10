@@ -91,7 +91,10 @@ function showClients(data) {
 
 function deleteClient(id) {
   fetch(`http://localhost:3000/api/clients/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      'authorization': 'bearer ' + token
+    }
   })
     .then(response => {
 
