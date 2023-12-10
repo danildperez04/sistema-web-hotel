@@ -1,0 +1,2 @@
+GET http://localhost:3000/api/reports?limit=10&date=2023-12 HTTP/1.1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJkYW5pbGRwZXJlejA0IiwiaWF0IjoxNzAyMjQ1NDIwLCJleHAiOjE3MDM5NzM0MjB9.C0AstF9xgZHX1sJ2ypo9TgAvd7Qj70m9pPjo0RFhQ1E

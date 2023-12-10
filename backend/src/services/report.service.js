@@ -1,25 +1,56 @@
-const { Reservation } = require('../models/reservation');
-const { PDFDocument } = require('pdf-lib');
+const { Reservation: reservationModel } = require('../models/reservation');
+const { jsPDF } = require('jspdf');
+const { default: autoTable } = require('jspdf-autotable');
 const { Op } = require('sequelize');
-const fs = require('fs').promises;
-
-
 
 class Report {
+  async generatePDF({ limit, date }) {
+    const pdfDoc = new jsPDF();
 
-  async generatePDF(limit , date) {
-    const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage();
-    const reservations = await Reservation.findAll( { include: { all: true }, where: { [Op.like]: date }, limit } );
-
-    reservations.forEach(reservation => {
-      page.drawText(`fecha de inicio: ${reservation.startDate}`);
-      page.drawText(`fecha de de salida: ${reservation.endDate}`);
+    const reservations = await reservationModel.findAll({
+      include:
+      {
+        all: true
+      },
+      // where: {
+      //   startDate: {
+      //     [Op.like]: date
+      //   }
+      // },
+      limit
     });
 
-    const pdfBytes = await pdfDoc.save();
-    await fs.writeFile('Reporte_Mensual.pdf', pdfBytes);
-    return pdfDoc;
+    const formatedReservations = reservations.map(reservation => {
+      return [
+        reservation.id,
+        reservation?.user?.username,
+        this.formatDate(reservation.startDate),
+        this.formatDate(reservation.endDate),
+        reservation.cancelled ? 'si' : 'no'
+      ];
+    });
+
+    autoTable(pdfDoc, {
+      head: [['ID', 'Usuario', 'Fecha Inicio', 'Fecha Salida', 'Cancelada']],
+      body: [
+        ...formatedReservations
+      ],
+    });
+
+    await pdfDoc.save('Reporte_Mensual.pdf');
+  }
+
+  formatDate(date) {
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+
+    return new Date(date).toLocaleDateString(
+      'es-ES', options
+    );
   }
 }
 module.exports = Report;
