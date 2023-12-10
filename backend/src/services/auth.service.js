@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { BadRequestException } = require('../utils/customErrors');
 const userService = new (require('./users.service'))();
 
 class Auth {
@@ -9,7 +10,7 @@ class Auth {
     const isPasswordCorrect = user === null ? false : await bcrypt.compare(password, user.password);
 
     if (!(user && isPasswordCorrect)) {
-      throw new Error('Wrong Credentials');
+      throw new BadRequestException('Wrong Credentials');
     }
 
     const userForToken = {

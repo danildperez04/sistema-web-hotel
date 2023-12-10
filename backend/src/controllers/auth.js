@@ -1,4 +1,5 @@
 const Auth = require('../services/auth.service');
+const { HTTP_STATUS } = require('../utils/http');
 const authService = new Auth();
 
 const login = async (req, res) => {
@@ -6,7 +7,7 @@ const login = async (req, res) => {
 
   const token = await authService.login({ username, password });
 
-  res.status(200).send({
+  res.status(HTTP_STATUS.OK).send({
     token
   });
 };

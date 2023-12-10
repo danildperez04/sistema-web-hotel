@@ -1,5 +1,6 @@
 const http = require('http');
 require('dotenv').config({});
+require('express-async-errors');
 
 require('./src/models/role');
 require('./src/models/reservation');
@@ -11,15 +12,15 @@ const db = require('./src/db');
 
 const server = http.createServer(app);
 
-server.listen(port, host, async ()=>{
-  try{
+server.listen(port, host, async () => {
+  try {
     await db.authenticate();
     console.log('Connected to [DB]');
-    
+
     await db.sync({});
 
     console.log(`Server listening on port ${port}`);
-  }catch (error){
+  } catch (error) {
     console.error(error);
   }
 });

@@ -5,6 +5,7 @@ const app = express();
 const cors = require('cors');
 const api = require('./routes/index');
 const morgan = require('morgan');
+const { errorHandler } = require('./middlewares/error-handler');
 
 app.use(cors());
 
@@ -16,5 +17,7 @@ app.use(morgan('dev'));
 app.use('/api', api);
 
 app.use(notFound);
+
+app.use(errorHandler);
 
 module.exports = app;
