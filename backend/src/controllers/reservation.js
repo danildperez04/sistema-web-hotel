@@ -1,6 +1,7 @@
 //TODO: Reservation Controller
 const Reservation = require('../services/reservation.service');
 const Client = require('../services/client.service');
+const { NotFoundException } = require('../utils/customErrors');
 const reservationServices = new Reservation();
 const clientService = new Client();
 
@@ -32,7 +33,7 @@ const create = async (req, res) => {
   const client = await clientService.getOne(clientId);
 
   if (!client) {
-    return res.status(404).send({ message: 'client not found' });
+    throw new NotFoundException('client not found');
   }
 
   const reservation = await reservationServices.create({

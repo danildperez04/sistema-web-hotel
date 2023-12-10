@@ -12,11 +12,11 @@ class Report {
       {
         all: true
       },
-      // where: {
-      //   startDate: {
-      //     [Op.like]: date
-      //   }
-      // },
+      where: {
+        startDate: {
+          [Op.substring]: date
+        }
+      },
       limit
     });
 
@@ -24,6 +24,7 @@ class Report {
       return [
         reservation.id,
         reservation?.user?.username,
+        reservation?.client?.fullName,
         this.formatDate(reservation.startDate),
         this.formatDate(reservation.endDate),
         reservation.cancelled ? 'si' : 'no'
@@ -31,7 +32,7 @@ class Report {
     });
 
     autoTable(pdfDoc, {
-      head: [['ID', 'Usuario', 'Fecha Inicio', 'Fecha Salida', 'Cancelada']],
+      head: [['ID', 'Usuario', 'Cliente', 'Fecha Inicio', 'Fecha Salida', 'Cancelada']],
       body: [
         ...formatedReservations
       ],

@@ -1,2 +1,2 @@
-GET http://localhost:3000/api/reports?limit=10&date=2023-12 HTTP/1.1
+GET http://localhost:3000/api/reports?limit=10&date=2023-12-08 HTTP/1.1
 Authorization: bearer token
