@@ -1,10 +1,19 @@
+import { getToken } from "./token.js";
+
+const token = getToken();
+
 document.addEventListener('DOMContentLoaded', () => {
   loadRooms();
   displayModal();
 });
 
+
 async function loadRooms() {
-  const response = await fetch('http://localhost:3000/api/rooms');
+  const response = await fetch('http://localhost:3000/api/rooms', {
+    headers: {
+      'authorization': 'bearer ' + token
+    }
+  });
   const data = await response.json();
   showRooms(data);
 
@@ -83,7 +92,8 @@ function createRoom() {
       method: 'POST',
       body: JSON.stringify(roomData),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'authorization': 'bearer ' + token
       }
     })
       .then(response => {

@@ -1,3 +1,7 @@
+import { getToken } from "./token.js";
+
+const token = getToken();
+
 document.addEventListener('DOMContentLoaded', () => {
   startApp();
   loadDepartments();
@@ -17,7 +21,8 @@ function startApp() {
       method: 'POST',
       body: JSON.stringify(clientData),
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'authorization': 'bearer ' + token
       }
     })
       .then(response => {
@@ -60,7 +65,11 @@ function startApp() {
 }
 
 async function loadDepartments() {
-  const response = await fetch('http://localhost:3000/api/departments');
+  const response = await fetch('http://localhost:3000/api/departments', {
+    headers: {
+      'authorization': 'bearer ' + token
+    }
+  });
   const data = await response.json();
 
   const cmbDepartments = document.querySelector('#option-department');
