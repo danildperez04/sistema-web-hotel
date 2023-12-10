@@ -1,0 +1,55 @@
+GET http://localhost:3000/api/reservations/ HTTP/1.1
+
+GET http://localhost:3000/api/reservations/id HTTP/1.1
+
+POST http://localhost:3000/api/reservations/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "clientId": 2,
+  "startDate": "2023-12-08",
+  "endDate": "2023-12-09",
+  "cancelled": 0,
+  "services":[
+    {
+      "id": 1,
+      "price": 250
+    },
+    {
+      "id": 2,
+      "price": 350
+    }
+    ],
+  "rooms":[
+    {
+      "id": 1,
+      "price":200
+    }
+  ]
+}
+
+# Aqui se tiene que mandar todos los servicios y cuartos que desean que esten relacionados, si no se envia alguno que estaba antes ese sera eliminado
+PUT http://localhost:3000/api/reservations/id HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "clientId": 2,
+  "startDate": "2023-12-09",
+  "endDate": "2023-12-12",
+  "cancelled": 0,
+  "services": [
+      {
+        "id":1,
+        "price":240
+        
+      }
+    ],
+  "rooms": [
+      {
+        "id":1, 
+        "price": 300
+      }
+    ]
+}

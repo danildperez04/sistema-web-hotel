@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../services/users.service');
+const { NotFoundException } = require('../utils/customErrors');
 const userService = new User();
 
 const getAll = async (req, res) => {
@@ -11,12 +12,10 @@ const getAll = async (req, res) => {
 const getOne = async (req, res) => {
   const { id } = req.params;
 
-  const foundUser = await userService.getOne(id);
+  const foundUser = await userService.getOneById(id);
 
   if (!foundUser) {
-    return res.status(404).send({
-      message: 'User not found',
-    });
+    throw new NotFoundException('user not found');
   }
 
   res.send(foundUser);
@@ -38,12 +37,42 @@ const create = async (req, res) => {
   res.send(user);
 };
 
-const update = async () => {
+const update = async (req, res) => {
+  const { id } = req.params;
+  const { firstName, lastName, email, username, password } = req.body;
+  const foundUser = await userService.getOneById(id);
 
+  if (!foundUser) {
+    throw new NotFoundException('user not found');
+  }
+
+  const passwordHash = password && await bcrypt.hash(password, 10);
+
+  const userToUpdate = {
+    firstName,
+    lastName,
+    email,
+    username,
+    password: passwordHash
+  };
+
+  const updatedRoom = await userService.update(userToUpdate, id);
+
+  res.send(updatedRoom);
 };
 
-const remove = async () => {
+const remove = async (req, res) => {
+  const { id } = req.params;
 
+  const foundUser = await userService.getOneById(id);
+
+  if (!foundUser) {
+    throw new NotFoundException('user not found');
+  }
+
+  await userService.remove(id);
+
+  res.sendStatus(204);
 };
 
 module.exports = {

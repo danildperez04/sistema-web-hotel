@@ -9,7 +9,8 @@ const getAll = async (req, res) => {
 
 const getOne = async (req, res) => {
   const { id } = req.params;
-  res.send(`Get Service {${id}} `);
+  const service = await servicesService.getOne(id);
+  res.send(service);
 };
 
 const create = async (req, res) => {
