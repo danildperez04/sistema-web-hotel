@@ -1,15 +1,15 @@
-document.addEventListener('DOMContentLoaded', ()=>{
-    displayModal();
+document.addEventListener('DOMContentLoaded', () => {
+  displayModal();
 });
 
-function displayModal(){
+function displayModal() {
 
-    document.querySelector('#reports')
-    .addEventListener('click', ()=>{
-        const modal = document.createElement('div');
-        modal.classList.add('modal');
-        modal.classList.add('modal-create-room')
-        modal.innerHTML = `
+  document.querySelector('#reports')
+    .addEventListener('click', () => {
+      const modal = document.createElement('div');
+      modal.classList.add('modal');
+      modal.classList.add('modal-create-room')
+      modal.innerHTML = `
       <div class="modal-content">
       <img class ="btn-x" src="./src/img/cerrar.png">
         <h1>Crear Reportes</h1>
@@ -26,14 +26,14 @@ function displayModal(){
       </div>
       </div>
       ;`
-        setTimeout(() => {
-            const modalContent = document.querySelector('.modal-content');
-            modalContent.classList.add('animation');
+      setTimeout(() => {
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.classList.add('animation');
 
-        }, 0);
+      }, 0);
 
-        document.querySelector('body').appendChild(modal);
+      document.querySelector('body').appendChild(modal);
     });
 
- 
+
 }
