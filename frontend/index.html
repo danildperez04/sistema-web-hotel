@@ -1,51 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
+    <link rel="stylesheet" href="./src/styles/app.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
-  <link rel="stylesheet" href="./src/styles/app.css">
-</head>
+  <body>
+    <section class="left-bar">
+      <div class="menu-content">
+        <nav>
+          <a href="./src/pages/client-list.html">Clientes</a>
+          <a href="./src/pages/service.html">Servicios</a>
+          <!--   <a href="./src/pages/client-list.html">Lista de Clientes</a>-->
+          <a href="./src/pages/rooms.html">Habitaciones</a>
+          <a href="#">Reservas</a>
+          <a href="#" id="reports">Reportes</a>
+        </nav>
+      </div>
+    </section>
 
-<body>
-
-  <section class="left-bar">
-
-    <div class="menu-content">
+    <header class="header">
+      <div class="search">
+        <label for="input-search">Buscar</label>
+        <input
+          type="text"
+          id="input-search"
+          placeholder="¿Qué estas buscando?"
+        />
+        <button><img src="./src/img/search.png" alt="" /></button>
+      </div>
 
       <nav>
-        <a href="./src/pages/client-list.html">Clientes</a>
-        <a href="./src/pages/service.html">Servicios</a>
-        <!--   <a href="./src/pages/client-list.html">Lista de Clientes</a>-->
-        <a href="./src/pages/rooms.html">Habitaciones</a>
-        <a href="#">Reservas</a>
-        <a href="#" id="reports">Reportes</a>
+        <a href="">Cuentas</a>
+        <a href="">Control</a>
+        <a href="">Gestion</a>
+        <a href="">Informacion</a>
       </nav>
+    </header>
 
-    </div>
-
-  </section>
-
-  <header class="header">
-
-    <div class="search">
-      <label for="input-search">Buscar</label>
-      <input type="text" id="input-search" placeholder="¿Qué estas buscando?">
-      <button><img src="./src/img/search.png" alt=""></button>
-    </div>
-
-    <nav>
-      <a href="">Cuentas</a>
-      <a href="">Control</a>
-      <a href="">Gestion</a>
-      <a href="">Informacion</a>
-    </nav>
-  </header>
-
-
-  <script src="./main.js"></script>
-</body>
-
+    <script src="./main.js"></script>
+  </body>
 </html>

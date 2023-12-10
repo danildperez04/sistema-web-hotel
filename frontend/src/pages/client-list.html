@@ -1,47 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/app.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="../styles/app.css">
-</head>
+  <body>
+    <header class="header"></header>
 
-<body>
-  <header class="header">
+    <main>
+      <h1>Lista de clientes</h1>
+      <div class="msg"></div>
+      <table class="client-list">
+        <thead class="header-table">
+          <tr>
+            <th>DNI</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Municipio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
 
-  </header>
+        <tbody></tbody>
+      </table>
+    </main>
 
-  <main>
-    <h1>Lista de clientes</h1>
-    <div class="msg">
+    <a href="./client.html">Crear un nuevo cliente</a>
 
-    </div>
-    <table class="client-list">
-      <thead class="header-table">
-        <tr>
-          <th>DNI</th>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Teléfono</th>
-          <th>Dirección</th>
-          <th>Municipio</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-      </tbody>
-
-    </table>
-
-  </main>
-
-  <a href="./client.html">Crear un nuevo cliente</a>
-
-  <script src="../js/client-list.js" type="module"></script>
-</body>
-
+    <script src="../js/client-list.js" type="module"></script>
+  </body>
 </html>
