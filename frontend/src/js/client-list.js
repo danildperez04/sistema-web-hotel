@@ -16,11 +16,14 @@ function showClients(data) {
     const row = document.createElement('tr');
     row.classList.add('row');
     Object.keys(client).forEach(key => {
-      if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'municipalityId') {
+      if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'municipalityId' && key !== 'birthDate') {
         const cell = document.createElement('td');
         cell.textContent = client[key];
         row.appendChild(cell);
+        console.log(typeof(key));
+        
       }
+
     });
     const actions = document.createElement('td');
     actions.classList.add('actions');

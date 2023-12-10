@@ -764,4 +764,19 @@ body {
   background-color: #417f41;
 }
 
+.form-service {
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+  margin: 0 auto;
+  gap: 2rem;
+}
+.form-service textarea {
+  resize: none;
+}
+
+h1 {
+  text-align: center;
+}
+
 /*# sourceMappingURL=app.css.map */
