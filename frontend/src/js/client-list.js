@@ -1,4 +1,4 @@
-import {getToken} from './token.js';
+import { getToken } from './token.js';
 
 const token = getToken();
 
@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
 function start() {
   fetch('http://localhost:3000/api/clients', {
     headers: {
-      'authorization': 'bearer '+token
+      'authorization': 'bearer ' + token
     }
-  })  
+  })
     .then(response => response.json())
     .then(data => showClients(data));
 }
@@ -30,7 +30,7 @@ function showClients(data) {
         const cell = document.createElement('td');
         cell.textContent = client[key];
         row.appendChild(cell);
-        
+
       }
 
     });
@@ -73,7 +73,7 @@ function showClients(data) {
           modal.remove();
         });
 
-        document.querySelector('.btnDelete').addEventListener('click', ()=>{
+        document.querySelector('.btnDelete').addEventListener('click', () => {
           modal.remove();
           deleteClient(client['id']);
         });

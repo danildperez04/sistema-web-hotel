@@ -1,7 +1,7 @@
-export function displayModal(message){
-    const modal = document.createElement('div');
-          modal.classList.add('modal');
-          modal.innerHTML = `
+export function displayModal(message) {
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.innerHTML = `
                              <div class="modal-content">
                              <img src="../img/check.png">
                               <p>${message}</p>
@@ -11,16 +11,16 @@ export function displayModal(message){
                             </div>
                             `;
 
-          setTimeout(() => {
-            const modalContent = document.querySelector('.modal-content');
-            modalContent.classList.add('animation');
+  setTimeout(() => {
+    const modalContent = document.querySelector('.modal-content');
+    modalContent.classList.add('animation');
 
-            document.querySelector('.close-modal').addEventListener('click', () => {
-              modal.remove();
-              window.location.reload();
-            });
+    document.querySelector('.close-modal').addEventListener('click', () => {
+      modal.remove();
+      window.location.reload();
+    });
 
-          }, 0);
+  }, 0);
 
-          document.body.appendChild(modal);
+  document.body.appendChild(modal);
 }
