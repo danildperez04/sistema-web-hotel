@@ -12,7 +12,7 @@ const errorHandler = (err, req, res, next) => {
 
   if (err instanceof CustomError) {
     return res.status(err.status).json({
-      status: err.status,
+      statusCode: err.status,
       message: err.message
     });
   }
