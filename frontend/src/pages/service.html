@@ -5,15 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Añadir Servicio</title>
+  <link rel="stylesheet" href="../styles/app.css">
 </head>
 
 <body>
   <section>
     <h1>Servicios</h1>
-    <form>
+    <form class="form form-service">
       <input type="text" name="name" placeholder="Nombre" required>
+      <input type="number" name="price" id="" placeholder="Precio" required>
       <textarea name="details" cols="30" rows="10" placeholder="Detalles" required></textarea>
-      <button type="submit">Crear</button>
+      <button type="submit" class="btn-create-room">Crear</button>
     </form>
   </section>
 
@@ -31,6 +33,8 @@
       </tbody>
     </table>
   </section>
+
+  <script src="../js/service.js" type="module"></script>
 </body>
 
 </html>
