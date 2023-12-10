@@ -33,6 +33,11 @@ function displayModal() {
       }, 0);
 
       document.querySelector('body').appendChild(modal);
+
+      document.querySelector('.btn-x')
+      .addEventListener('click', ()=>{
+        modal.remove();
+      })
     });
 
 

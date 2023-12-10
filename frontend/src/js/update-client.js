@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const id = localStorage.getItem('id');
+  const idClient = localStorage.getItem('idClient');
 
   fetch(`http://localhost:3000/api/clients/${id}`)
     .then(response => response.json())
@@ -10,13 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         const clientData = Object.fromEntries(new FormData(e.target));
-        localStorage.clear();
+        localStorage.removeItem('idClient');
 
-        fetch(`http://localhost:3000/api/clients/${id}`, {
+        fetch(`http://localhost:3000/api/clients/${idClient}`, {
           method: 'PUT',
           body: JSON.stringify(clientData),
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'authorization': 'bearer ' + token
           }
         })
           .then(response => {
