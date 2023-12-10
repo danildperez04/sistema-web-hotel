@@ -426,7 +426,7 @@ label, input {
   width: 46rem;
   text-align: center;
   margin: 5rem auto 3rem auto;
-  height: 46rem;
+  height: 58rem;
   padding-bottom: 1rem;
 }
 .section-client .client-form {
@@ -441,7 +441,7 @@ label, input {
   flex-direction: column;
   width: 90%;
 }
-.section-client .client-form div input {
+.section-client .client-form div input, .section-client .client-form div select {
   width: 90%;
   height: 1.7rem;
   border-radius: 5px;

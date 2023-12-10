@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   startApp();
+  loadDepartments();
 });
 
 function startApp() {
@@ -7,6 +8,10 @@ function startApp() {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const clientData = Object.fromEntries(new FormData(e.target));
+
+    const municipalities = document.querySelector('#option-municipality');
+
+    clientData.municipalityId = municipalities.options[municipalities.selectedIndex].value;
 
     fetch('http://localhost:3000/api/clients', {
       method: 'POST',
@@ -53,3 +58,34 @@ function startApp() {
       });
   });
 }
+
+async function loadDepartments() {
+  const response = await fetch('http://localhost:3000/api/departments');
+  const data = await response.json();
+
+  const cmbDepartments = document.querySelector('#option-department');
+  const cmbMunicipalities = document.querySelector('#option-municipality');
+  let allMunicipalities = [];
+
+  data.forEach(department => {
+    const option = document.createElement('option');
+    option.textContent = department['name'];
+    option.value = department['id'];
+    cmbDepartments.appendChild(option);
+    allMunicipalities = allMunicipalities.concat(department.municipalities);
+  });
+
+  cmbDepartments.addEventListener('change', () => {
+    cmbMunicipalities.innerHTML = '';
+    const id = cmbDepartments.options[cmbDepartments.selectedIndex].value;
+    const selected = data.find(department => department.id == parseInt(id));
+
+    selected.municipalities.forEach(municipality => {
+      const option = document.createElement('option');
+      option.textContent = municipality['name'];
+      option.value = municipality['id'];
+      cmbMunicipalities.appendChild(option);
+    });
+  });
+}
+
