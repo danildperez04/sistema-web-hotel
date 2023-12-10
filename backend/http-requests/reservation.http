@@ -1,12 +1,14 @@
 GET http://localhost:3000/api/reservations/ HTTP/1.1
+Authorization: bearer token
 
 GET http://localhost:3000/api/reservations/id HTTP/1.1
+Authorization: bearer token
 
 POST http://localhost:3000/api/reservations/ HTTP/1.1
 Content-Type: application/json
+Authorization: bearer token
 
 {
-  "userId": 1,
   "clientId": 2,
   "startDate": "2023-12-08",
   "endDate": "2023-12-09",
@@ -32,9 +34,9 @@ Content-Type: application/json
 # Aqui se tiene que mandar todos los servicios y cuartos que desean que esten relacionados, si no se envia alguno que estaba antes ese sera eliminado
 PUT http://localhost:3000/api/reservations/id HTTP/1.1
 Content-Type: application/json
+Authorization: bearer token
 
 {
-  "userId": 1,
   "clientId": 2,
   "startDate": "2023-12-09",
   "endDate": "2023-12-12",
