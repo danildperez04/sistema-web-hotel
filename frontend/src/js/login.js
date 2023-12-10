@@ -1,55 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
-  startApp();
+document.addEventListener('DOMContentLoaded', ()=>{
+    login();
 });
 
-function startApp() {
-  const form = document.querySelector('.form');
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+function login(){
+    const form = document.querySelector('.form');
+    form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        const user = Object.fromEntries(new FormData(e.target));
 
-    if (validateFields()) {
-      const userData = Object.fromEntries(new FormData(e.target));
+       const response = await fetch('http://localhost:3000/auth/', {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+       });
+       const token = await response.json();
 
-      fetch('http://localhost:3000/api/users/', {
-        method: 'POST',
-        body: JSON.stringify(userData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(e => console.error(e.message));
-    }
+       localStorage.setItem('token', token['token']);
 
-  });
-}
-
-function validateFields() {
-
-  const pass = document.querySelector('#pass').value;
-  const confirm = document.querySelector('#confirm').value;
-
-  if (pass !== confirm) {
-    showError('Las contraseñas no coinciden', 'confirm');
-    return false;
-  }
-
-  return true;
-
-}
-
-
-function showError(text, field) {
-  if (document.querySelector('.error') !== null) {
-    document.querySelector('.error').remove();
-  }
-
-  const error = document.createElement('div');
-  const info = document.createElement('p');
-  info.textContent = text;
-  error.appendChild(info);
-  error.classList.add('error')
-  const add = document.querySelector('.' + field);
-  add.appendChild(error);
+    });
 }
