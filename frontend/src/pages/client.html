@@ -1,66 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/app.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="../styles/app.css">
-</head>
+  <body>
+    <section class="section-client">
+      <h1>Agregar Nuevo Cliente</h1>
+      <form class="client-form">
+        <div class="field">
+          <label for="input-client-dni">Cédula </label>
+          <input
+            id="input-client-dni"
+            name="dni"
+            type="text"
+            placeholder="Ingrese su cédula..."
+            required
+          />
+        </div>
 
-<body>
-  <section class="section-client">
-    <h1>Agregar Nuevo Cliente</h1>
-    <form class="client-form">
-      <div class="field">
-        <label for="input-client-dni">Cédula </label>
-        <input id="input-client-dni" name="dni" type="text" placeholder="Ingrese su cédula..." required>
-      </div>
+        <div class="field">
+          <label for="input-client-name">Nombre </label>
+          <input
+            id="input-client-name"
+            name="fullName"
+            type="text"
+            placeholder="Ingrese su nombre..."
+            required
+          />
+        </div>
 
-      <div class="field">
-        <label for="input-client-name">Nombre </label>
-        <input id="input-client-name" name="fullName" type="text" placeholder="Ingrese su nombre..." required>
-      </div>
+        <div class="field">
+          <label for="input-client-email">Email </label>
+          <input
+            id="input-client-email"
+            name="email"
+            type="email"
+            placeholder="Ingrese su email..."
+            required
+          />
+        </div>
 
-      <div class="field">
-        <label for="input-client-email">Email </label>
-        <input id="input-client-email" name="email" type="email" placeholder="Ingrese su email..." required>
-      </div>
+        <div class="field">
+          <label for="input-client-phonenumber">Numero de telefono </label>
+          <input
+            id="input-client-phonenumber"
+            name="phoneNumber"
+            type="tel"
+            placeholder="Ingrese su numero de telefono..."
+            required
+          />
+        </div>
 
-      <div class="field">
-        <label for="input-client-phonenumber">Numero de telefono </label>
-        <input id="input-client-phonenumber" name="phoneNumber" type="tel"
-          placeholder="Ingrese su numero de telefono..." required>
-      </div>
+        <div class="field">
+          <label for="option-department">Seleccione el departamento </label>
+          <select name="" id="option-department"></select>
+        </div>
 
-      <div class="field">
-        <label for="option-department">Seleccione el departamento </label>
-        <select name="" id="option-department"></select>
-      </div>
+        <div class="field">
+          <label for="option-municipality">Seleccione el municipio </label>
+          <select name="" id="option-municipality"></select>
+        </div>
 
-      <div class="field">
-        <label for="option-municipality">Seleccione el municipio </label>
-        <select name="" id="option-municipality"></select>
-      </div>
+        <div class="field">
+          <label for="input-client-birthdate">Fecha de nacimiento </label>
+          <input
+            id="input-client-birthdate"
+            name="birthDate"
+            type="date"
+            required
+          />
+        </div>
 
-      <div class="field">
-        <label for="input-client-birthdate">Fecha de nacimiento </label>
-        <input id="input-client-birthdate" name="birthDate" type="date" required>
-      </div>
+        <div class="field">
+          <label for="input-client-address">Dirección </label>
+          <textarea
+            id="input-client-address"
+            name="address"
+            type="text"
+            required
+            placeholder="Escribe tu dirección"
+          ></textarea>
+        </div>
 
-      <div class="field">
-        <label for="input-client-address">Dirección </label>
-        <textarea id="input-client-address" name="address" type="text" required
-          placeholder="Escribe tu dirección"></textarea>
+        <input type="submit" name="" id="" class="submit" />
+      </form>
+    </section>
 
-      </div>
-
-      <input type="submit" name="" id="" class="submit">
-
-    </form>
-  </section>
-
-  <script src="../js/client.js"></script>
-</body>
-
+    <script src="../js/client.js"></script>
+  </body>
 </html>
