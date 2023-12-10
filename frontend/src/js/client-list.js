@@ -1,13 +1,23 @@
+import {getToken} from './token.js';
+
+const token = getToken();
+
+
 document.addEventListener('DOMContentLoaded', () => {
   start();
 });
 
 
 function start() {
-  fetch('http://localhost:3000/api/clients')
+  fetch('http://localhost:3000/api/clients', {
+    headers: {
+      'authorization': 'bearer '+token
+    }
+  })  
     .then(response => response.json())
     .then(data => showClients(data));
 }
+
 
 function showClients(data) {
   const table = document.querySelector('.client-list tbody');
@@ -20,15 +30,14 @@ function showClients(data) {
         const cell = document.createElement('td');
         cell.textContent = client[key];
         row.appendChild(cell);
-        console.log(typeof(key));
         
       }
 
     });
     const actions = document.createElement('td');
     actions.classList.add('actions');
-    btnUpdate = document.createElement('a');
-    btnDelete = document.createElement('a');
+    const btnUpdate = document.createElement('a');
+    const btnDelete = document.createElement('a');
     btnUpdate.textContent = 'Actualizar';
     btnUpdate.classList.add('btn-update');
     btnDelete.textContent = 'Eliminar';
