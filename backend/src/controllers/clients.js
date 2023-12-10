@@ -1,8 +1,22 @@
 const Client = require('../services/client.service');
+const { NotFoundException } = require('../utils/customErrors');
 const clientService = new Client();
 
 const getAll = async (req, res) => {
-  const clients = await clientService.getAll();
+  const { dni } = req.query;
+
+  let clients;
+
+  if (dni) {
+    clients = await clientService.getOneBy({ dni });
+  }
+  else {
+    clients = await clientService.getAll();
+  }
+
+  if (!clients) {
+    throw new NotFoundException('client not found');
+  }
 
   res.send(clients);
 };

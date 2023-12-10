@@ -6,6 +6,10 @@ class Client {
     return await clientModel.findAll({ include: { all: true } });
   }
 
+  async getOneBy(param) {
+    return await clientModel.findOne({ where: param });
+  }
+
   async getOne(id) {
     const client = await clientModel.findOne({ include: { all: true }, where: { id } });
     return client?.dataValues;
