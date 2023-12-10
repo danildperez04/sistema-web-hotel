@@ -28,13 +28,8 @@ const getOne = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const { userId, clientId, startDate, endDate, cancelled, services, rooms } = req.body;
-
-  const user = await userService.getOneById(userId);
-
-  if (!user) {
-    return res.status(404).send({ message: 'user not found' });
-  }
+  const { clientId, startDate, endDate, cancelled, services, rooms } = req.body;
+  const { user } = req;
 
   const client = await clientService.getOne(clientId);
 
@@ -43,7 +38,7 @@ const create = async (req, res) => {
   }
 
   const reservation = await reservationServices.create({
-    userId,
+    userId: user.id,
     clientId,
     startDate,
     endDate,
