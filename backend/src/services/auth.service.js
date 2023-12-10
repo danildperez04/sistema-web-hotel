@@ -19,7 +19,8 @@ class Auth {
     };
 
     const token = jwt.sign(userForToken, process.env.SECRET, {
-      expiresIn: '20d'
+      expiresIn: '20d',
+
     });
 
     return token;

@@ -5,7 +5,7 @@ const userService = new User();
 const userExtractor = async (req, res, next) => {
   const authorization = req.get('authorization');
 
-  if (!authorization && !authorization.toLowerCase().startsWith('bearer')) {
+  if (!authorization && !authorization?.toLowerCase()?.startsWith('bearer')) {
     return res.status(400).json({ error: 'authorization header missing or invalid' });
   }
 

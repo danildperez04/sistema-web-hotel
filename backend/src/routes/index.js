@@ -7,10 +7,7 @@ const roomsRouter = require('./room.js');
 const reservationsRouter = require('./reservation.js');
 
 const Client = require('../services/client.service.js');
-const { login } = require('../controllers/auth.js');
 const { getReport } = require('../controllers/report.js');
-
-router.post('/auth', login);
 
 router.use('/users', usersRouter);
 router.use('/clients', clientsRouter);

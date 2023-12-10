@@ -1,9 +1,12 @@
 GET http://localhost:3000/api/clients HTTP/1.1
+Authorization: bearer token
 
 GET http://localhost:3000/api/clients/id HTTP/1.1
+Authorization: bearer token
 
 POST http://localhost:3000/api/clients HTTP/1.1
 Content-Type: application/json
+Authorization: bearer token
 
 {
   "dni":"491-230903-1000T",
@@ -18,13 +21,16 @@ Content-Type: application/json
 # Esto se puede cambiar de forma parcial pero lo correcto seria mandar todo el nuevo recurso
 PUT http://localhost:3000/api/clients/id HTTP/1.1
 Content-Type: application/json
+Authorization: bearer token
 
 {
   "fullName": "Dani-sama"
 }
 
 DELETE http://localhost:3000/api/clients/id HTTP/1.1
+Authorization: bearer token
 
 # Departments
 
 GET http://localhost:3000/api/departments HTTP/1.1
+Authorization: bearer token
