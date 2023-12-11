@@ -1,16 +1,17 @@
+import { getServices } from "../services/service.js";
 import { displayModal, modalForm } from "./modal.js";
 import { getToken } from "./token.js";
-
 const token = getToken();
 
 document.addEventListener('DOMContentLoaded', async () => {
   const services = await getServices();
   fillServices(services);
+
   document.querySelector('.btn-display-modal-service')
-  .addEventListener('click', ()=>{
-    modalForm('Agregar un nuevo servicio');
-    createService();
-  });
+    .addEventListener('click', () => {
+      modalForm('Agregar un nuevo servicio');
+      createService();
+    });
 });
 
 function createService() {
@@ -36,26 +37,13 @@ function createService() {
   });
 }
 
-
-
-export async function getServices(){
-  const response = await fetch('http://localhost:3000/api/services', {
-    headers:{
-      'authorization': 'bearer ' + token
-    }
-  });
-
-  return await response.json();
-  
-}
-
-function fillServices(services){
+function fillServices(services) {
   const table = document.querySelector('.table-services tbody');
 
-  services.forEach(service =>{
+  services.forEach(service => {
     const row = document.createElement('tr');
     row.classList.add('row');
-    Object.keys(service).forEach(column =>{
+    Object.keys(service).forEach(column => {
       if (column !== 'id' && column !== 'createdAt' && column !== 'updatedAt') {
         const cell = document.createElement('td');
         cell.textContent = service[column];
@@ -78,10 +66,8 @@ function fillServices(services){
     table.appendChild(row);
 
     btnUpdate.addEventListener('click', () => {
-      
-      modalForm('Actualizar Servicio' ,service['id']);
 
+      modalForm('Actualizar Servicio', service['id']);
     });
-
   });
 } 

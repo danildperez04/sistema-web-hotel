@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reservaciones</title>
-    <link rel="stylesheet" href="../styles/app.css">
+    <link rel="stylesheet" href="../styles/app.css" />
   </head>
 
   <body>
@@ -12,35 +12,33 @@
       <h1>Realizar una reserva</h1>
       <div class="field">
         <label for="input-date-start">Fecha de Inicio</label>
-        <input type="date" id="input-date-start" name="startDate" max="today" required>
+        <input
+          type="date"
+          id="input-date-start"
+          name="startDate"
+          max="today"
+          required
+        />
       </div>
-      
+
       <div class="field">
         <label for="input-date-end">Fecha de Salida</label>
-        <input type="date" id="input-date-end" name="endDate" required>
+        <input type="date" id="input-date-end" name="endDate" required />
       </div>
 
       <div class="field">
         <label for="">Ingrese la Cédula del cliente</label>
-        <input type="text" placeholder="Cédula" id="input-text-dni" required>
+        <input type="text" placeholder="Cédula" id="input-text-dni" required />
       </div>
 
       <div class="field">
-        <input type="submit" class="btn-create" value="Crear Reserva">
+        <input type="submit" class="btn-create" value="Crear Reserva" />
       </div>
-
     </form>
 
+    <select name="" id="select-services" class=""></select>
 
-    <select name="" id="select-services" class="">
-      
-    </select>
-
-    
-    <select name="" id="select-rooms" class="">
-      
-    </select>
-    
+    <select name="" id="select-rooms" class=""></select>
 
     <table class="table-service">
       <thead>
@@ -51,9 +49,7 @@
         </tr>
       </thead>
 
-      <tbody>
-
-      </tbody>
+      <tbody></tbody>
     </table>
 
     <table class="table-room">
@@ -65,9 +61,7 @@
         </tr>
       </thead>
 
-      <tbody>
-
-      </tbody>
+      <tbody></tbody>
     </table>
 
     <script src="../js/reservations.js" type="module"></script>

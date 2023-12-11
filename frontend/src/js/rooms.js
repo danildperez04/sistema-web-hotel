@@ -1,23 +1,14 @@
+import { loadRooms } from "../services/room.js";
 import { getToken } from "./token.js";
 
 const token = getToken();
 
-document.addEventListener('DOMContentLoaded', async() => {
+document.addEventListener('DOMContentLoaded', async () => {
   const rooms = await loadRooms();
   showRooms(rooms);
   displayModal();
 });
 
-
-export async function loadRooms() {
-  const response = await fetch('http://localhost:3000/api/rooms', {
-    headers: {
-      'authorization': 'bearer ' + token
-    }
-  });
-  return await response.json();
-
-}
 
 function showRooms(data) {
   const table = document.querySelector('.table-rooms tbody');
@@ -35,7 +26,7 @@ function showRooms(data) {
     });
 
     table.appendChild(row);
- });
+  });
 }
 
 function displayModal() {

@@ -35,9 +35,9 @@ function displayModal() {
       document.querySelector('body').appendChild(modal);
 
       document.querySelector('.btn-x')
-      .addEventListener('click', ()=>{
-        modal.remove();
-      })
+        .addEventListener('click', () => {
+          modal.remove();
+        })
     });
 
 
