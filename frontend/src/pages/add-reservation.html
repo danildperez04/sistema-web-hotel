@@ -1,47 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reservaciones</title>
-    <link rel="stylesheet" href="../styles/app.css" />
-  </head>
 
-  <body>
-    <form action="" class="form">
-      <h1>Realizar una reserva</h1>
-      <div class="field">
-        <label for="input-date-start">Fecha de Inicio</label>
-        <input
-          type="datetime-local"
-          id="input-date-start"
-          name="startDate"
-          max="today"
-          required
-        />
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservaciones</title>
+  <link rel="stylesheet" href="../styles/app.css" />
+</head>
 
-      <div class="field">
-        <label for="input-date-end">Fecha de Salida</label>
-        <input type="datetime-local" id="input-date-end" name="endDate" required />
-      </div>
+<body>
 
-      <div class="field">
-        <label for="">Ingrese la Cédula del cliente</label>
-        <input type="text" placeholder="Cédula" id="input-text-dni" required />
-      </div>
-
-      <div class="field">
-        <input type="submit" class="btn-create" value="Crear Reserva" />
-      </div>
-    </form>
-
-    <select name="" id="select-services" class=""></select>
-
+  <div class="options-container">
+    <select name="" id="select-services" class="input"></select>
     <select name="" id="select-rooms" class=""></select>
+  </div>
 
-    <table class="table-service">
-      <thead>
+
+  <section class="tables">
+    <table class="table-service table">
+      <thead class="header-table">
         <tr>
           <th>ID</th>
           <th>Nombre Servicio</th>
@@ -49,11 +26,14 @@
         </tr>
       </thead>
 
-      <tbody></tbody>
+      <tbody>
+
+      </tbody>
+
     </table>
 
     <table class="table-room">
-      <thead>
+      <thead class="header-table">
         <tr>
           <th>ID</th>
           <th>Código de habitación</th>
@@ -61,9 +41,38 @@
         </tr>
       </thead>
 
-      <tbody></tbody>
+      <tbody>
+
+      </tbody>
     </table>
 
-    <script src="../js/add-reservations.js" type="module"></script>
-  </body>
+  </section>
+
+
+
+  <form action="" class="form">
+    <h1>Realizar una reserva</h1>
+    <div class="field">
+      <label for="input-date-start">Fecha de Inicio</label>
+      <input type="datetime-local" id="input-date-start" name="startDate" max="today" required />
+    </div>
+
+    <div class="field">
+      <label for="input-date-end">Fecha de Salida</label>
+      <input type="datetime-local" id="input-date-end" name="endDate" required />
+    </div>
+
+    <div class="field">
+      <label for="">Ingrese la Cédula del cliente</label>
+      <input type="text" placeholder="Cédula" id="input-text-dni" required />
+    </div>
+
+    <div class="btn-container">
+      <input type="submit" class="btn-create" value="Crear Reserva" />
+    </div>
+  </form>
+
+  <script src="../js/add-reservations.js" type="module"></script>
+</body>
+
 </html>

@@ -1,17 +1,21 @@
-.modal-create-room{
+.modal{
     
     .form{
         display: flex;
         flex-direction: column;
-        gap: 2rem;
-        input{
+        align-items: flex-start;
+        gap: 1.5rem;
+        input, button{
             height: 2rem;
+            width: 100%;
         }
 
         textarea{
-            height: 6rem;
+            height: 8rem;
             resize: none;
+            width: 100%;    
         }
+        
     }
 
    

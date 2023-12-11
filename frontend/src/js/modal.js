@@ -2,12 +2,13 @@ import { getToken } from "./token.js";
 
 const token = getToken();
 
-export function displayModal(message) {
+export function displayModal(message, success=true) {
   const modal = document.createElement('div');
   modal.classList.add('modal');
+  const urlImage = success ? '../img/check.png' : '../img/advertencia.png';
   modal.innerHTML = `
                              <div class="modal-content">
-                             <img src="../img/check.png">
+                             <img src="${urlImage}">
                               <p>${message}</p>
                               <div>
                                   <button class="close-modal">Aceptar</button>

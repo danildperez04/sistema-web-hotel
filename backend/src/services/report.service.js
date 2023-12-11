@@ -13,7 +13,7 @@ class Report {
         all: true
       },
       where: {
-        startDate: {
+        createdAt: {
           [Op.substring]: date
         }
       },

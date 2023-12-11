@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             if (!response.ok) {
-                return displayModal('No se encontro el cliente');
+                return displayModal('No se encontro el cliente', false);
             }
             const client = await response.json();
 
@@ -126,8 +126,9 @@ cmbServices.addEventListener('change', () => {
 
 cmbRooms.addEventListener('change', () => {
     const roomSelected = JSON.parse(cmbRooms.options[cmbRooms.selectedIndex].value);
-    const tableRooms = document.querySelector('.table-room');
+    const tableRooms = document.querySelector('.table-room tbody');
     const row = document.createElement('tr');
+    row.classList.add('row');
 
     const [_, ...rows] = Array.from(tableRooms.rows);
 

@@ -3,11 +3,12 @@ import { loadReservations } from "../services/reservations.js";
 document.addEventListener('DOMContentLoaded', async()=>{
     const reservations = await loadReservations();
     console.log(reservations);
-    const table = document.querySelector('.table-reservations');
+    const table = document.querySelector('.table-reservations tbody');
 
 
     reservations.forEach(reservation => {
         const row = document.createElement('tr');
+        row.classList.add('row');
         
         const cellID = document.createElement('td');
         cellID.textContent = reservation.id;

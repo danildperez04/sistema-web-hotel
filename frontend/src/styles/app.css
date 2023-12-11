@@ -321,6 +321,12 @@ label, input {
   color: rgb(3, 70, 3);
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
 .message {
   background-color: #70b670;
   height: 2rem;
@@ -336,22 +342,33 @@ label, input {
   font-weight: bold;
 }
 
-.modal-create-room .form {
+.modal .form {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  align-items: flex-start;
+  gap: 1.5rem;
 }
-.modal-create-room .form input {
+.modal .form input, .modal .form button {
   height: 2rem;
+  width: 100%;
 }
-.modal-create-room .form textarea {
-  height: 6rem;
+.modal .form textarea {
+  height: 8rem;
   resize: none;
+  width: 100%;
 }
 
 .btn-x {
   margin-right: -33rem;
   cursor: pointer;
+}
+
+.footer {
+  background-color: #4c4c6c;
+  height: 10rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 .section {
@@ -378,6 +395,7 @@ label, input {
   display: flex;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
+  width: 100%;
 }
 .section .form .field input {
   height: 2.5rem;
@@ -498,20 +516,23 @@ main {
 .client-list {
   margin: 3rem;
 }
-.client-list .header-table {
-  background-color: #33C3F0;
+
+.header-table {
+  background-color: #17396d;
+  height: 2rem;
 }
-.client-list .header-table tr th {
+.header-table tr th {
   color: #ffffff;
   font-weight: 700;
   margin-top: 1rem;
   width: auto;
   min-width: 10rem;
 }
-.client-list tbody td {
+
+tbody td {
   text-align: center;
 }
-.client-list tbody tr {
+tbody tr {
   background-color: rgb(200, 194, 194);
 }
 
@@ -811,7 +832,7 @@ h1 {
 }
 
 .form {
-  margin: 0 auto;
+  margin: 0 auto 5rem auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -827,6 +848,28 @@ h1 {
   height: 2.5rem;
   border-radius: 5px;
   border: 1px solid #33C3F0;
+}
+
+.tables {
+  display: flex;
+  margin: 5rem 0;
+}
+.tables .table-service, .tables .table-room {
+  margin: 0 auto;
+}
+
+.options-container {
+  display: flex;
+  width: 80%;
+  margin: 2rem auto;
+  gap: 5rem;
+  justify-content: space-evenly;
+}
+.options-container select {
+  width: 50%;
+  height: 1.7rem;
+  border-radius: 5px;
+  border: 1px solid #63d1f3;
 }
 
 .table-reservations {

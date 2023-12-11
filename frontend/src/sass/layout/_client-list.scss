@@ -8,6 +8,7 @@
   box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
+  
 }
 
 main {
@@ -17,26 +18,29 @@ main {
 .client-list {
   margin: 3rem;
 
-  .header-table {
-    background-color: $blue;
+  
+}
 
-    tr th {
-      color: $white;
-      font-weight: 700;
-      margin-top: 1rem;
-      width: auto;
-      min-width: 10rem;
-    }
+.header-table {
+  background-color: $darkBlue;
+  height: 2rem;
+
+  tr th {
+    color: $white;
+    font-weight: 700;
+    margin-top: 1rem;
+    width: auto;
+    min-width: 10rem;
+  }
+}
+
+tbody {
+  td {
+    text-align: center;
   }
 
-  tbody {
-    td {
-      text-align: center;
-    }
-
-    tr {
-      background-color: rgb(200, 194, 194);
-    }
+  tr {
+    background-color: rgb(200, 194, 194);
   }
 }
 
