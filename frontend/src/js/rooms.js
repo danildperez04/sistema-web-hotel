@@ -2,20 +2,20 @@ import { getToken } from "./token.js";
 
 const token = getToken();
 
-document.addEventListener('DOMContentLoaded', () => {
-  loadRooms();
+document.addEventListener('DOMContentLoaded', async() => {
+  const rooms = await loadRooms();
+  showRooms(rooms);
   displayModal();
 });
 
 
-async function loadRooms() {
+export async function loadRooms() {
   const response = await fetch('http://localhost:3000/api/rooms', {
     headers: {
       'authorization': 'bearer ' + token
     }
   });
-  const data = await response.json();
-  showRooms(data);
+  return await response.json();
 
 }
 
@@ -35,7 +35,7 @@ function showRooms(data) {
     });
 
     table.appendChild(row);
-  });
+ });
 }
 
 function displayModal() {

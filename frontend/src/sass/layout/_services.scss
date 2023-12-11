@@ -4,6 +4,10 @@
     width: 30rem;
     margin: 0 auto;
     gap: 2rem;
+
+    input, textarea{
+      width: 100%;
+    }
     textarea{
         resize: none;
     }

@@ -3,8 +3,9 @@ import { getToken } from "./token.js";
 
 const token = getToken();
 
-document.addEventListener('DOMContentLoaded', () => {
-  getServices();
+document.addEventListener('DOMContentLoaded', async () => {
+  const services = await getServices();
+  fillServices(services);
   document.querySelector('.btn-display-modal-service')
   .addEventListener('click', ()=>{
     modalForm('Agregar un nuevo servicio');
@@ -37,14 +38,18 @@ function createService() {
 
 
 
-async function getServices(){
+export async function getServices(){
   const response = await fetch('http://localhost:3000/api/services', {
     headers:{
       'authorization': 'bearer ' + token
     }
   });
 
-  const services = await response.json();
+  return await response.json();
+  
+}
+
+function fillServices(services){
   const table = document.querySelector('.table-services tbody');
 
   services.forEach(service =>{
@@ -79,4 +84,4 @@ async function getServices(){
     });
 
   });
-}
+} 
