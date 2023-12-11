@@ -22,7 +22,7 @@ Authorization: bearer token
       "id": 2,
       "price": 350
     }
-    ],
+  ],
   "rooms":[
     {
       "id": 1,
