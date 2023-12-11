@@ -1,7 +1,15 @@
 import { getReport } from "./src/services/report";
+import { getToken } from "./src/js/token.js";
+
+const token = getToken();
 
 document.addEventListener('DOMContentLoaded', () => {
+  if(!token){
+    window.location.replace('/src/pages/login.html', '/');
+  }
+
   displayModal();
+
 });
 
 function displayModal() {
@@ -41,13 +49,16 @@ function displayModal() {
           modal.remove();
         })
 
-        document.querySelector('.form').addEventListener('submit', (e) => {
+        document.querySelector('.form').addEventListener('submit', async(e) => {
           e.preventDefault();
           
           const reportData = Object.fromEntries( new FormData(e.target) );
           
-          getReport(reportData);
-          
+          const blob = await getReport(reportData);
+          console.log(blob);
+          const file = window.URL.createObjectURL(blob);
+         // window.location.assign(file);
+         window.open(file, '_blank');
         });
 
     });

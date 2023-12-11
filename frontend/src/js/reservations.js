@@ -1,150 +1,52 @@
-import { getToken } from "./token.js";
-import { displayModal } from "./modal.js";
-import { getServices } from "../services/service.js";
-import { loadRooms } from "../services/room.js";
+import { loadReservations } from "../services/reservations.js";
 
-const token = getToken();
-
-const tableService = document.querySelector('.table-service');
-const tableRooms = document.querySelector('.table-room');
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.form')
-        .addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const reservationData = Object.fromEntries(new FormData(e.target));
-
-            const dni = document.querySelector('#input-text-dni').value;
-
-            const response = await fetch(`http://localhost:3000/api/clients?dni=${dni}`, {
-                headers: {
-                    'authorization': 'bearer ' + token
-                }
-            });
+document.addEventListener('DOMContentLoaded', async()=>{
+    const reservations = await loadReservations();
+    console.log(reservations);
+    const table = document.querySelector('.table-reservations');
 
 
-            if (!response.ok) {
-                return displayModal('No se encontro el cliente');
-            }
-            const client = await response.json();
+    reservations.forEach(reservation => {
+        const row = document.createElement('tr');
+        
+        const cellID = document.createElement('td');
+        cellID.textContent = reservation.id;
+        const cellUser = document.createElement('td');
+        cellUser.textContent = reservation.user['firstName'];
+        const cellClient = document.createElement('td');
+        cellClient.textContent = reservation.client['fullName'];
+        const cellStartDate = document.createElement('td');
+        cellStartDate.textContent = formatDate(reservation.startDate);
+        const cellEndDate = document.createElement('td');
+        cellEndDate.textContent = formatDate(reservation.endDate);
+        const roomCell = document.createElement('td');
+        roomCell.textContent = reservation.rooms.map(room => room.code).join(', ');
+        const cellCancelled = document.createElement('td');
+        cellCancelled.textContent = reservation.cancelled;
 
-            reservationData.clientId = client['id'];
-            reservationData.cancelled = false;
+        
 
+        row.appendChild(cellID);
+        row.appendChild(cellUser);
+        row.appendChild(cellClient);
+        row.appendChild(cellStartDate);
+        row.appendChild(cellEndDate);
+        row.appendChild(roomCell);
+        row.appendChild(cellCancelled);
 
-            const tableRows = tableService.rows.length;
-            if (tableRows > 1) {
-                const [_, ...rows] = Array.from(tableService.rows);
-
-                reservationData.services = rows.map(row => {
-                    return { id: row['cells'][0]['textContent'], price: parseInt(row['cells'][2]['textContent']) };
-                });
-
-            }
-
-            if (document.querySelector('.table-room').rows.length > 1) {
-                const [_, ...rows] = Array.from(tableRooms.rows);
-
-                reservationData.rooms = rows.map(row => {
-                    return { id: row['cells'][0]['textContent'], price: parseInt(row['cells'][2]['textContent']) };
-                });
-            }
-
-
-            const request = await fetch(`http://localhost:3000/api/reservations`, {
-                method: 'POST',
-                body: JSON.stringify(reservationData),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': 'bearer ' + token
-                }
-            });
-
-            if (request.ok) {
-                displayModal('Se ha agregado la reserva correctamente');
-            }
-
-        });
-
-    fillOptions();
+        table.appendChild(row);
+    });
 });
 
-const cmbServices = document.querySelector('#select-services');
-const cmbRooms = document.querySelector('#select-rooms');
-
-async function fillOptions() {
-    const services = await getServices();
-    const rooms = await loadRooms();
-
-
-    services.forEach(service => {
-        const option = document.createElement('option');
-        option.textContent = service['name'];
-        option.value = JSON.stringify(service);
-        cmbServices.appendChild(option);
-    });
-
-    rooms.forEach(room => {
-        const option = document.createElement('option');
-        option.textContent = room['code'];
-        option.value = JSON.stringify(room);
-        cmbRooms.appendChild(option);
-    });
-
+function formatDate(date){
+    const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      };
+  
+      return new Date(date).toLocaleDateString(
+        'es-ES', options
+      );
 }
-
-cmbServices.addEventListener('change', () => {
-    const tableServices = document.querySelector('.table-service tbody');
-    const serviceSelected = JSON.parse(cmbServices.options[cmbServices.selectedIndex].value);
-
-    const row = document.createElement('tr');
-    row.classList.add('row');
-
-    const [_, ...rows] = Array.from(tableService.rows);
-
-    const ids = rows.map(row =>{
-        return parseInt(row['cells'][0]['textContent']);
-    });
-
-    if(ids.includes(serviceSelected['id']))
-        return ;
-
-    Object.keys(serviceSelected).forEach(key => {
-
-        if (key !== 'details' && key !== 'createdAt' && key !== 'updatedAt') {
-            const cell = document.createElement('td');
-            cell.textContent = serviceSelected[key];
-            row.appendChild(cell);
-        }
-
-    });
-    tableServices.appendChild(row);
-
-});
-
-
-cmbRooms.addEventListener('change', () => {
-    const roomSelected = JSON.parse(cmbRooms.options[cmbRooms.selectedIndex].value);
-    const tableRooms = document.querySelector('.table-room');
-    const row = document.createElement('tr');
-
-    const [_, ...rows] = Array.from(tableRooms.rows);
-
-    const ids = rows.map(row =>{
-        return parseInt(row['cells'][0]['textContent']);
-    });
-
-    if(ids.includes(roomSelected['id']))
-        return ;
-    Object.keys(roomSelected).forEach(key => {
-        if (key !== 'description' && key !== 'createdAt' && key !== 'updatedAt') {
-            const cell = document.createElement('td');
-            cell.textContent = roomSelected[key];
-            row.appendChild(cell);
-        }
-
-    });
-
-    tableRooms.appendChild(row);
-});

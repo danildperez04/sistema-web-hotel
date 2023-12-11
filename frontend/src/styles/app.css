@@ -829,4 +829,24 @@ h1 {
   border: 1px solid #33C3F0;
 }
 
+.table-reservations {
+  margin: 5rem auto;
+}
+.table-reservations .header-table {
+  background-color: #17396d;
+}
+.table-reservations .header-table tr th {
+  color: #ffffff;
+  font-weight: 700;
+  margin-top: 1rem;
+  width: auto;
+  min-width: 10rem;
+}
+.table-reservations tbody td {
+  text-align: center;
+}
+.table-reservations tbody tr {
+  background-color: rgb(200, 194, 194);
+}
+
 /*# sourceMappingURL=app.css.map */

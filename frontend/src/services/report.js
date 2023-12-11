@@ -8,5 +8,5 @@ export async function getReport( { limit , date } ) {
       'authorization': 'bearer ' + token
     }
   });
-  return await response.json();
+  return await response.blob();
 }

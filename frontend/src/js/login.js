@@ -19,5 +19,7 @@ function login() {
 
     localStorage.setItem('token', token['token']);
 
+    window.location.replace('/', '/src/pages/login.html');
+
   });
 }
