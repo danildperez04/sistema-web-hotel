@@ -7,5 +7,30 @@
     <link rel="stylesheet" href="../styles/app.css">
   </head>
 
-  <body></body>
+  <body>
+    <form action="" class="form">
+      <h1>Realizar una reserva</h1>
+      <div class="field">
+        <label for="input-date-start">Fecha de Inicio</label>
+        <input type="date" id="input-date-start" name="startDate" max="today" required>
+      </div>
+      
+      <div class="field">
+        <label for="input-date-end">Fecha de Salida</label>
+        <input type="date" id="input-date-end" name="endDate" required>
+      </div>
+
+      <div class="field">
+        <label for="">Ingrese la Cédula del cliente</label>
+        <input type="text" placeholder="Cédula" id="input-text-dni" required>
+      </div>
+
+      <div class="field">
+        <input type="submit" class="btn-create" value="Crear Reserva">
+      </div>
+
+    </form>
+
+    <script src="../js/reservations.js" type="module"></script>
+  </body>
 </html>
