@@ -5,78 +5,146 @@ import { loadRooms } from "../services/room.js";
 
 const token = getToken();
 
+const tableService = document.querySelector('.table-service');
+const tableRooms = document.querySelector('.table-room');
+
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelector('.form')
-    .addEventListener('submit', async (e) => {
-      e.preventDefault();
+    document.querySelector('.form')
+        .addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-      const reservationData = Object.fromEntries(new FormData(e.target));
+            const reservationData = Object.fromEntries(new FormData(e.target));
 
-      const dni = document.querySelector('#input-text-dni').value;
+            const dni = document.querySelector('#input-text-dni').value;
 
-      const response = await fetch(`http://localhost:3000/api/clients?dni=${dni}`, {
-        headers: {
-          'authorization': 'bearer ' + token
-        }
-      });
+            const response = await fetch(`http://localhost:3000/api/clients?dni=${dni}`, {
+                headers: {
+                    'authorization': 'bearer ' + token
+                }
+            });
 
 
-      if (!response.ok) {
-        return displayModal('No se encontro el cliente');
-      }
-      const client = await response.json();
+            if (!response.ok) {
+                return displayModal('No se encontro el cliente');
+            }
+            const client = await response.json();
 
-      reservationData.clientId = client['id'];
-      reservationData.cancelled = false;
+            reservationData.clientId = client['id'];
+            reservationData.cancelled = false;
 
-      const request = await fetch(`http://localhost:3000/api/reservations`, {
-        method: 'POST',
-        body: JSON.stringify(reservationData),
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': 'bearer ' + token
-        }
-      });
 
-      if (request.ok) {
-        displayModal('Se ha agregado la reserva correctamente');
-      }
+            const tableRows = tableService.rows.length;
+            if (tableRows > 1) {
+                const [_, ...rows] = Array.from(tableService.rows);
 
-    });
+                reservationData.services = rows.map(row => {
+                    return { id: row['cells'][0]['textContent'], price: parseInt(row['cells'][2]['textContent']) };
+                });
 
-  fillOptions();
+            }
+
+            if (document.querySelector('.table-room').rows.length > 1) {
+                const [_, ...rows] = Array.from(tableRooms.rows);
+
+                reservationData.rooms = rows.map(row => {
+                    return { id: row['cells'][0]['textContent'], price: parseInt(row['cells'][2]['textContent']) };
+                });
+            }
+
+
+            const request = await fetch(`http://localhost:3000/api/reservations`, {
+                method: 'POST',
+                body: JSON.stringify(reservationData),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': 'bearer ' + token
+                }
+            });
+
+            if (request.ok) {
+                displayModal('Se ha agregado la reserva correctamente');
+            }
+
+        });
+
+    fillOptions();
 });
 
+const cmbServices = document.querySelector('#select-services');
+const cmbRooms = document.querySelector('#select-rooms');
+
 async function fillOptions() {
-  const services = await getServices();
-  const rooms = await loadRooms();
-
-  const cmbServices = document.querySelector('#select-services');
-  const cmbRooms = document.querySelector('#select-rooms');
-
-  services.forEach(service => {
-    const option = document.createElement('option');
-    option.textContent = service['name'];
-    option.value = service['name'];
-    cmbServices.appendChild(option);
-  });
-
-  rooms.forEach(room => {
-    const option = document.createElement('option');
-    option.textContent = room['code']
-    cmbRooms.appendChild(option);
-    console.log(room['code']);
-  });
+    const services = await getServices();
+    const rooms = await loadRooms();
 
 
-  cmbServices.addEventListener('change', () => {
-    const tableServices = document.querySelector('.table-service');
+    services.forEach(service => {
+        const option = document.createElement('option');
+        option.textContent = service['name'];
+        option.value = JSON.stringify(service);
+        cmbServices.appendChild(option);
+    });
 
-    const id = cmbServices
+    rooms.forEach(room => {
+        const option = document.createElement('option');
+        option.textContent = room['code'];
+        option.value = JSON.stringify(room);
+        cmbRooms.appendChild(option);
+    });
+
+}
+
+cmbServices.addEventListener('change', () => {
+    const tableServices = document.querySelector('.table-service tbody');
+    const serviceSelected = JSON.parse(cmbServices.options[cmbServices.selectedIndex].value);
 
     const row = document.createElement('tr');
     row.classList.add('row');
 
-  })
+    const [_, ...rows] = Array.from(tableService.rows);
 
-}
+    const ids = rows.map(row =>{
+        return parseInt(row['cells'][0]['textContent']);
+    });
+
+    if(ids.includes(serviceSelected['id']))
+        return ;
+
+    Object.keys(serviceSelected).forEach(key => {
+
+        if (key !== 'details' && key !== 'createdAt' && key !== 'updatedAt') {
+            const cell = document.createElement('td');
+            cell.textContent = serviceSelected[key];
+            row.appendChild(cell);
+        }
+
+    });
+    tableServices.appendChild(row);
+
+});
+
+
+cmbRooms.addEventListener('change', () => {
+    const roomSelected = JSON.parse(cmbRooms.options[cmbRooms.selectedIndex].value);
+    const tableRooms = document.querySelector('.table-room');
+    const row = document.createElement('tr');
+
+    const [_, ...rows] = Array.from(tableRooms.rows);
+
+    const ids = rows.map(row =>{
+        return parseInt(row['cells'][0]['textContent']);
+    });
+
+    if(ids.includes(roomSelected['id']))
+        return ;
+    Object.keys(roomSelected).forEach(key => {
+        if (key !== 'description' && key !== 'createdAt' && key !== 'updatedAt') {
+            const cell = document.createElement('td');
+            cell.textContent = roomSelected[key];
+            row.appendChild(cell);
+        }
+
+    });
+
+    tableRooms.appendChild(row);
+});
