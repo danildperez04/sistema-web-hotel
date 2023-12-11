@@ -1,5 +1,7 @@
 import { getToken } from "./token.js";
 import { displayModal } from "./modal.js";
+import { getServices } from "./service.js";
+import { loadRooms } from "./rooms.js";
 
 const token = getToken();
 
@@ -41,4 +43,39 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         });
-})
+
+        fillOptions();
+});
+
+async function fillOptions(){
+    const services = await getServices();
+    //const rooms = await loadRooms();
+    const cmbServices = document.querySelector('#select-services');
+   // const cmbRooms = document.querySelector('#select-rooms');
+
+    services.forEach(service =>{
+        const option = document.createElement('option');
+        option.textContent = service['name'];
+        option.value = service['name'];
+        cmbServices.appendChild(option);
+    });
+
+    // rooms.forEach(room =>{
+    //     const option = document.createElement('option');
+    //     option.textContent = room['name']
+    //     cmbRooms.appendChild(option);
+    //     console.log(room['name']);
+    // });
+    
+
+    cmbServices.addEventListener('change', ()=>{
+        const tableServices = document.querySelector('.table-service');
+        
+        const id = cmbServices
+
+        const row = document.createElement('tr');
+        row.classList.add('row');
+    
+    })
+
+}

@@ -772,6 +772,9 @@ body {
   margin: 0 auto;
   gap: 2rem;
 }
+.form-service input, .form-service textarea {
+  width: 100%;
+}
 .form-service textarea {
   resize: none;
 }
