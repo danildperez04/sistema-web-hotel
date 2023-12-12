@@ -1,25 +1,22 @@
+import { createUser } from "../services/signup.js";
+import {displayModal} from "../components/modal.js";
+
 document.addEventListener('DOMContentLoaded', () => {
   startApp();
 });
 
 function startApp() {
   const form = document.querySelector('.form');
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async(e) => {
     e.preventDefault();
 
     if (validateFields()) {
       const userData = Object.fromEntries(new FormData(e.target));
+      const response = await createUser(userData);
 
-      fetch('http://localhost:3000/auth/signup/', {
-        method: 'POST',
-        body: JSON.stringify(userData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(e => console.error(e.message));
+      if(!response.ok)
+      return displayModal('No se puedo registrar el usuario', false);
+    
     }
 
   });

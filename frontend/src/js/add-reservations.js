@@ -1,5 +1,5 @@
-import { getToken } from "./token.js";
-import { displayModal } from "./modal.js";
+import { getToken } from "../components/token.js";
+import { displayModal } from "../components/modal.js";
 import { getServices } from "../services/service.js";
 import { loadRooms } from "../services/room.js";
 
@@ -130,7 +130,8 @@ cmbRooms.addEventListener('change', () => {
     const row = document.createElement('tr');
     row.classList.add('row');
 
-    const [_, ...rows] = Array.from(tableRooms.rows);
+    const rows = Array.from(tableRooms.rows);
+    console.log(tableRooms.rows);
 
     const ids = rows.map(row =>{
         return parseInt(row['cells'][0]['textContent']);

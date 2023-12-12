@@ -1,5 +1,5 @@
 import { getReport } from "./src/services/report";
-import { getToken } from "./src/js/token.js";
+import { getToken } from "./src/components/token.js";
 
 const token = getToken();
 
@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if(!token){
     window.location.replace('/src/pages/login.html', '/');
   }
-
   displayModal();
+  closeSession();
 
 });
 
@@ -47,7 +47,7 @@ function displayModal() {
       document.querySelector('.btn-x')
         .addEventListener('click', () => {
           modal.remove();
-        })
+        });
 
         document.querySelector('.form').addEventListener('submit', async(e) => {
           e.preventDefault();
@@ -64,4 +64,12 @@ function displayModal() {
     });
 
 
+}
+
+function closeSession(){
+  document.querySelector('#btn-close-session')
+  .addEventListener('click', ()=>{
+    localStorage.removeItem('token');
+    window.location.reload();
+  });
 }

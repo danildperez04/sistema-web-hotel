@@ -1,8 +1,16 @@
+import { getToken } from "./token.js";
+
+const token = getToken();
+
 document.addEventListener('DOMContentLoaded', () => {
 
   const idClient = localStorage.getItem('idClient');
 
-  fetch(`http://localhost:3000/api/clients/${id}`)
+  fetch(`http://localhost:3000/api/clients/${idClient}`, {
+    headers: {
+      'authorization': 'bearer ' + token
+    }
+  })
     .then(response => response.json())
     .then(data => {
       fullFields(data);

@@ -624,6 +624,16 @@ tbody tr {
   opacity: 1;
 }
 
+.button-create {
+  display: flex;
+  width: 250px;
+  height: 20px;
+  text-decoration: none;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
 .left-bar {
   background-color: #17396d;
   position: absolute;
@@ -667,11 +677,11 @@ tbody tr {
   gap: 2rem;
   justify-content: space-between;
 }
-.header nav a {
+.header nav a, .header nav img {
   color: #ffffff;
   text-decoration: none;
 }
-.header nav a:hover {
+.header nav a:hover, .header nav img:hover {
   cursor: pointer;
 }
 

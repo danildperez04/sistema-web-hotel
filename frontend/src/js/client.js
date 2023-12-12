@@ -1,4 +1,4 @@
-import { getToken } from "./token.js";
+import { getToken } from "../components/token.js";
 
 const token = getToken();
 

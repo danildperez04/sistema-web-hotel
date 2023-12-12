@@ -1,4 +1,4 @@
-import { getToken } from './token.js';
+import { getToken } from '../components/token.js';
 
 const token = getToken();
 
@@ -26,14 +26,19 @@ function showClients(data) {
     const row = document.createElement('tr');
     row.classList.add('row');
     Object.keys(client).forEach(key => {
-      if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'municipalityId' && key !== 'birthDate') {
+      if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'reservations' && key !== 'municipalityId' && key !== 'birthDate') {
         const cell = document.createElement('td');
-        cell.textContent = client[key];
+        if(key === 'municipality'){
+          cell.textContent = client[key]['name'];
+        }else{ 
+          cell.textContent = client[key];
+        }
         row.appendChild(cell);
 
       }
 
     });
+
     const actions = document.createElement('td');
     actions.classList.add('actions');
     const btnUpdate = document.createElement('a');

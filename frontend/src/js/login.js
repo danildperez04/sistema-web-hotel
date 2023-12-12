@@ -1,3 +1,6 @@
+import {displayModal} from '../components/modal.js';
+import { authenticate } from '../services/login.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   login();
 });
@@ -8,17 +11,13 @@ function login() {
     e.preventDefault();
     const user = Object.fromEntries(new FormData(e.target));
 
-    const response = await fetch('http://localhost:3000/auth/', {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = await authenticate(user);
+
+    if(!response.ok)
+     return displayModal('Por favor revise su usuario y contraseña', false);
+
     const token = await response.json();
-
     localStorage.setItem('token', token['token']);
-
     window.location.replace('/', '/src/pages/login.html');
 
   });
