@@ -1,4 +1,5 @@
 const Service = require('../services/services.service');
+const { NotFoundException } = require('../utils/customErrors');
 const servicesService = new Service();
 
 const getAll = async (req, res) => {
@@ -30,9 +31,7 @@ const update = async (req, res) => {
   const foundService = await servicesService.getOne(id);
 
   if (!foundService) {
-    res.status(404).send({
-      message: 'Service not found'
-    });
+    throw new NotFoundException('service not found');
   }
 
   const serviceToUpdate = {
@@ -52,9 +51,7 @@ const remove = async (req, res) => {
   const foundService = await servicesService.getOne(id);
 
   if (!foundService) {
-    res.status(404).send({
-      message: 'Service not found'
-    });
+    throw new NotFoundException('service not found');
   }
 
   await servicesService.remove(id);

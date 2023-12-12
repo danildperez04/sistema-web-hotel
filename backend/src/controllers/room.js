@@ -1,4 +1,6 @@
 const Room = require('../services/room.service');
+const { NotFoundException } = require('../utils/customErrors');
+const { HTTP_STATUS } = require('../utils/http');
 const roomServices = new Room();
 
 const getAll = async (req, res) => {
@@ -13,34 +15,30 @@ const getOne = async (req, res) => {
   const foundRoom = await roomServices.getOne(id);
 
   if (!foundRoom) {
-    return res.status(404).send({
-      message: 'Room not found'
-    });
+    throw new NotFoundException('room not found');
   }
 
   res.send(foundRoom);
 };
 
 const create = async (req, res) => {
-  const {code, price, description} = req.body;
+  const { code, price, description } = req.body;
   const room = await roomServices.create({
     code,
     price,
     description,
   });
 
-  res.send(room);
+  res.status(HTTP_STATUS.CREATED).send(room);
 };
 
 const update = async (req, res) => {
   const { id } = req.params;
-  const {code, price, description} = req.body;
+  const { code, price, description } = req.body;
   const foundRoom = await roomServices.getOne(id);
 
   if (!foundRoom) {
-    return res.status(404).send({
-      message: 'Room not found'
-    });
+    throw new NotFoundException('room not found');
   }
 
   const roomToUpdate = {
@@ -59,9 +57,7 @@ const remove = async (req, res) => {
   const foundRoom = await roomServices.getOne(id);
 
   if (!foundRoom) {
-    return res.status(404).send({
-      message: 'Room not found'
-    });
+    throw new NotFoundException('room not found');
   }
 
   await roomServices.remove(id);

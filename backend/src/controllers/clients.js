@@ -1,5 +1,6 @@
 const Client = require('../services/client.service');
-const { NotFoundException } = require('../utils/customErrors');
+const { NotFoundException, BadRequestException } = require('../utils/customErrors');
+const { HTTP_STATUS } = require('../utils/http');
 const clientService = new Client();
 
 const getAll = async (req, res) => {
@@ -27,9 +28,7 @@ const getOne = async (req, res) => {
   const foundClient = await clientService.getOne(id);
 
   if (!foundClient) {
-    return res.status(404).send({
-      message: 'Client not found'
-    });
+    throw new NotFoundException('client not found');
   }
 
   res.send(foundClient);
@@ -37,6 +36,12 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   const { dni, fullName, email, phoneNumber, address, birthDate, municipalityId } = req.body;
+
+  const foundClient = await clientService.getOneBy({ dni });
+
+  if (foundClient) {
+    throw new BadRequestException('dni must be unique');
+  }
 
   const client = await clientService.create({
     dni,
@@ -48,7 +53,7 @@ const create = async (req, res) => {
     municipalityId
   });
 
-  res.send(client);
+  res.status(HTTP_STATUS.CREATED).send(client);
 };
 
 const update = async (req, res) => {
@@ -57,9 +62,7 @@ const update = async (req, res) => {
   const foundClient = await clientService.getOne(id);
 
   if (!foundClient) {
-    return res.status(404).send({
-      message: 'Client not found'
-    });
+    throw new NotFoundException('client not found');
   }
 
   const clientToUpdate = {
@@ -82,9 +85,7 @@ const remove = async (req, res) => {
   const foundClient = await clientService.getOne(id);
 
   if (!foundClient) {
-    return res.status(404).send({
-      message: 'Client not found'
-    });
+    throw new NotFoundException('client not found');
   }
 
   await clientService.remove(id);

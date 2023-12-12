@@ -6,7 +6,8 @@ class Room extends Model { }
 Room.init({
   code: {
     type: DataTypes.STRING,
-    allowNull: false
+    unique: true,
+    allowNull: false,
   },
   price: {
     type: DataTypes.DOUBLE,

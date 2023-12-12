@@ -6,6 +6,7 @@ class Department extends Model { }
 Department.init({
   name: {
     type: DataTypes.STRING,
+    unique: true,
     allowNull: false,
   }
 }, {

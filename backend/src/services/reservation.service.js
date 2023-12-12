@@ -1,6 +1,8 @@
 const { Reservation: reservationModel } = require('../models/reservation');
 const { Reservation_Room } = require('../models/reservation_room');
 const { Reservation_Service } = require('../models/reservation_service');
+const { Op } = require('sequelize');
+const { BadRequestException } = require('../utils/customErrors');
 
 class Reservation {
   async getAll() {
@@ -21,6 +23,50 @@ class Reservation {
   }
 
   async create(reservationData, { services, rooms }) {
+    const { startDate, endDate } = reservationData;
+
+    const options = {
+      // where: {
+      //   [Op.or]: {
+      //     startDate: {
+      //       [Op.lte]: endDate
+      //     },
+      //     endDate: {
+      //       [Op.gte]: startDate
+      //     }
+      //   }
+      // }
+      where: {
+        [Op.or]: [
+          {
+            startDate: {
+              [Op.between]: [startDate, endDate]
+            }
+          },
+          {
+            endDate: {
+              [Op.between]: [startDate, endDate]
+            }
+          },
+          {
+            [Op.and]: [
+              { startDate: { [Op.lte]: startDate } },
+              { endDate: { [Op.gte]: endDate } }
+            ]
+          }
+        ]
+      },
+      include: {
+        all: true
+      }
+    };
+
+    const reservations = await reservationModel.findAll(options);
+
+    if (!this.canReservate({ rooms, reservations })) {
+      throw new BadRequestException('Existen habitaciones reservadas para esas fechas');
+    }
+
     const reservation = await reservationModel.create(reservationData);
 
     if (services && services.length > 0) {
@@ -84,6 +130,16 @@ class Reservation {
     }
 
     return await reservation.save();
+  }
+
+  canReservate({ rooms, reservations }) {
+    return rooms
+      .reduce((prev, room) => (
+        prev && reservations.some(
+          ({ rooms }) => (
+            rooms.includes(room)
+          ))
+      ), true);
   }
 }
 

@@ -2,7 +2,7 @@ import { getToken } from "./token.js";
 
 const token = getToken();
 
-export function displayModal(message, success=true) {
+export function displayModal(message, success = true) {
   const modal = document.createElement('div');
   modal.classList.add('modal');
   const urlImage = success ? '../img/check.png' : '../img/advertencia.png';
@@ -63,21 +63,21 @@ export function modalForm(title, id) {
   document.body.appendChild(modal);
 
 
-    if(id){
-      fetch(`http://localhost:3000/api/services/${id}`, {
-        headers: {'authorization': 'bearer ' + token}
-      })
+  if (id) {
+    fetch(`http://localhost:3000/api/services/${id}`, {
+      headers: { 'authorization': 'bearer ' + token }
+    })
       .then(response => response.json())
       .then(service => {
         document.querySelector('#input-service-name').value = service.name;
         document.querySelector('#input-service-price').value = service.price;
         document.querySelector('#input-service-details').value = service.details;
         document.querySelector('#btn-create-service').textContent = 'Actualizar';
-        
+
       })
       .catch(err => console.error(err));
-      
-    }
+
+  }
 
 
   document.querySelector('.btn-x')

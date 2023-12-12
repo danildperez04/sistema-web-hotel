@@ -2,6 +2,7 @@
 const Reservation = require('../services/reservation.service');
 const Client = require('../services/client.service');
 const { NotFoundException } = require('../utils/customErrors');
+const { HTTP_STATUS } = require('../utils/http');
 const reservationServices = new Reservation();
 const clientService = new Client();
 
@@ -17,9 +18,7 @@ const getOne = async (req, res) => {
   const foundReservation = await reservationServices.getOne(id);
 
   if (!foundReservation) {
-    return res.status(404).send({
-      message: 'Reservation not found'
-    });
+    throw new NotFoundException('reservation not found');
   }
 
   res.send(foundReservation);
@@ -44,7 +43,7 @@ const create = async (req, res) => {
     cancelled,
   }, { services, rooms });
 
-  res.send(reservation);
+  res.status(HTTP_STATUS.CREATED).send(reservation);
 };
 
 const update = async (req, res) => {
@@ -55,15 +54,13 @@ const update = async (req, res) => {
   const foundReservation = await reservationServices.getOne(id);
 
   if (!foundReservation) {
-    return res.status(404).send({
-      message: 'Reservation not found'
-    });
+    throw new NotFoundException('reservation not found');
   }
 
   const client = await clientService.getOne(clientId);
 
   if (!client) {
-    return res.status(404).send({ message: 'client not found' });
+    throw new NotFoundException('client not found');
   }
 
   const reservationToUpdate = {

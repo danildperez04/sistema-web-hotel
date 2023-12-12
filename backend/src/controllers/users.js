@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../services/users.service');
-const { NotFoundException } = require('../utils/customErrors');
+const { NotFoundException, BadRequestException } = require('../utils/customErrors');
 const userService = new User();
 
 const getAll = async (req, res) => {
@@ -23,6 +23,12 @@ const getOne = async (req, res) => {
 
 const create = async (req, res) => {
   const { firstName, lastName, email, username, password } = req.body;
+
+  const foundUser = await userService.getOneBy({ username });
+
+  if (foundUser) {
+    throw new BadRequestException('username must be unique');
+  }
 
   const passwordHash = await bcrypt.hash(password, 10);
 
