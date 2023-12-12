@@ -63,8 +63,8 @@ class Reservation {
 
     const reservations = await reservationModel.findAll(options);
 
-    if (!this.canReservate({ rooms, reservations })) {
-      throw new BadRequestException('Existen habitaciones reservadas para esas fechas');
+    if (!this.canReserve({ rooms, reservations })) {
+      throw new BadRequestException('Cannot reserve in those dates');
     }
 
     const reservation = await reservationModel.create(reservationData);
@@ -132,7 +132,7 @@ class Reservation {
     return await reservation.save();
   }
 
-  canReservate({ rooms, reservations }) {
+  canReserve({ rooms, reservations }) {
     return rooms
       .reduce((prev, room) => (
         prev && reservations.some(
