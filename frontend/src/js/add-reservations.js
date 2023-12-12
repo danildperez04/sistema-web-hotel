@@ -1,7 +1,9 @@
-import { getToken } from "./token.js";
-import { displayModal } from "./modal.js";
+import { getToken } from "../components/token.js";
+import { displayModal } from "../components/modal.js";
 import { getServices } from "../services/service.js";
 import { loadRooms } from "../services/room.js";
+import { findClient } from "../services/reservations.js";
+import { createReservation } from "../services/reservations.js";
 
 const token = getToken();
 
@@ -17,21 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const dni = document.querySelector('#input-text-dni').value;
 
-      const response = await fetch(`http://localhost:3000/api/clients?dni=${dni}`, {
-        headers: {
-          'authorization': 'bearer ' + token
-        }
-      });
-
+      const response = await findClient(dni);
 
       if (!response.ok) {
         return displayModal('No se encontro el cliente', false);
       }
-      const client = await response.json();
 
+      const client = await response.json();
       reservationData.clientId = client['id'];
       reservationData.cancelled = false;
-
 
       const tableRows = tableService.rows.length;
       if (tableRows > 1) {
@@ -52,18 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
 
-      const request = await fetch(`http://localhost:3000/api/reservations`, {
-        method: 'POST',
-        body: JSON.stringify(reservationData),
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': 'bearer ' + token
-        }
-      });
+      const create = await createReservation(reservationData);
 
-      if (request.ok) {
-        displayModal('Se ha agregado la reserva correctamente');
+      if (!create.ok) {
+        return displayModal('No se pudo agregar la reserva', false);
       }
+
+      return displayModal('Se ha guardado la reserva correctamente');
+
 
     });
 
@@ -130,7 +122,8 @@ cmbRooms.addEventListener('change', () => {
   const row = document.createElement('tr');
   row.classList.add('row');
 
-  const [_, ...rows] = Array.from(tableRooms.rows);
+  const rows = Array.from(tableRooms.rows);
+  console.log(tableRooms.rows);
 
   const ids = rows.map(row => {
     return parseInt(row['cells'][0]['textContent']);

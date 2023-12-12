@@ -1,6 +1,7 @@
-import { getToken } from "./token.js";
+import {create} from "../services/client.js";
+import {displayModal} from "../components/modal.js";
+import { loadDepartment } from "../services/departments.js";
 
-const token = getToken();
 
 document.addEventListener('DOMContentLoaded', () => {
   startApp();
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function startApp() {
   const form = document.querySelector('.client-form');
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async(e) => {
     e.preventDefault();
     const clientData = Object.fromEntries(new FormData(e.target));
 
@@ -17,60 +18,25 @@ function startApp() {
 
     clientData.municipalityId = municipalities.options[municipalities.selectedIndex].value;
 
-    fetch('http://localhost:3000/api/clients', {
-      method: 'POST',
-      body: JSON.stringify(clientData),
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': 'bearer ' + token
-      }
-    })
-      .then(response => {
+    const response = await create(clientData);
 
-        if (response.ok) {
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-          const modal = document.createElement('div');
-          modal.classList.add('modal');
-          modal.innerHTML = `
-                             <div class="modal-content">
-                             <img src="../img/check.png">
-                              <p>Se creó el nuevo cliente correctamente</p>
-                              <div>
-                                  <button class="close-modal">Aceptar</button>
-                            </div>
-                            </div>
-                            `;
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 
-          setTimeout(() => {
-            const modalContent = document.querySelector('.modal-content');
-            modalContent.classList.add('animation');
-
-            document.querySelector('.close-modal').addEventListener('click', () => {
-              modal.remove();
-              window.location.replace('client-list.html', 'update-client.html');
-            });
-
-          }, 0);
-
-          document.querySelector('body').appendChild(modal);
+         if (!response.ok) {
+            return displayModal('Error. No se pudo agregar el cliente', false);
         }
 
-      })
-      .catch(err => {
-        console.error(err);
+        displayModal('Se creó el nuevo cliente correctamente');
+        window.location.replace('client-list.html', 'update-client.html');
 
-      });
-  });
+       });
+
 }
 
 async function loadDepartments() {
-  const response = await fetch('http://localhost:3000/api/departments', {
-    headers: {
-      'authorization': 'bearer ' + token
-    }
-  });
-  const data = await response.json();
+  
+  const data = await loadDepartment();
 
   const cmbDepartments = document.querySelector('#option-department');
   const cmbMunicipalities = document.querySelector('#option-municipality');
