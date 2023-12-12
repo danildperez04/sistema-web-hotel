@@ -1,6 +1,5 @@
-import { getToken } from '../components/token.js';
-
-const token = getToken();
+import { load } from '../services/client.js';
+import { remove } from '../services/client.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,14 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function start() {
-  fetch('http://localhost:3000/api/clients', {
-    headers: {
-      'authorization': 'bearer ' + token
-    }
-  })
-    .then(response => response.json())
-    .then(data => showClients(data));
+async function start() {
+  const clients = await load();
+  showClients(clients);
 }
 
 
@@ -28,9 +22,9 @@ function showClients(data) {
     Object.keys(client).forEach(key => {
       if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'reservations' && key !== 'municipalityId' && key !== 'birthDate') {
         const cell = document.createElement('td');
-        if(key === 'municipality'){
+        if (key === 'municipality') {
           cell.textContent = client[key]['name'];
-        }else{ 
+        } else {
           cell.textContent = client[key];
         }
         row.appendChild(cell);
@@ -94,14 +88,8 @@ function showClients(data) {
 }
 
 
-function deleteClient(id) {
-  fetch(`http://localhost:3000/api/clients/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'authorization': 'bearer ' + token
-    }
-  })
-    .then(response => {
+async function deleteClient(id) {
+  const response = await remove(id)
 
       if (response.ok) {
         const dialog = document.createElement('div');
@@ -110,12 +98,11 @@ function deleteClient(id) {
         message.textContent = 'Se ha eliminado el cliente correctamente';
         dialog.appendChild(message);
         document.querySelector('.msg').appendChild(dialog);
+
         setTimeout(() => {
           location.reload();
         }, 2000);
       }
-
-    });
 
 }
 

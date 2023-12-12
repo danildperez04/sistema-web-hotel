@@ -1,6 +1,7 @@
 import { getServices } from "../services/service.js";
-import { displayModal, modalForm } from "./modal.js";
-import { getToken } from "./token.js";
+import { displayModal, modalForm } from "../components/modal.js";
+import { getToken } from "../components/token.js";
+
 const token = getToken();
 
 document.addEventListener('DOMContentLoaded', async () => {

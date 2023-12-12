@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', async()=>{
         const cellCancelled = document.createElement('td');
         cellCancelled.textContent = reservation.cancelled;
 
-        
-
         row.appendChild(cellID);
         row.appendChild(cellUser);
         row.appendChild(cellClient);

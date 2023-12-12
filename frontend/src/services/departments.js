@@ -1,9 +1,10 @@
 import { getToken } from "../components/token.js";
 
 const token = getToken();
+ 
 
-export async function getServices() {
-  const response = await fetch('http://localhost:3000/api/services', {
+export async function loadDepartment(){
+    const response = await fetch('http://localhost:3000/api/departments', {
     headers: {
       'authorization': 'bearer ' + token
     }

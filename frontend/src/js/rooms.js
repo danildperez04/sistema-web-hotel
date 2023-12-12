@@ -1,7 +1,7 @@
 import { loadRooms } from "../services/room.js";
-import { getToken } from "./token.js";
+import { create } from "../services/room.js";
+import { displayModal } from "../components/modal.js";
 
-const token = getToken();
 
 document.addEventListener('DOMContentLoaded', async () => {
   const rooms = await loadRooms();
@@ -74,25 +74,18 @@ function displayModal() {
 
 function createRoom() {
   const form = document.querySelector('.form');
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async(e) => {
     e.preventDefault();
 
     const roomData = Object.fromEntries(new FormData(e.target));
 
-    fetch('http://localhost:3000/api/rooms', {
-      method: 'POST',
-      body: JSON.stringify(roomData),
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': 'bearer ' + token
-      }
-    })
-      .then(response => {
-        if (response.ok) {
-          window.location.reload();
+    
+      const response = await create(roomData);
+        if (!response.ok) {
+          return displayModal('Error. No se pudo agregar la habitación', false);
         }
-      })
-      .catch(err => console.log(err));
+   
+        window.location.reload();
 
   });
 }
