@@ -7,6 +7,12 @@ const { BadRequestException } = require('../utils/customErrors');
 class Reservation {
   async getAll() {
     const reservations = await reservationModel.findAll({
+      where: {
+        endDate: {
+          [Op.gt]: (new Date())
+        },
+        cancelled: false
+      },
       include: { all: true }
     });
 
