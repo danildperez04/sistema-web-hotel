@@ -36,5 +36,17 @@ async function createReservation(reservationData){
     return await response.json();
 }
 
+async function cancell(reservation){
+    const response = await fetch(`http://localhost:3000/api/reservations/${reservation.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(reservation),
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'bearer ' + token
+          }
+    });
+    
+    return response;
+}
 
-export{loadReservations, findClient, createReservation};
+export{loadReservations, findClient, createReservation, cancell};
