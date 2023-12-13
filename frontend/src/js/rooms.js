@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const rooms = await loadRooms();
   showRooms(rooms);
   displayModalCreate();
+
 });
 
 
@@ -39,7 +40,7 @@ function displayModalCreate() {
           <div class="modal-content">
           <img class ="btn-x" src="../img/cerrar.png">
             <h1>Agregar nueva habitación</h1>
-  
+
             <form class="form">
                 <input type="number" placeholder="Código" name="code">
                 <input type="number" placeholder="Precio" required name="price">
@@ -47,7 +48,7 @@ function displayModalCreate() {
             <input type="submit" value="Crear Habitación" class="btn-create-room btn-create">
             </form>
           <div>
-          
+
           </div>
           </div>
           ;`
@@ -74,18 +75,27 @@ function displayModalCreate() {
 
 function createRoom() {
   const form = document.querySelector('.form');
-  form.addEventListener('submit', async(e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const roomData = Object.fromEntries(new FormData(e.target));
 
+    const tableRooms = document.querySelector('.table-rooms');
+    const [_, ...rows] = Array.from(tableRooms.rows);
+    const savedCodes = [];
+
+    rows.forEach(row => savedCodes.push(row['cells'][0]['textContent']));
     
+    if(!savedCodes.includes(roomData.code)){
       const response = await create(roomData);
-        if (!response.ok) {
-          return displayModal('Error. No se pudo agregar la habitación', false);
-        }
-   
-        window.location.reload();
+      if (!response.ok) {
+        return displayModal('Error. No se pudo agregar la habitación', false);
+      }
+  
+     return window.location.reload();
+    }
+     document.querySelector('.modal').remove();
+     displayModal('El Código de habitación ingresado ya existe', false);
 
   });
 }
