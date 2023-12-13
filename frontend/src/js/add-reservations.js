@@ -1,16 +1,15 @@
-import { getToken } from "../components/token.js";
 import { displayModal } from "../components/modal.js";
 import { getServices } from "../services/service.js";
 import { loadRooms } from "../services/room.js";
 import { findClient } from "../services/reservations.js";
 import { createReservation } from "../services/reservations.js";
 
-const token = getToken();
 
 const tableService = document.querySelector('.table-service');
 const tableRooms = document.querySelector('.table-room');
 
 document.addEventListener('DOMContentLoaded', () => {
+
   document.querySelector('.form')
     .addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await findClient(dni);
 
       if (!response.ok) {
-        return displayModal('No se encontro el cliente', false);
+        return displayModal('No se encontró el cliente', false);
       }
 
       const client = await response.json();
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const create = await createReservation(reservationData);
       console.log(create);
-      
+
       if (create.statusCode === 400) {
         const message = create.message ? create.message : 'No se pudo agregar la reserva';
         return displayModal(message, false);
@@ -63,10 +62,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
   fillOptions();
+  setDates();
+
 });
 
 const cmbServices = document.querySelector('#select-services');
 const cmbRooms = document.querySelector('#select-rooms');
+
+
+function setDates() {
+  const date = new Date();
+  const dd = String(date.getDate()).padStart(2, '0');
+  const mm = String(date.getMonth() + 1).padStart(2, '0');
+  const yyyy = date.getFullYear();
+  const hh = String(date.getHours()).padStart(2, '0');
+  const min = String(date.getMinutes()).padStart(2, '0');
+
+  const currentDate = yyyy + '-' + mm + '-' + dd + 'T' + hh + ':' + min;
+
+  const inputDateStart = document.querySelector('#input-date-start');
+  inputDateStart.min = currentDate;
+
+  inputDateStart.addEventListener('change', () => {
+    const inputDateEnd = document.querySelector('#input-date-end');
+    inputDateEnd.disabled = false;
+    const selectedDate = inputDateStart.value;
+    const selectedDay = selectedDate.substring(8, 10)
+    const nextDay = (parseInt(selectedDay) + 1).toString();
+    const minDateEnd = selectedDate.replace(selectedDay, nextDay);
+    inputDateEnd.min = minDateEnd;
+  });
+}
 
 async function fillOptions() {
   const services = await getServices();
