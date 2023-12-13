@@ -62,6 +62,8 @@ class Reservation {
 
     const reservations = await reservationModel.findAll(options);
 
+    console.log(reservations.dataValues);
+
     if (!this.canReserve({ rooms, reservations })) {
       return null;
     }
@@ -132,6 +134,10 @@ class Reservation {
   }
 
   canReserve({ rooms, reservations }) {
+    if (!rooms?.length || !reservations?.length) {
+      return true;
+    }
+
     return rooms
       .reduce((prev, room) => (
         prev && reservations.some(
