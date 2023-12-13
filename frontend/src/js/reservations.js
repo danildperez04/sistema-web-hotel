@@ -1,11 +1,9 @@
-import { getToken } from "../components/token.js";
 import { displayModal } from "../components/modal.js";
 import { getServices } from "../services/service.js";
 import { loadRooms } from "../services/room.js";
 import { findClient } from "../services/reservations.js";
 import { createReservation } from "../services/reservations.js";
 
-const token = getToken();
 
 const tableService = document.querySelector('.table-service');
 const tableRooms = document.querySelector('.table-room');
@@ -61,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fillOptions();
 });
+
 
 const cmbServices = document.querySelector('#select-services');
 const cmbRooms = document.querySelector('#select-rooms');
