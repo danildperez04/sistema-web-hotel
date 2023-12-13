@@ -139,11 +139,7 @@ class Reservation {
       .map(({ rooms }) => rooms
         .map(room => room.id));
 
-    const newReservations = [];
-
-    for (const reservation of reservationArr) {
-      newReservations.push(...reservation);
-    }
+    const newReservations = reservationArr.flat();
 
     if (!roomsArr?.length || !reservationArr?.length) {
       return true;
