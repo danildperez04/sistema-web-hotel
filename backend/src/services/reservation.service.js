@@ -63,8 +63,6 @@ class Reservation {
 
     const reservations = await reservationModel.findAll(options);
 
-    console.log(reservations.dataValues);
-
     if (!this.canReserve({ rooms, reservations })) {
       throw new BadRequestException('Ya existen habitaciones reservadas para esas fechas');
     }
@@ -135,17 +133,24 @@ class Reservation {
   }
 
   canReserve({ rooms, reservations }) {
-    if (!rooms?.length || !reservations?.length) {
+    // Get ids
+    const roomsArr = rooms.map(room => room.id);
+    const reservationArr = reservations
+      .map(({ rooms }) => rooms
+        .map(room => room.id));
+
+    const newReservations = [];
+
+    for (const reservation of reservationArr) {
+      newReservations.push(...reservation);
+    }
+
+    if (!roomsArr?.length || !reservationArr?.length) {
       return true;
     }
 
-    return rooms
-      .reduce((prev, room) => (
-        prev && reservations.some(
-          ({ rooms }) => (
-            rooms.includes(room)
-          ))
-      ), true);
+    return roomsArr
+      .some(room => !newReservations.includes(room));
   }
 }
 
