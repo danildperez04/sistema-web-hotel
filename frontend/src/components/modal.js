@@ -2,7 +2,7 @@ import { getToken } from "./token.js";
 
 const token = getToken();
 
-export function displayModal(message, success = true) {
+export function displayModal(message, success = true, location) {
   const modal = document.createElement('div');
   modal.classList.add('modal');
   const urlImage = success ? '../img/check.png' : '../img/advertencia.png';
@@ -22,6 +22,10 @@ export function displayModal(message, success = true) {
 
     document.querySelector('.close-modal').addEventListener('click', () => {
       modal.remove();
+      if(location){
+        window.location = location;
+      }
+      
       window.location.reload();
     });
 

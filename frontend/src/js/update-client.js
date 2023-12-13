@@ -1,68 +1,35 @@
-import { getToken } from "./token.js";
+import { update } from "../services/client.js";
+import { displayModal } from "../components/modal.js";
+import { getClientById } from "../services/client.js";
 
-const token = getToken();
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async() => {
 
   const idClient = localStorage.getItem('idClient');
 
-  fetch(`http://localhost:3000/api/clients/${idClient}`, {
-    headers: {
-      'authorization': 'bearer ' + token
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
+  
+    const data = await getClientById(idClient);
+
       fullFields(data);
       const form = document.querySelector('.client-form');
-      form.addEventListener('submit', (e) => {
+      form.addEventListener('submit', async(e) => {
         e.preventDefault();
         const clientData = Object.fromEntries(new FormData(e.target));
         localStorage.removeItem('idClient');
 
-        fetch(`http://localhost:3000/api/clients/${idClient}`, {
-          method: 'PUT',
-          body: JSON.stringify(clientData),
-          headers: {
-            'Content-Type': 'application/json',
-            'authorization': 'bearer ' + token
-          }
-        })
-          .then(response => {
+        
+            const response = await update(idClient, clientData);
             if (response.ok) {
               document.body.scrollTop = 0;
               document.documentElement.scrollTop = 0;
-              const modal = document.createElement('div');
-              modal.classList.add('modal');
-              modal.innerHTML = `
-                             <div class="modal-content">
-                             <img src="../img/check.png">
-                              <p>Se ha actualizado el cliente correctamente</p>
-                              <div>
-                                  <button class="close-modal">Aceptar</button>
-                            </div>
-                            </div>
-                            `;
 
-              setTimeout(() => {
-                const modalContent = document.querySelector('.modal-content');
-                modalContent.classList.add('animation');
+              displayModal('Se ha actualizado el cliente correctamente', true, 'http://localhost:5173/src/pages/client-list.html');
 
-                document.querySelector('.close-modal').addEventListener('click', () => {
-                  modal.remove();
-                  window.location.replace('client-list.html', 'update-client.html');
-                });
-
-              }, 0);
-
-              document.querySelector('body').appendChild(modal);
             }
           });
 
       });
-    });
 
-});
 
 function fullFields(obj) {
   document.querySelector('#input-client-dni').value = obj.dni;

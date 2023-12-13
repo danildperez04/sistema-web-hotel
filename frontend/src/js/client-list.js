@@ -1,9 +1,12 @@
 import { load } from '../services/client.js';
 import { remove } from '../services/client.js';
+import { getOneClient } from '../services/client.js';
+import {displayModal} from "../components/modal.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {
   start();
+  filterClient();
 });
 
 
@@ -14,6 +17,53 @@ async function start() {
 
 
 function showClients(data) {
+
+  addActions(data);
+
+}
+
+
+async function deleteClient(id) {
+  const response = await remove(id)
+
+      if (response.ok) {
+        const dialog = document.createElement('div');
+        dialog.classList.add('message');
+        const message = document.createElement('p');
+        message.textContent = 'Se ha eliminado el cliente correctamente';
+        dialog.appendChild(message);
+        document.querySelector('.msg').appendChild(dialog);
+
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      }
+
+}
+
+function filterClient(){
+  const btnSearch = document.querySelector('#btn-search-client')
+  btnSearch.addEventListener('click', async()=>{
+      const dni = document.querySelector('#input-search-client').value;
+      const response = await getOneClient(dni);
+      
+      if(!response.ok){
+        return displayModal('No se encontro el cliente', false);
+      }
+      
+      const filteredClient = await response.json();
+      console.log(filteredClient);
+      //const table = document.querySelector('.client-list tbody');
+      const rows = document.querySelectorAll('.row');
+      rows.forEach(row => row.remove());
+
+      addActions([filteredClient]);
+
+  });
+}
+
+
+function addActions(data){
   const table = document.querySelector('.client-list tbody');
 
   data.forEach(client => {
@@ -56,53 +106,34 @@ function showClients(data) {
       modal.innerHTML = `
         <div class="modal-content">
           <p>¿Estas seguro que quieres eliminar este cliente? Esta acción no se puede deshacer</p>
-
+  
         <div>
           <button class="btnDelete">Eliminar</button>
           <button class="close-modal">Cancelar</button>
         </div>
         </div>
         `;
-
+  
       setTimeout(() => {
         const modalContent = document.querySelector('.modal-content');
         modalContent.classList.add('animation');
-
+  
         document.querySelector('.close-modal').addEventListener('click', () => {
           modal.remove();
         });
-
+  
         document.querySelector('.btnDelete').addEventListener('click', () => {
           modal.remove();
           deleteClient(client['id']);
         });
-
+  
       }, 0);
-
+  
       document.querySelector('body').appendChild(modal);
-
+  
     });
 
   });
 
-}
-
-
-async function deleteClient(id) {
-  const response = await remove(id)
-
-      if (response.ok) {
-        const dialog = document.createElement('div');
-        dialog.classList.add('message');
-        const message = document.createElement('p');
-        message.textContent = 'Se ha eliminado el cliente correctamente';
-        dialog.appendChild(message);
-        document.querySelector('.msg').appendChild(dialog);
-
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
-      }
 
 }
-

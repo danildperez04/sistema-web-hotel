@@ -639,6 +639,15 @@ tbody tr {
   align-items: center;
 }
 
+.search-client .label-input-search {
+  color: black;
+}
+.search-client .input-search-dni-client {
+  border: 1px solid gray;
+  display: block;
+  width: 10rem;
+}
+
 .left-bar {
   background-color: #17396d;
   position: absolute;

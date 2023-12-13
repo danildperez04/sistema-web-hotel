@@ -159,3 +159,16 @@ tbody {
   justify-content: center;
   align-items: center;
 }
+
+.search-client{
+
+  .label-input-search{
+    color: black;
+  }
+  
+  .input-search-dni-client{
+    border: 1px solid gray;
+    display: block;
+    width: 10rem;
+  }
+}
