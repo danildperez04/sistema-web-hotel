@@ -2,6 +2,7 @@ const { Reservation: reservationModel } = require('../models/reservation');
 const { Reservation_Room } = require('../models/reservation_room');
 const { Reservation_Service } = require('../models/reservation_service');
 const { Op } = require('sequelize');
+const { BadRequestException } = require('../utils/customErrors');
 
 class Reservation {
   async getAll() {
@@ -65,7 +66,7 @@ class Reservation {
     console.log(reservations.dataValues);
 
     if (!this.canReserve({ rooms, reservations })) {
-      return null;
+      throw new BadRequestException('Ya existen habitaciones reservadas para esas fechas');
     }
 
     const reservation = await reservationModel.create(reservationData);
