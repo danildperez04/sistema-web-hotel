@@ -2,7 +2,6 @@ const { Reservation: reservationModel } = require('../models/reservation');
 const { Reservation_Room } = require('../models/reservation_room');
 const { Reservation_Service } = require('../models/reservation_service');
 const { Op } = require('sequelize');
-const { BadRequestException } = require('../utils/customErrors');
 
 class Reservation {
   async getAll() {
@@ -64,7 +63,7 @@ class Reservation {
     const reservations = await reservationModel.findAll(options);
 
     if (!this.canReserve({ rooms, reservations })) {
-      throw new BadRequestException('Cannot reserve in those dates');
+      return null;
     }
 
     const reservation = await reservationModel.create(reservationData);

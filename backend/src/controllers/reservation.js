@@ -43,6 +43,12 @@ const create = async (req, res) => {
     cancelled,
   }, { services, rooms });
 
+  if (!reservation) {
+    res.send({
+      message: 'cannot reserve in those dates'
+    });
+  }
+
   res.status(HTTP_STATUS.CREATED).send(reservation);
 };
 
