@@ -20,6 +20,7 @@ class Reservation {
   }
 
   async getOne(id) {
+    console.log(id);
     const reservation = await reservationModel.findAll({
       where: { id },
       include: { all: true }
