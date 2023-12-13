@@ -6,7 +6,7 @@ import { displayModal } from "../components/modal.js";
 document.addEventListener('DOMContentLoaded', async () => {
   const rooms = await loadRooms();
   showRooms(rooms);
-  displayModal();
+  displayModalCreate();
 });
 
 
@@ -29,7 +29,7 @@ function showRooms(data) {
   });
 }
 
-function displayModal() {
+function displayModalCreate() {
   document.querySelector('.btn-create')
     .addEventListener('click', () => {
       const modal = document.createElement('div');

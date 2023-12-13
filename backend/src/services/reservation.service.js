@@ -25,47 +25,47 @@ class Reservation {
   async create(reservationData, { services, rooms }) {
     const { startDate, endDate } = reservationData;
 
-    const options = {
-      // where: {
-      //   [Op.or]: {
-      //     startDate: {
-      //       [Op.lte]: endDate
-      //     },
-      //     endDate: {
-      //       [Op.gte]: startDate
-      //     }
-      //   }
-      // }
-      where: {
-        [Op.or]: [
-          {
-            startDate: {
-              [Op.between]: [startDate, endDate]
-            }
-          },
-          {
-            endDate: {
-              [Op.between]: [startDate, endDate]
-            }
-          },
-          {
-            [Op.and]: [
-              { startDate: { [Op.lte]: startDate } },
-              { endDate: { [Op.gte]: endDate } }
-            ]
-          }
-        ]
-      },
-      include: {
-        all: true
-      }
-    };
+    // const options = {
+    //   // where: {
+    //   //   [Op.or]: {
+    //   //     startDate: {
+    //   //       [Op.lte]: endDate
+    //   //     },
+    //   //     endDate: {
+    //   //       [Op.gte]: startDate
+    //   //     }
+    //   //   }
+    //   // }
+    //   where: {
+    //     [Op.or]: [
+    //       {
+    //         startDate: {
+    //           [Op.between]: [startDate, endDate]
+    //         }
+    //       },
+    //       {
+    //         endDate: {
+    //           [Op.between]: [startDate, endDate]
+    //         }
+    //       },
+    //       {
+    //         [Op.and]: [
+    //           { startDate: { [Op.lte]: startDate } },
+    //           { endDate: { [Op.gte]: endDate } }
+    //         ]
+    //       }
+    //     ]
+    //   },
+    //   include: {
+    //     all: true
+    //   }
+    // };
 
-    const reservations = await reservationModel.findAll(options);
+    // const reservations = await reservationModel.findAll(options);
 
-    if (!this.canReserve({ rooms, reservations })) {
-      throw new BadRequestException('Cannot reserve in those dates');
-    }
+    // if (!this.canReserve({ rooms, reservations })) {
+    //   throw new BadRequestException('Cannot reserve in those dates');
+    // }
 
     const reservation = await reservationModel.create(reservationData);
 
