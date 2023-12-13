@@ -7,7 +7,7 @@ class Client {
   }
 
   async getOneBy(param) {
-    return await clientModel.findOne({ where: param });
+    return await clientModel.findOne({ where: param, include: { all: true } });
   }
 
   async getOne(id) {
