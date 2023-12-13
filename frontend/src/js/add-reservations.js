@@ -49,9 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
       const create = await createReservation(reservationData);
+      console.log(create);
+      
+      if (create.statusCode === 400) {
+        const message = create.message ? create.message : 'No se pudo agregar la reserva';
+        return displayModal(message, false);
 
-      if (!create.ok) {
-        return displayModal('No se pudo agregar la reserva', false);
       }
 
       return displayModal('Se ha guardado la reserva correctamente');

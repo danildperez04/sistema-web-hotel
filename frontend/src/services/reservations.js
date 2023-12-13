@@ -33,8 +33,7 @@ async function createReservation(reservationData){
         }
     });
 
-    console.log(response);
-    return response;
+    return await response.json();
 }
 
 
