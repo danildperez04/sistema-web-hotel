@@ -27,8 +27,8 @@ function startApp() {
             return displayModal('Error. No se pudo agregar el cliente', false);
         }
 
-        displayModal('Se creó el nuevo cliente correctamente');
-        window.location.replace('client-list.html', 'update-client.html');
+        displayModal('Se creó el nuevo cliente correctamente', true, 'http://localhost:5173/src/pages/client-list.html');
+        //window.location.replace('client-list.html', 'update-client.html');
 
        });
 

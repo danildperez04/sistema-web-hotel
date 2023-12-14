@@ -42,13 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const [_, ...rows] = Array.from(tableRooms.rows);
 
         reservationData.rooms = rows.map(row => {
-          return { id: row['cells'][0]['textContent'], price: parseInt(row['cells'][2]['textContent']) };
+          return { id: parseInt(row['cells'][0]['textContent']), price: parseInt(row['cells'][2]['textContent']) };
         });
       }
 
-
+      console.log(reservationData);
       const create = await createReservation(reservationData);
-      console.log(create);
+      // console.log(create);
 
       if (create.statusCode === 400) {
         const message = create.message ? create.message : 'No se pudo agregar la reserva';
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       }
 
-      return displayModal('Se ha guardado la reserva correctamente');
+      return displayModal('Se ha guardado la reserva correctamente', true, 'http://localhost:5173/src/pages/reservations.html');
 
 
     });

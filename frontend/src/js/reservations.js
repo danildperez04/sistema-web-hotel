@@ -1,5 +1,6 @@
 import { loadReservations } from "../services/reservations.js";
 import { cancell } from "../services/reservations.js";
+import { confirmationMessage } from "../components/modal.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
   const reservations = await loadReservations();
@@ -32,8 +33,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     actions.appendChild(btnCancell);
 
     btnCancell.addEventListener('click', ()=>{
+      confirmationMessage('¿Estás seguro que quieres cancelar esta reserva?', 'Cancelar Reserva', 'Volver');
       reservation.cancelled = true;
-      cancellReservation(reservation);
+
+      document.querySelector('#btn-execute-action').addEventListener('click', () => {
+        document.querySelector('.modal').remove();
+        cancellReservation(reservation);
+      });
+      
     });
 
    //row.appendChild(cellID);

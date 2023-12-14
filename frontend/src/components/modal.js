@@ -2,7 +2,7 @@ import { getToken } from "./token.js";
 
 const token = getToken();
 
-export function displayModal(message, success = true, location) {
+export function displayModal(message, success = true, location = '') {
   const modal = document.createElement('div');
   modal.classList.add('modal');
   const urlImage = success ? '../img/check.png' : '../img/advertencia.png';
@@ -22,8 +22,8 @@ export function displayModal(message, success = true, location) {
 
     document.querySelector('.close-modal').addEventListener('click', () => {
       modal.remove();
-      if(location){
-        window.location = location;
+      if(location !== ''){
+        return window.location = location;
       }
       
       window.location.reload();
@@ -89,3 +89,34 @@ export function modalForm(title, id) {
       modal.remove();
     });
 }
+
+function confirmationMessage(message, button1 = 'Eliminar', button2 = 'Cancelar'){
+  const modal = document.createElement('div');
+      modal.classList.add('modal');
+      modal.innerHTML = `
+        <div class="modal-content">
+          <p>${message}</p>
+  
+        <div>
+          <button class="btnDelete" id="btn-execute-action">${button1}</button>
+          <button class="close-modal">${button2}</button>
+        </div>
+        </div>
+        `;
+  
+      setTimeout(() => {
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.classList.add('animation');
+  
+        document.querySelector('.close-modal').addEventListener('click', () => {
+          modal.remove();
+        });
+  
+      }, 0);
+
+      document.querySelector('body').appendChild(modal);
+
+}
+
+
+export {confirmationMessage};
