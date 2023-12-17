@@ -1,5 +1,5 @@
 .left-bar {
-    background-color: $darkBlue;
+    background-color: $lightGreen;
     position: absolute;
     width: 13rem;
     height: 100%;
@@ -11,7 +11,6 @@
 .menu-content {
     width: 100%;
     max-width: 25rem;
-    // background: #1c1c1c;
     position: relative;
     transition: all 500ms ease;
 
@@ -29,7 +28,7 @@
 
             &:hover{
                 border-left: 5px solid $lighBlue;
-                background: darken($darkBlue, 10);
+                background: darken($darkgray, 10);
             }
         }
 
@@ -64,6 +63,7 @@
     gap: 1rem;
     margin-left: 2rem;
     align-items: center;
+    justify-content: center;
 
     label{
         color: $white;

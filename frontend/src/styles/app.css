@@ -328,17 +328,34 @@ body {
 }
 
 .message {
-  background-color: #70b670;
+  background-color: #b3d9b3;
   height: 2rem;
   width: 80%;
-  margin: 0 auto;
+  margin: 2rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-left: 5px solid rgb(82, 161, 82);
 }
 .message p {
   font-size: 1.2rem;
-  color: #ffffff;
+  color: #417f41;
+  font-weight: bold;
+}
+
+.alert {
+  background-color: #cf9794;
+  height: 2rem;
+  width: 80%;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 5px solid #ae544f;
+}
+.alert p {
+  font-size: 1.2rem;
+  color: #8b433f;
   font-weight: bold;
 }
 
@@ -364,11 +381,26 @@ body {
 }
 
 .footer {
-  background-color: #4c4c6c;
+  background-color: #333333;
   height: 10rem;
   position: absolute;
   bottom: 0;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.footer a, .footer h1 {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 400;
+}
+.footer a span, .footer h1 span {
+  font-weight: 900;
+}
+.footer nav {
+  display: flex;
+  gap: 2rem;
 }
 
 .section {
@@ -502,11 +534,19 @@ body {
 }
 
 .header {
-  background-color: #33C3F0;
+  background-color: #333333;
   height: 4rem;
   box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
+}
+.header a, .header h1 {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 400;
+}
+.header a span, .header h1 span {
+  font-weight: 900;
 }
 
 main {
@@ -514,7 +554,7 @@ main {
 }
 
 .client-list {
-  margin: 3rem;
+  margin: 3rem auto;
 }
 
 .header-table {
@@ -649,7 +689,7 @@ tbody tr {
 }
 
 .left-bar {
-  background-color: #17396d;
+  background-color: #71B100;
   position: absolute;
   width: 13rem;
   height: 100%;
@@ -678,7 +718,7 @@ tbody tr {
 }
 .menu-content nav a:hover {
   border-left: 5px solid #a2dcd7;
-  background: #0e2343;
+  background: #1a1a1a;
 }
 
 .header {
@@ -704,6 +744,7 @@ tbody tr {
   gap: 1rem;
   margin-left: 2rem;
   align-items: center;
+  justify-content: center;
 }
 .search label {
   color: #ffffff;

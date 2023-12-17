@@ -3,11 +3,21 @@
 }
 
 .header {
-  background-color: $blue;
+  background-color: $darkgray;
   height: 4rem;
   box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
+
+  a, h1{
+    text-decoration: none;
+    color: $white;
+    font-weight: 400;
+
+    span{
+        font-weight: 900;
+    }
+}
   
 }
 
@@ -16,9 +26,7 @@ main {
 }
 
 .client-list {
-  margin: 3rem;
-
-  
+  margin: 3rem auto;
 }
 
 .header-table {
@@ -161,7 +169,6 @@ tbody {
 }
 
 .search-client{
-
   .label-input-search{
     color: black;
   }

@@ -1,56 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="../styles/app.css" />
-  </head>
 
-  <body>
-    <header class="header">
-     <a href="../../index.html"><img src="../img/casa.png" alt=""></a> 
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="../styles/app.css" />
+</head>
 
-    <main>
-      <h1>Lista de clientes</h1>
+<body>
+  <header class="header">
+    <a href="../../index.html"><img src="../img/casa.png" alt=""></a>
+  </header>
 
-      <div class="search search-client">
-        <label for="input-search" class="label-input-search">Buscar un cliente</label>
-        <input
-          type="text"
-          id="input-search-client"
-          placeholder="Ingrese la cédula"
-        />
-        <button id="btn-search-client"><img src="../img/search.png" alt="" /></button>
-      </div>
+  <main>
+    <h1>Lista de clientes</h1>
 
-      <div class="msg"></div>
-      <table class="client-list">
-        <thead class="header-table">
-          <tr>
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
-            <th>Municipio</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
+    <div class="search search-client">
+      <label for="input-search" class="label-input-search">Buscar un cliente</label>
+      <input type="text" id="input-search-client" placeholder="Ingrese la cédula" />
+      <button id="btn-search-client"><img src="../img/search.png" alt="" /></button>
+    </div>
 
-        <tbody></tbody>
-      </table>
-    </main>
+    <div class="show-message">
 
-      <a href="./client.html" class="btn-create button-create">Crear un nuevo cliente</a>
+    </div>
+
+    <table class="client-list">
+      <thead class="header-table">
+        <tr>
+          <th>DNI</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Municipio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <a href="./client.html" class="btn-create button-create">Crear un nuevo cliente</a>
 
 
-    <footer class="footer">
+  <footer class="footer">
+    <a href="../../index.html">
+      <h1>Hotel <span>San Carlos</span></h1>
+    </a>
 
-    </footer>
+    <nav>
+      <a href="./reservations.html">Reservaciones</a>
+      <a href="./rooms.html">Habitaciones</a>
+      <a href="./service.html">Servicios</a>
+      <a href="./client-list.html">Clientes</a>
+    </nav>
+  </footer>
 
-    <script src="../js/client-list.js" type="module"></script>
+  <script src="../js/client-list.js" type="module"></script>
 
-  </body>
+</body>
+
 </html>

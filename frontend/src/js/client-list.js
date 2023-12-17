@@ -1,7 +1,7 @@
 import { load } from '../services/client.js';
 import { remove } from '../services/client.js';
 import { getOneClient } from '../services/client.js';
-import {displayModal} from "../components/modal.js";
+import { confirmationMessage } from '../components/modal.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,44 +26,37 @@ function showClients(data) {
 async function deleteClient(id) {
   const response = await remove(id)
 
-      if (response.ok) {
-        const dialog = document.createElement('div');
-        dialog.classList.add('message');
-        const message = document.createElement('p');
-        message.textContent = 'Se ha eliminado el cliente correctamente';
-        dialog.appendChild(message);
-        document.querySelector('.msg').appendChild(dialog);
-
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
-      }
+  if (response.ok) {
+    displayMessage('Se ha eliminado el cliente correctamente')
+    setTimeout(() => {
+      location.reload();
+    }, 2000);
+  }
 
 }
 
-function filterClient(){
+function filterClient() {
   const btnSearch = document.querySelector('#btn-search-client')
-  btnSearch.addEventListener('click', async()=>{
-      const dni = document.querySelector('#input-search-client').value;
-      const response = await getOneClient(dni);
-      
-      if(!response.ok){
-        return displayModal('No se encontro el cliente', false);
-      }
-      
-      const filteredClient = await response.json();
-      console.log(filteredClient);
-      //const table = document.querySelector('.client-list tbody');
-      const rows = document.querySelectorAll('.row');
-      rows.forEach(row => row.remove());
+  btnSearch.addEventListener('click', async () => {
+    const dni = document.querySelector('#input-search-client').value;
+    const response = await getOneClient(dni);
 
-      addActions([filteredClient]);
+    if (!response.ok) {
+      return displayMessage('No se encontró el cliente', false);
+    }
+
+    const filteredClient = await response.json();
+    console.log(filteredClient);
+    const rows = document.querySelectorAll('.row');
+    rows.forEach(row => row.remove());
+
+    addActions([filteredClient]);
 
   });
 }
 
 
-function addActions(data){
+function addActions(data) {
   const table = document.querySelector('.client-list tbody');
 
   data.forEach(client => {
@@ -72,11 +65,10 @@ function addActions(data){
     Object.keys(client).forEach(key => {
       if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'reservations' && key !== 'municipalityId' && key !== 'birthDate') {
         const cell = document.createElement('td');
-        if (key === 'municipality') {
-          cell.textContent = client[key]['name'];
-        } else {
-          cell.textContent = client[key];
-        }
+        key === 'municipality' ?  
+        cell.textContent = client[key]['name'] :     
+        cell.textContent = client[key];
+        
         row.appendChild(cell);
 
       }
@@ -101,39 +93,30 @@ function addActions(data){
       window.location.replace('update-client.html', 'client-list.html')
     });
     btnDelete.addEventListener('click', () => {
-      const modal = document.createElement('div');
-      modal.classList.add('modal');
-      modal.innerHTML = `
-        <div class="modal-content">
-          <p>¿Estas seguro que quieres eliminar este cliente? Esta acción no se puede deshacer</p>
-  
-        <div>
-          <button class="btnDelete">Eliminar</button>
-          <button class="close-modal">Cancelar</button>
-        </div>
-        </div>
-        `;
-  
-      setTimeout(() => {
-        const modalContent = document.querySelector('.modal-content');
-        modalContent.classList.add('animation');
-  
-        document.querySelector('.close-modal').addEventListener('click', () => {
-          modal.remove();
-        });
-  
-        document.querySelector('.btnDelete').addEventListener('click', () => {
-          modal.remove();
-          deleteClient(client['id']);
-        });
-  
-      }, 0);
-  
-      document.querySelector('body').appendChild(modal);
-  
-    });
+
+      confirmationMessage('¿Estas seguro que quieres eliminar este cliente? Esta acción no se puede deshacer');
+
+      document.querySelector('.btnDelete').addEventListener('click', () => {
+        document.querySelector('.modal').remove();
+        deleteClient(client['id']);
+      });
+
+    }, 0);
 
   });
 
+}
 
+
+function displayMessage(message, success = true) {
+  const dialog = document.createElement('div');
+  success ? dialog.classList.add('message') : dialog.classList.add('alert');
+  const text = document.createElement('p');
+  text.textContent = message;
+  dialog.appendChild(text);
+  document.querySelector('.show-message').appendChild(dialog);
+
+  setTimeout(() => {
+    dialog.remove();
+  }, 2000);
 }
