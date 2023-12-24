@@ -18,14 +18,16 @@
         transform: translateY(15%);
 
         a {
-            display: block;
+            display: flex;
             text-decoration: none;
             padding: 1.5rem;
             color: $white;
             border-left: 5px solid transparent;
             transition: all 400ms ease;
             text-align: center;
-
+            justify-content: space-around;
+            align-items: center;
+          
             &:hover{
                 border-left: 5px solid $lighBlue;
                 background: darken($darkgray, 10);

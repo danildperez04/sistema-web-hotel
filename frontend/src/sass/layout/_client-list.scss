@@ -3,7 +3,7 @@
 }
 
 .header {
-  background-color: $violet;
+  background-color: $blue;
   height: 4rem;
   box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
@@ -113,7 +113,7 @@ tbody {
     margin-bottom: 2rem;
     display: block;
     max-width: 35rem;
-    min-height: 6.6rem;
+    max-height: 28rem;
     height: auto;
     padding: 1rem 1rem;
     background-color: $white;
@@ -136,7 +136,7 @@ tbody {
       border: none;
       font-weight: bold;
       cursor: pointer;
-      width: 8rem;
+      min-width: 8rem;
 
       &:hover{
         background-color: lighten($redError, 15);
