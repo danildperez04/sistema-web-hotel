@@ -381,9 +381,9 @@ body {
 }
 
 .footer {
-  background-color: #333333;
+  background-color: #17396d;
   height: 10rem;
-  position: absolute;
+  margin-top: 5rem;
   bottom: 0;
   width: 100%;
   display: flex;
@@ -410,9 +410,9 @@ body {
   box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
   -webkit-box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
   -moz-box-shadow: 3px 8px 24px -2px rgba(0, 0, 0, 0.61);
-  width: 20rem;
+  width: 22rem;
   text-align: center;
-  margin: 5rem auto 3rem auto;
+  margin: 3rem auto 3rem auto;
 }
 .section h1 {
   font-family: "Montserrat", sans-serif;
@@ -534,7 +534,7 @@ body {
 }
 
 .header {
-  background-color: #333333;
+  background-color: #4c4c6c;
   height: 4rem;
   box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
@@ -555,55 +555,62 @@ main {
 
 .client-list {
   margin: 3rem auto;
+  border-spacing: 0;
 }
 
 .header-table {
   background-color: #17396d;
   height: 2rem;
+  margin: 0;
 }
-.header-table tr th {
+.header-table th {
   color: #ffffff;
   font-weight: 700;
-  margin-top: 1rem;
   width: auto;
   min-width: 10rem;
+  padding: 10px;
 }
 
 tbody td {
   text-align: center;
+  margin: 5px 0;
+  border-bottom: 1px solid rgb(102, 100, 100);
+  padding: 10px;
 }
 tbody tr {
-  background-color: rgb(200, 194, 194);
+  border: 1px solid rgb(200, 194, 194);
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
-  padding-top: 0.4rem;
-  justify-content: space-around;
+  gap: 0.5rem;
+  padding-top: 4px;
+  justify-content: space-evenly;
+  margin-bottom: 0px;
 }
 .actions a {
   background-color: #b90707;
   color: #ffffff;
   width: auto;
-  min-width: 6rem;
+  min-width: 2.3rem;
   cursor: pointer;
   margin: 0 0.2rem;
-  height: 1.3rem;
+  height: 1.5rem;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 4px;
+  border-radius: 4px;
 }
 .actions a:hover {
   background-color: #f84848;
 }
 .actions .btn-update {
-  background-color: rgb(82, 161, 82);
+  background-color: #E08709;
 }
 .actions .btn-update:hover {
-  background-color: #70b670;
+  background-color: #f6a026;
 }
 
 .row {
@@ -679,6 +686,10 @@ tbody tr {
   align-items: center;
 }
 
+.search-client {
+  margin-top: 2rem;
+  margin-bottom: -1rem;
+}
 .search-client .label-input-search {
   color: black;
 }
@@ -688,8 +699,12 @@ tbody tr {
   width: 10rem;
 }
 
+.section-clients {
+  width: 90%;
+}
+
 .left-bar {
-  background-color: #71B100;
+  background-color: #17396d;
   position: absolute;
   width: 13rem;
   height: 100%;
@@ -820,6 +835,7 @@ body {
 
 .table-rooms {
   margin: 3rem auto;
+  border-spacing: 0;
 }
 .table-rooms .header-table {
   background-color: #17396d;
@@ -834,9 +850,6 @@ body {
 .table-rooms tbody td {
   text-align: center;
 }
-.table-rooms tbody tr {
-  background-color: rgb(200, 194, 194);
-}
 
 .btn-create {
   background-color: rgb(82, 161, 82);
@@ -846,6 +859,7 @@ body {
   cursor: pointer;
   position: relative;
   min-height: 2rem;
+  width: 20rem;
 }
 .btn-create:hover {
   background-color: #417f41;
@@ -870,7 +884,8 @@ h1 {
 }
 
 .table-services {
-  margin: 5rem auto;
+  margin: 3rem auto;
+  border-spacing: 0;
 }
 .table-services .header-table {
   background-color: #17396d;
@@ -885,15 +900,15 @@ h1 {
 .table-services tbody td {
   text-align: center;
 }
-.table-services tbody tr {
-  background-color: rgb(200, 194, 194);
-}
 
 .btn-container {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+.btn-container button {
+  width: 20rem;
 }
 
 .form {
@@ -939,6 +954,7 @@ h1 {
 
 .table-reservations {
   margin: 5rem auto;
+  border-spacing: 0;
 }
 .table-reservations .header-table {
   background-color: #17396d;
@@ -952,9 +968,6 @@ h1 {
 }
 .table-reservations tbody td {
   text-align: center;
-}
-.table-reservations tbody tr {
-  background-color: rgb(200, 194, 194);
 }
 
 /*# sourceMappingURL=app.css.map */

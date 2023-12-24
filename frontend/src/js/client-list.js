@@ -2,6 +2,7 @@ import { load } from '../services/client.js';
 import { remove } from '../services/client.js';
 import { getOneClient } from '../services/client.js';
 import { confirmationMessage } from '../components/modal.js';
+import { displayMessage } from '../components/message.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -79,9 +80,13 @@ function addActions(data) {
     actions.classList.add('actions');
     const btnUpdate = document.createElement('a');
     const btnDelete = document.createElement('a');
-    btnUpdate.textContent = 'Actualizar';
     btnUpdate.classList.add('btn-update');
-    btnDelete.textContent = 'Eliminar';
+    const updateIcon = document.createElement('i');
+    updateIcon.classList.add('bi', 'bi-pencil-square');
+    btnUpdate.appendChild(updateIcon);
+    const deletIcon = document.createElement('i');
+    deletIcon.classList.add('bi', 'bi-trash');
+    btnDelete.appendChild(deletIcon);
     actions.appendChild(btnUpdate);
     actions.appendChild(btnDelete);
     row.appendChild(actions);
@@ -107,16 +112,3 @@ function addActions(data) {
 
 }
 
-
-function displayMessage(message, success = true) {
-  const dialog = document.createElement('div');
-  success ? dialog.classList.add('message') : dialog.classList.add('alert');
-  const text = document.createElement('p');
-  text.textContent = message;
-  dialog.appendChild(text);
-  document.querySelector('.show-message').appendChild(dialog);
-
-  setTimeout(() => {
-    dialog.remove();
-  }, 2000);
-}

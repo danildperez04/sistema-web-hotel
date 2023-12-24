@@ -3,7 +3,7 @@
 }
 
 .header {
-  background-color: $darkgray;
+  background-color: $violet;
   height: 4rem;
   box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 4px 14px -9px rgba(0, 0, 0, 0.75);
@@ -27,61 +27,68 @@ main {
 
 .client-list {
   margin: 3rem auto;
+  border-spacing: 0;
 }
 
 .header-table {
   background-color: $darkBlue;
   height: 2rem;
+  margin: 0;
 
-  tr th {
+   th {
     color: $white;
     font-weight: 700;
-    margin-top: 1rem;
     width: auto;
     min-width: 10rem;
+    padding: 10px;
   }
 }
 
 tbody {
+
   td {
-    text-align: center;
+    text-align: center; 
+    margin: 5px 0;
+    border-bottom: 1px solid rgb(102, 100, 100);
+    padding: 10px;
   }
 
   tr {
-    background-color: rgb(200, 194, 194);
+    border: 1px solid rgb(200, 194, 194);
   }
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
-  padding-top: .4rem;
-  justify-content: space-around;
+  gap: .5rem;
+  padding-top: 4px;
+  justify-content: space-evenly;
+  margin-bottom: 0px;
 
   a {
     background-color: darken($redError, 15);
     color: $white;
     width: auto;
-    min-width: 6rem;
+    min-width: 2.3rem;
     cursor: pointer;
     margin: 0 .2rem;
-    height: 1.3rem;
+    height: 1.5rem;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 4px;
-
+    border-radius: 4px;
     &:hover {
       background-color: lighten($redError, 10);
     }
   }
 
   .btn-update {
-    background-color: $green;
+    background-color: $yellow;
 
     &:hover {
-      background-color: lighten($green, 10);
+      background-color: lighten($yellow, 10);
     }
 
   }
@@ -169,6 +176,8 @@ tbody {
 }
 
 .search-client{
+  margin-top: 2rem;
+  margin-bottom: -1rem;
   .label-input-search{
     color: black;
   }
@@ -178,4 +187,8 @@ tbody {
     display: block;
     width: 10rem;
   }
+}
+
+.section-clients{
+  width: 90%;
 }

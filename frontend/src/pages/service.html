@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Añadir Servicio</title>
     <link rel="stylesheet" href="../styles/app.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
   </head>
 
   <header class="header">
@@ -12,9 +13,13 @@
 
   </header>
   <body>
-    <!--  -->
 
-    <section>
+      <h1>Lista de Servicios</h1>
+
+      <div class="show-message">
+
+      </div>
+
       <table class="table-services">
         <thead class="header-table">
           <tr>
@@ -28,11 +33,23 @@
 
         </tbody>
       </table>
-    </section>
 
     <div class="btn-container">
       <button class="btn-create btn-display-modal-service">Agregar un nuevo servicio</button>
     </div>
+
+    <footer class="footer">
+      <a href="../../index.html">
+        <h1>Hotel <span>San Carlos</span></h1>
+      </a>
+  
+      <nav>
+        <a href="./reservations.html">Reservaciones</a>
+        <a href="./rooms.html">Habitaciones</a>
+        <a href="./service.html">Servicios</a>
+        <a href="./client-list.html">Clientes</a>
+      </nav>
+    </footer>
 
     <script src="../js/service.js" type="module"></script>
   </body>

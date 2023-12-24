@@ -1,18 +1,26 @@
 import { loadRooms } from "../services/room.js";
 import { create } from "../services/room.js";
-import { displayModal } from "../components/modal.js";
+import { modalFormRoom } from "../components/modal.js";
+import { confirmationMessage } from "../components/modal.js";
+import { updateRoom } from "../services/room.js";
+import { displayMessage } from "../components/message.js";
+import { removeRoom } from "../services/room.js";
 
 
-document.addEventListener('DOMContentLoaded', async () => {
-  const rooms = await loadRooms();
-  showRooms(rooms);
+document.addEventListener('DOMContentLoaded', () => {
+  showRooms();
   displayModalCreate();
 
 });
 
+const savedCodes = [];
 
-function showRooms(data) {
+
+async function showRooms() {
+  const data = await loadRooms();
   const table = document.querySelector('.table-rooms tbody');
+  const rows = document.querySelectorAll('.row');
+  rows.forEach(row => row.remove());
 
   data.forEach(room => {
     const row = document.createElement('tr');
@@ -26,76 +34,137 @@ function showRooms(data) {
       }
     });
 
+    const actions = document.createElement('td');
+    actions.classList.add('actions');
+    const btnUpdate = document.createElement('a');
+    const btnDelete = document.createElement('a');
+    btnUpdate.classList.add('btn-update');
+    const updateIcon = document.createElement('i');
+    updateIcon.classList.add('bi', 'bi-pencil-square');
+    btnUpdate.appendChild(updateIcon);
+    const deletIcon = document.createElement('i');
+    deletIcon.classList.add('bi', 'bi-trash');
+    btnDelete.appendChild(deletIcon);
+    actions.appendChild(btnUpdate);
+    actions.appendChild(btnDelete);
+    row.appendChild(actions);
     table.appendChild(row);
+
+    btnUpdate.addEventListener('click', () => {
+      modalFormRoom('Actualizar información', room['id']);
+      update(room['id'])
+    });
+
+    btnDelete.addEventListener('click', ()=>{
+      deleteRoom(room['id']);
+    });
+
   });
+ 
 }
 
+
 function displayModalCreate() {
-  document.querySelector('.btn-create')
+  document.querySelector('#btn-display-modal-create-room')
     .addEventListener('click', () => {
-      const modal = document.createElement('div');
-      modal.classList.add('modal');
-      modal.classList.add('modal-create-room')
-      modal.innerHTML = `
-          <div class="modal-content">
-          <img class ="btn-x" src="../img/cerrar.png">
-            <h1>Agregar nueva habitación</h1>
-
-            <form class="form">
-                <input type="number" placeholder="Código" name="code">
-                <input type="number" placeholder="Precio" required name="price">
-                <textarea placeholder="Descripcion" required name="description"></textarea>
-            <input type="submit" value="Crear Habitación" class="btn-create-room btn-create">
-            </form>
-          <div>
-
-          </div>
-          </div>
-          ;`
-      setTimeout(() => {
-        const modalContent = document.querySelector('.modal-content');
-        modalContent.classList.add('animation');
-
-      }, 0);
-
-      document.querySelector('body').appendChild(modal);
-
-      document.querySelector('.btn-x')
-        .addEventListener('click', () => {
-          modal.remove();
-        });
-
-      document.querySelector('.btn-create-room')
-        .addEventListener('click', () => {
-          createRoom();
-        });
+      modalFormRoom('Crear una nueva habitación');
+      createRoom();
     });
 
 }
 
+
 function createRoom() {
-  const form = document.querySelector('.form');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
 
-    const roomData = Object.fromEntries(new FormData(e.target));
+  if (document.querySelector('#btn-create-room').value === 'Crear Habitación') {
+    const form = document.querySelector('.form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    const tableRooms = document.querySelector('.table-rooms');
-    const [_, ...rows] = Array.from(tableRooms.rows);
-    const savedCodes = [];
 
-    rows.forEach(row => savedCodes.push(row['cells'][0]['textContent']));
-    
-    if(!savedCodes.includes(roomData.code)){
-      const response = await create(roomData);
-      if (!response.ok) {
-        return displayModal('Error. No se pudo agregar la habitación', false);
+      const roomData = Object.fromEntries(new FormData(e.target));
+
+      savedCodes.length = 0;
+      const tableRooms = document.querySelector('.table-rooms');
+      const [_, ...rows] = Array.from(tableRooms.rows);
+      rows.forEach(row => savedCodes.push(row['cells'][0]['textContent']));
+
+      document.querySelector('.modal').remove();
+      if (!savedCodes.includes(roomData.code)) {
+        const response = await create(roomData);
+        if (!response.ok) {
+          return displayMessage('Error. No se pudo agregar la habitación', false);
+        }
+        displayMessage('Se ha agregado la habitación correctamente');
+        return (
+          setTimeout(() => {
+            showRooms();
+          }, 2000)
+        );
       }
-  
-     return window.location.reload();
-    }
-     document.querySelector('.modal').remove();
-     displayModal('El Código de habitación ingresado ya existe', false);
+      displayMessage('El Código de habitación ingresado ya existe', false);
 
+    });
+
+  }
+
+}
+
+
+function update(id){
+  const form = document.querySelector('.form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (document.querySelector('#btn-create-room').value === 'Actualizar') {
+          savedCodes.length = 0;
+          const tableRooms = document.querySelector('.table-rooms');
+          const [_, ...rows] = Array.from(tableRooms.rows);
+          rows.forEach(row => savedCodes.push(row['cells'][0]['textContent']));
+          const roomCode = document.querySelector('#input-room-code').value;
+          savedCodes.splice(savedCodes.indexOf(roomCode), 1);
+
+          const roomData = Object.fromEntries(new FormData(e.target));
+          document.querySelector('.modal').remove();
+          if (!savedCodes.includes(roomData.code)) {
+            const response = await updateRoom(id, roomData);
+
+            if (!response.ok) {
+              return displayMessage('Error. No se pudo actualizar la habitación', false);
+            }
+            displayMessage('Se ha actualizado la habitación correctamente');
+            return (
+              setTimeout(() => {
+                showRooms();
+              }, 2000)
+            );
+          }
+
+          displayMessage('El Código de habitación ingresado ya existe', false);
+
+        }
+
+      });
+}
+
+
+function deleteRoom(id){
+  confirmationMessage('Estas seguro que quieres eliminar esta habitación. Esta acción no se puede deshacer');
+
+  document.querySelector('#btn-execute-action')
+  .addEventListener('click', async()=>{
+      const response = await removeRoom(id);
+
+      document.querySelector('.modal').remove();
+      if(!response.ok){
+        return displayMessage('Error. No se pudo eliminar la habitación', false);
+      }
+
+      displayMessage('Se ha eliminado la habitación correctamente');
+      return (
+        setTimeout(() => {
+          showRooms();
+        }, 2000)
+      );
   });
 }

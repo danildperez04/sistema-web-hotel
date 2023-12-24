@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <link rel="stylesheet" href="../styles/app.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -16,31 +17,34 @@
   <main>
     <h1>Lista de clientes</h1>
 
-    <div class="search search-client">
-      <label for="input-search" class="label-input-search">Buscar un cliente</label>
-      <input type="text" id="input-search-client" placeholder="Ingrese la cédula" />
-      <button id="btn-search-client"><img src="../img/search.png" alt="" /></button>
-    </div>
+<section class="section section-clients">
 
-    <div class="show-message">
+  <div class="search search-client">
+    <label for="input-search" class="label-input-search">Buscar un cliente</label>
+    <input type="text" id="input-search-client" placeholder="Ingrese la cédula" />
+    <button id="btn-search-client"><img src="../img/search.png" alt="" /></button>
+  </div>
 
-    </div>
+  <div class="show-message">
 
-    <table class="client-list">
-      <thead class="header-table">
-        <tr>
-          <th>DNI</th>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Teléfono</th>
-          <th>Dirección</th>
-          <th>Municipio</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
+  </div>
 
-      <tbody></tbody>
-    </table>
+<table class="client-list">
+  <thead class="header-table">
+    <tr>
+      <th>DNI</th>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Dirección</th>
+      <th>Municipio</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+
+  <tbody></tbody>
+</table>
+</section>
   </main>
 
   <a href="./client.html" class="btn-create button-create">Crear un nuevo cliente</a>

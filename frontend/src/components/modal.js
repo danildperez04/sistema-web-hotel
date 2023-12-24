@@ -1,8 +1,8 @@
-import { getToken } from "./token.js";
+import { getOneService } from "../services/service.js";
+import { getOneRoom } from "../services/room.js";
 
-const token = getToken();
 
-export function displayModal(message, success = true, location = '') {
+function displayModal(message, success = true, location = '') {
   const modal = document.createElement('div');
   modal.classList.add('modal');
   const urlImage = success ? '../img/check.png' : '../img/advertencia.png';
@@ -22,10 +22,10 @@ export function displayModal(message, success = true, location = '') {
 
     document.querySelector('.close-modal').addEventListener('click', () => {
       modal.remove();
-      if(location !== ''){
+      if (location !== '') {
         return window.location = location;
       }
-      
+
       window.location.reload();
     });
 
@@ -34,7 +34,7 @@ export function displayModal(message, success = true, location = '') {
   document.body.appendChild(modal);
 }
 
-export function modalForm(title, id) {
+async function modalForm(title, id) {
   const modal = document.createElement('div');
   modal.classList.add('modal');
   modal.innerHTML = `
@@ -66,23 +66,14 @@ export function modalForm(title, id) {
 
   document.body.appendChild(modal);
 
-
   if (id) {
-    fetch(`http://localhost:3000/api/services/${id}`, {
-      headers: { 'authorization': 'bearer ' + token }
-    })
-      .then(response => response.json())
-      .then(service => {
-        document.querySelector('#input-service-name').value = service.name;
-        document.querySelector('#input-service-price').value = service.price;
-        document.querySelector('#input-service-details').value = service.details;
-        document.querySelector('#btn-create-service').textContent = 'Actualizar';
-
-      })
-      .catch(err => console.error(err));
+    const service = await getOneService(id);
+    document.querySelector('#input-service-name').value = service.name;
+    document.querySelector('#input-service-price').value = service.price;
+    document.querySelector('#input-service-details').value = service.details;
+    document.querySelector('#btn-create-service').textContent = 'Actualizar';
 
   }
-
 
   document.querySelector('.btn-x')
     .addEventListener('click', () => {
@@ -90,10 +81,11 @@ export function modalForm(title, id) {
     });
 }
 
-function confirmationMessage(message, button1 = 'Eliminar', button2 = 'Cancelar'){
+
+function confirmationMessage(message, button1 = 'Eliminar', button2 = 'Cancelar') {
   const modal = document.createElement('div');
-      modal.classList.add('modal');
-      modal.innerHTML = `
+  modal.classList.add('modal');
+  modal.innerHTML = `
         <div class="modal-content">
           <p>${message}</p>
   
@@ -103,20 +95,64 @@ function confirmationMessage(message, button1 = 'Eliminar', button2 = 'Cancelar'
         </div>
         </div>
         `;
-  
-      setTimeout(() => {
-        const modalContent = document.querySelector('.modal-content');
-        modalContent.classList.add('animation');
-  
-        document.querySelector('.close-modal').addEventListener('click', () => {
-          modal.remove();
-        });
-  
-      }, 0);
 
-      document.querySelector('body').appendChild(modal);
+  setTimeout(() => {
+    const modalContent = document.querySelector('.modal-content');
+    modalContent.classList.add('animation');
+
+    document.querySelector('.close-modal').addEventListener('click', () => {
+      modal.remove();
+    });
+
+  }, 0);
+
+  document.querySelector('body').appendChild(modal);
 
 }
 
 
-export {confirmationMessage};
+async function modalFormRoom(title, id){
+  const modal = document.createElement('div');
+      modal.classList.add('modal');
+      modal.classList.add('modal-create-room')
+      modal.innerHTML = `
+          <div class="modal-content">
+          <img class ="btn-x" src="../img/cerrar.png">
+            <h1>${title}</h1>
+
+            <form class="form">
+                <input type="number" placeholder="Código" name="code" id="input-room-code">
+                <input type="number" placeholder="Precio" required name="price" id="input-room-price">
+                <textarea placeholder="Descripcion" required name="description" id="input-room-description"></textarea>
+            <input type="submit" value="Crear Habitación" class="btn-create" id="btn-create-room">
+            </form>
+          <div>
+
+          </div>
+          </div>
+          ;`
+      setTimeout(() => {
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.classList.add('animation');
+
+      }, 0);
+
+      document.querySelector('body').appendChild(modal);
+
+      document.querySelector('.btn-x')
+        .addEventListener('click', () => {
+          modal.remove();
+        });
+
+        if (id) {
+          const room = await getOneRoom(id);
+          document.querySelector('#input-room-code').value = room.code;
+          document.querySelector('#input-room-price').value = room.price;
+          document.querySelector('#input-room-description').value = room.description;
+          document.querySelector('#btn-create-room').value = 'Actualizar';
+      
+        }
+}
+
+
+export { displayModal, modalForm, confirmationMessage, modalFormRoom };

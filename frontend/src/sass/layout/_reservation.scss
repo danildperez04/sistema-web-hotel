@@ -50,6 +50,7 @@
 
 .table-reservations{
     margin: 5rem auto;
+  border-spacing: 0;
     .header-table {
         background-color: $darkBlue;
     
@@ -67,8 +68,5 @@
           text-align: center;
         }
     
-        tr {
-          background-color: rgb(200, 194, 194);
-        }
       }
 }

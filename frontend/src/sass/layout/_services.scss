@@ -18,7 +18,8 @@ h1{
 }
 
 .table-services{
-    margin: 5rem auto;
+    margin: 3rem auto;
+    border-spacing: 0;
 
     .header-table {
       background-color: $darkBlue;
@@ -36,10 +37,7 @@ h1{
       td {
         text-align: center;
       }
-  
-      tr {
-        background-color: rgb(200, 194, 194);
-      }
+
     }
 }
 
@@ -48,4 +46,8 @@ h1{
     align-items: center;
     justify-content: center;
     width: 100%;
+
+    button{
+      width: 20rem;
+    }
 }

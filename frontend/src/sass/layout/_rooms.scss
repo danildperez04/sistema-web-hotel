@@ -1,6 +1,6 @@
 .table-rooms{
     margin: 3rem auto;
-
+    border-spacing: 0;
 
     .header-table {
         background-color: $darkBlue;
@@ -18,10 +18,7 @@
         td {
           text-align: center;
         }
-    
-        tr {
-          background-color: rgb(200, 194, 194);
-        }
+
       }
 }
 
@@ -33,7 +30,7 @@
     cursor: pointer;
     position: relative;
     min-height: 2rem;
-
+    width: 20rem;
     &:hover{
         background-color: darken($green, 10);
     }
