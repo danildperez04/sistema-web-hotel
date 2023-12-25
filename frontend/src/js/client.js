@@ -28,7 +28,6 @@ function startApp() {
         }
 
         displayModal('Se creó el nuevo cliente correctamente', true, 'http://localhost:5173/src/pages/client-list.html');
-        //window.location.replace('client-list.html', 'update-client.html');
 
        });
 
@@ -39,7 +38,6 @@ async function loadDepartments() {
   const data = await loadDepartment();
 
   const cmbDepartments = document.querySelector('#option-department');
-  const cmbMunicipalities = document.querySelector('#option-municipality');
   let allMunicipalities = [];
 
   data.forEach(department => {
@@ -50,16 +48,23 @@ async function loadDepartments() {
     allMunicipalities = allMunicipalities.concat(department.municipalities);
   });
 
-  cmbDepartments.addEventListener('change', () => {
-    cmbMunicipalities.innerHTML = '';
-    const id = cmbDepartments.options[cmbDepartments.selectedIndex].value;
-    const selected = data.find(department => department.id == parseInt(id));
+  loadMunicipality(cmbDepartments, data);
 
-    selected.municipalities.forEach(municipality => {
-      const option = document.createElement('option');
-      option.textContent = municipality['name'];
-      option.value = municipality['id'];
-      cmbMunicipalities.appendChild(option);
-    });
+  cmbDepartments.addEventListener('change', () => {
+    loadMunicipality(cmbDepartments, data);
+  });
+}
+
+function loadMunicipality(cmbDepartments, data){
+  const cmbMunicipalities = document.querySelector('#option-municipality');
+  cmbMunicipalities.innerHTML = '';
+  const id = cmbDepartments.options[cmbDepartments.selectedIndex].value;
+  const selected = data.find(department => department.id == parseInt(id));
+
+  selected.municipalities.forEach(municipality => {
+    const option = document.createElement('option');
+    option.textContent = municipality['name'];
+    option.value = municipality['id'];
+    cmbMunicipalities.appendChild(option);
   });
 }

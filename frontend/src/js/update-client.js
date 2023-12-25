@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async() => {
 
   
     const data = await getClientById(idClient);
+    console.log(data);
 
       fullFields(data);
       const form = document.querySelector('.client-form');
