@@ -1,6 +1,6 @@
 import { createUser } from "../services/signup.js";
-import {displayModal} from "../components/modal.js";
-import {displayMessage} from "../components/message.js";
+import { displayModal } from "../components/modal.js";
+import { displayMessage } from "../components/message.js";
 import { authenticate } from '../services/login.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,18 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function startApp() {
   const form = document.querySelector('.form');
-  form.addEventListener('submit', async(e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
 
-    if (validateFields()) {
+    if (validatePassword()) {
       const userData = Object.fromEntries(new FormData(e.target));
       const response = await createUser(userData);
 
-      if(!response.ok){
-      return displayModal('No se puedo registrar el usuario', false);
-      } 
-    
+      if (!response.ok) {
+        return displayModal('No se puedo registrar el usuario', false);
+      }
+
       const responseToken = await authenticate(userData);
       displayMessage('Usuario autenticado');
       document.body.style.cursor = 'progress';
@@ -28,25 +28,22 @@ function startApp() {
       setTimeout(() => {
         const token = responseToken;
         localStorage.setItem('token', token['token']);
-        window.location.replace('/', '/src/pages/signup.html');
+        return window.location.replace('/', '/src/pages/signup.html');
       }, 1000);
 
     }
 
+    showError('Las contraseñas no coinciden', 'confirm');
+
   });
 }
 
-function validateFields() {
+function validatePassword() {
 
   const pass = document.querySelector('#pass').value;
   const confirm = document.querySelector('#confirm').value;
 
-  if (pass !== confirm) {
-    showError('Las contraseñas no coinciden', 'confirm');
-    return false;
-  }
-
-  return true;
+  return pass === confirm;
 
 }
 
