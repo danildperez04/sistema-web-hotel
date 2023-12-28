@@ -1,5 +1,7 @@
 import { createUser } from "../services/signup.js";
 import {displayModal} from "../components/modal.js";
+import {displayMessage} from "../components/message.js";
+import { authenticate } from '../services/login.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   startApp();
@@ -10,13 +12,25 @@ function startApp() {
   form.addEventListener('submit', async(e) => {
     e.preventDefault();
 
+
     if (validateFields()) {
       const userData = Object.fromEntries(new FormData(e.target));
       const response = await createUser(userData);
 
-      if(!response.ok)
+      if(!response.ok){
       return displayModal('No se puedo registrar el usuario', false);
+      } 
     
+      const responseToken = await authenticate(userData);
+      displayMessage('Usuario autenticado');
+      document.body.style.cursor = 'progress';
+
+      setTimeout(() => {
+        const token = responseToken;
+        localStorage.setItem('token', token['token']);
+        window.location.replace('/', '/src/pages/signup.html');
+      }, 1000);
+
     }
 
   });

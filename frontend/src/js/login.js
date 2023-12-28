@@ -16,7 +16,7 @@ function login() {
     if(!response.ok)
      return displayModal('Por favor revise su usuario y contraseña', false);
 
-    const token = await response.json();
+    const token = response;
     localStorage.setItem('token', token['token']);
     window.location.replace('/', '/src/pages/login.html');
 

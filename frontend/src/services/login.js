@@ -7,5 +7,5 @@ export async function authenticate(user){
         }
       });
 
-      return await response;
+      return await response.json();
 }
