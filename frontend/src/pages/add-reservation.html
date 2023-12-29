@@ -10,55 +10,65 @@
 
 <body>
 
-  <div class="options-container">
-    <select name="" id="select-services" class="input">
-      <option value="" disabled selected>Seleccione un servicio</option>
-    </select>
+  <section class="section section-reservation">
 
-    <select name="" id="select-rooms" class="">
-      <option value="" disabled selected>Seleccione una habitación</option>
-    </select>
-  </div>
+    
+  <h1>Realizar una reserva</h1>
+
+    <fieldset>
+      <legend>Datos de la habitación</legend>
+      <div class="options-container">
+    
+        <select name="" id="select-services" class="input">
+          <option value="" disabled selected>Seleccione un servicio</option>
+        </select>
+    
+        <table class="table-service table">
+          <thead class="header-table">
+            <tr>
+              <th>ID</th>
+              <th>Nombre Servicio</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+    
+          <tbody>
+    
+          </tbody>
+    
+        </table>
+    
+    
+        <select name="" id="select-rooms" class="">
+          <option value="" disabled selected>Seleccione una habitación</option>
+        </select>
+    
+        <table class="table-room">
+          <thead class="header-table">
+            <tr>
+              <th>ID</th>
+              <th>Código de habitación</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+    
+          <tbody>
+    
+          </tbody>
+        </table>
+    
+      </div>
+    </fieldset>
+  
 
 
-  <section class="tables">
-    <table class="table-service table">
-      <thead class="header-table">
-        <tr>
-          <th>ID</th>
-          <th>Nombre Servicio</th>
-          <th>Precio</th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-      </tbody>
-
-    </table>
-
-    <table class="table-room">
-      <thead class="header-table">
-        <tr>
-          <th>ID</th>
-          <th>Código de habitación</th>
-          <th>Precio</th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-      </tbody>
-    </table>
-
-  </section>
-
-
-
+  <fieldset>
+    <legend>Fechas</legend>
+    
   <form action="" class="form">
-    <h1>Realizar una reserva</h1>
+ 
     <div class="field">
-      <label for="input-date-start">Fecha de Inicio</label>
+      <label for="input-date-start">Fecha de Entrada</label>
       <input type="datetime-local" id="input-date-start" name="startDate" required />
     </div>
 
@@ -73,11 +83,18 @@
     </div>
 
     <div class="btn-container">
-      <input type="submit" class="btn-create" value="Crear Reserva" />
+      <input type="submit" class="btn-create" id="btn-create-reservation" value="Crear Reserva" />
     </div>
   </form>
+  </fieldset>
+
+
+
+  </section>
 
   <script src="../js/add-reservations.js" type="module"></script>
 </body>
+
+
 
 </html>

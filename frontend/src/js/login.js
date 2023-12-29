@@ -13,8 +13,9 @@ function login() {
 
     const response = await authenticate(user);
 
-    if(!response.ok)
+    if(response.statusCode === 400){
      return displayModal('Por favor revise su usuario y contraseña', false);
+    } 
 
     const token = response;
     localStorage.setItem('token', token['token']);

@@ -1,5 +1,5 @@
 .form {
-    margin: 0 auto 5rem auto;
+    margin: 3rem auto;
 
     display: flex;
     flex-direction: column;
@@ -20,30 +20,27 @@
     }
 }
 
-.tables{
-
-  display: flex;
-  margin: 5rem 0;
-
   .table-service, .table-room{
-    margin: 0 auto;
+    margin: -1rem auto;
+    width: 100%;
+    border-spacing: 0;
   }
-
-}
 
 
 .options-container{
   display: flex;
-  width: 80%;
+  flex-direction: column;
+  width: 100%;
   margin: 2rem auto;
   gap: 5rem;
   justify-content: space-evenly;
 
   select{
-    width: 50%;
+    width: 100%;
     height: 1.7rem;
     border-radius: 5px;
-    border: 1px solid lighten($blue, 10)
+    border: 1px solid lighten($blue, 10);
+    margin: 0 auto;
   }
 }
 
@@ -69,4 +66,25 @@
         }
     
       }
+}
+
+#btn-create-reservation{
+  margin-top: 2rem;
+}
+
+.section-reservation{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 100rem;
+
+  fieldset{
+    border: 1px solid $darkBlue;
+    border-radius: 5px;
+  }
+
+  legend{
+    font-weight: 700;
+  }
 }
