@@ -1,11 +1,11 @@
 import {create} from "../services/client.js";
 import {displayModal} from "../components/modal.js";
-import { loadDepartment } from "../services/departments.js";
+import { showDepartments } from "./deparment.js";
 
 
 document.addEventListener('DOMContentLoaded', () => {
   startApp();
-  loadDepartments();
+  showDepartments();
 });
 
 function startApp() {
@@ -33,38 +33,3 @@ function startApp() {
 
 }
 
-async function loadDepartments() {
-  
-  const data = await loadDepartment();
-
-  const cmbDepartments = document.querySelector('#option-department');
-  let allMunicipalities = [];
-
-  data.forEach(department => {
-    const option = document.createElement('option');
-    option.textContent = department['name'];
-    option.value = department['id'];
-    cmbDepartments.appendChild(option);
-    allMunicipalities = allMunicipalities.concat(department.municipalities);
-  });
-
-  loadMunicipality(cmbDepartments, data);
-
-  cmbDepartments.addEventListener('change', () => {
-    loadMunicipality(cmbDepartments, data);
-  });
-}
-
-function loadMunicipality(cmbDepartments, data){
-  const cmbMunicipalities = document.querySelector('#option-municipality');
-  cmbMunicipalities.innerHTML = '';
-  const id = cmbDepartments.options[cmbDepartments.selectedIndex].value;
-  const selected = data.find(department => department.id == parseInt(id));
-
-  selected.municipalities.forEach(municipality => {
-    const option = document.createElement('option');
-    option.textContent = municipality['name'];
-    option.value = municipality['id'];
-    cmbMunicipalities.appendChild(option);
-  });
-}
